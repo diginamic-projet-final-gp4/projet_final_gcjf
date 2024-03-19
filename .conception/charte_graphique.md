@@ -78,6 +78,16 @@
    - **Forme** : Coins légèrement arrondis (4 à 8 pixels).
    - Les coins arrondis rendent les cartes plus attrayantes et faciles à parcourir.
 
+## Icônes
+
+- [Icons8 stickers](https://icones8.fr/icons/stickers)
+  Des icônes colorées et ludiques qui peuvent ajouter une touche de personnalité à votre application.
+
+  ou
+
+  - [Icons8 plasticine](https://icones8.fr/icons/plasticine)
+    Des icônes simples et modernes qui peuvent donner à votre application un aspect professionnel et épuré.
+
 ## Logo
 
 ![OIG3.CE1QPr91rIyrCiUy.jpg](assets/charte_graphique/541f28996553762c59fc4af96bc6be9945114f51.jpg)
