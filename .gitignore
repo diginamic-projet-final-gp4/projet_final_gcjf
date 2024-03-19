@@ -59,3 +59,4 @@ api-back/!**/src/test/**/build/
 
 ### VS Code ###
 api-back/.vscode/
+.vscode/
