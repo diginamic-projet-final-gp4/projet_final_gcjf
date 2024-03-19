@@ -1,0 +1,33 @@
+api-back/HELP.md
+api-back/target/
+api-back/!.mvn/wrapper/maven-wrapper.jar
+api-back/!**/src/main/**/target/
+api-back/!**/src/test/**/target/
+
+### STS ###
+api-back/.apt_generated
+api-back/.classpath
+api-back/.factorypath
+api-back/.project
+api-back/.settings
+api-back/.springBeans
+api-back/.sts4-cache
+
+### IntelliJ IDEA ###
+api-back/.idea
+api-back/*.iws
+api-back/*.iml
+api-back/*.ipr
+
+### NetBeans ###
+api-back/nbproject/private/
+api-back/nbbuild/
+api-back/dist/
+api-back/nbdist/
+api-back/.nb-gradle/
+api-back/build/
+api-back/!**/src/main/**/build/
+api-back/!**/src/test/**/build/
+
+### VS Code ###
+api-back/.vscode/
