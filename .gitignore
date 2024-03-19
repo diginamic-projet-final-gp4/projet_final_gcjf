@@ -1,8 +1,36 @@
+### FRONTEND
+# dependencies
+frontend/node_modules
+frontend/.pnp
+.pnp.js
+
+# testing
+frontend/coverage
+
+# production
+frontend/build
+
+# misc
+frontend/.DS_Store
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+
+
+
 api-back/HELP.md
 api-back/target/
+api-back/src/resources/application.properties
 api-back/!.mvn/wrapper/maven-wrapper.jar
 api-back/!**/src/main/**/target/
 api-back/!**/src/test/**/target/
+
 
 ### STS ###
 api-back/.apt_generated
