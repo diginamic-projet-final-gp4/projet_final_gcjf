@@ -33,7 +33,7 @@
 
 - [Madimi One](https://fonts.google.com/specimen/Madimi+One)
   Une police audacieuse et moderne qui peut donner à votre application un aspect contemporain.
-
+  
   ou
 
 - [Bowlby One SC](https://fonts.google.com/specimen/Bowlby+One+SC)
@@ -42,39 +42,39 @@
 ### Texte
 
 - [Yantramanav](https://fonts.google.com/specimen/Yantramanav)
-
+  
   Une police lisible et propre, parfaite pour les paragraphes et les descriptions.
-
+  
   ou
 
 - [Anek Gujarati](https://fonts.google.com/specimen/Anek+Gujarati)
-
+  
   Une police avec une touche d’originalité, qui peut ajouter de la personnalité à votre application.
 
 ## Formes
 
 1. **Header (En-tête)** :
-
+   
    - **Forme** : Coins légèrement arrondis (4 à 8 pixels).
    - Les coins arrondis adoucissent l’apparence de l’en-tête, le rendant plus accueillant et moderne.
 
 2. **Boutons** :
-
+   
    - **Forme** : Coins fortement arrondis (16 à 24 pixels).
    - Les coins fortement arrondis ajoutent une touche de douceur et d’interaction. Ils encouragent les utilisateurs à cliquer.
 
 3. **Menu (Barre de navigation)** :
-
+   
    - **Forme** : Coins carrés (0) ou coins légèrement arrondis (4 à 8 pixels).
    - Les coins carrés donnent un aspect net et professionnel, tandis que les coins légèrement arrondis sont plus conviviaux.
 
 4. **Icônes** :
-
+   
    - **Forme** : Coins elliptiques (50% du côté le plus court).
    - Les coins elliptiques ajoutent une touche de sophistication aux icônes sans les rendre trop prononcées.
 
 5. **Cartes (pour afficher les congés, jours fériés, etc.)** :
-
+   
    - **Forme** : Coins légèrement arrondis (4 à 8 pixels).
    - Les coins arrondis rendent les cartes plus attrayantes et faciles à parcourir.
 
@@ -82,9 +82,9 @@
 
 - [Icons8 stickers](https://icones8.fr/icons/stickers)
   Des icônes colorées et ludiques qui peuvent ajouter une touche de personnalité à votre application.
-
+  
   ou
-
+  
   - [Icons8 plasticine](https://icones8.fr/icons/plasticine)
     Des icônes simples et modernes qui peuvent donner à votre application un aspect professionnel et épuré.
 
