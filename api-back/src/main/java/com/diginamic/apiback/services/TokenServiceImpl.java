@@ -67,7 +67,7 @@ public class TokenServiceImpl implements TokenService {
     }
 
     /**
-     * Supprimer les tokens expirés.
+     * Supprime les tokens expirés.
      */
     @Override
     public void deleteExpiredTokens() {
@@ -77,7 +77,7 @@ public class TokenServiceImpl implements TokenService {
         // Récupérer les tokens expirés
         jwtRepository.deleteByExpiresAtBefore(now);
 
-        // Afficher un message dans la console
-        System.out.println("Deleted expired tokens");
+        // // Afficher un message dans la console
+        // System.out.println("Deleted expired tokens");
     }
 }
