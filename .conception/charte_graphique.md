@@ -80,13 +80,9 @@
 
 ## Icônes
 
-- [Icons8 stickers](https://icones8.fr/icons/stickers)
-  Des icônes colorées et ludiques qui peuvent ajouter une touche de personnalité à votre application.
+- [Icons8 glyph-neue](https://icones8.fr/icon/set/populaires/glyph-neue)
 
-  ou
-
-- [Icons8 plasticine](https://icones8.fr/icons/plasticine)
-  Des icônes simples et modernes qui peuvent donner à votre application un aspect professionnel et épuré.
+  Une collection d’icônes modernes (couleur unieque et en format SVG)
 
 ## Logo
 
