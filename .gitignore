@@ -1,4 +1,4 @@
-### FRONTEND
+### --------------------------------------------- FRONTEND
 # dependencies
 frontend/node_modules
 frontend/.pnp
@@ -21,18 +21,16 @@ frontend/npm-debug.log*
 frontend/yarn-debug.log*
 frontend/yarn-error.log*
 
+### --------------------------------------------- BACKEND 
+api-back/src/main/resources/application.properties
 
-
-
+### STS ###
 api-back/HELP.md
 api-back/target/
 api-back/src/resources/application.properties
 api-back/!.mvn/wrapper/maven-wrapper.jar
 api-back/!**/src/main/**/target/
 api-back/!**/src/test/**/target/
-
-
-### STS ###
 api-back/.apt_generated
 api-back/.classpath
 api-back/.factorypath
