@@ -1,4 +1,4 @@
-package dto;
+package com.diginamic.apiback.dto;
 
 import lombok.Getter;
 import lombok.Setter;

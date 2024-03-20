@@ -6,15 +6,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.diginamic.apiback.config.JwtProviderConfig;
+import com.diginamic.apiback.dto.LoginRequest;
+import com.diginamic.apiback.dto.RegisterRequest;
 import com.diginamic.apiback.services.AuthService;
-
-import dto.LoginRequest;
 
 /**
  * AuthController est un contrôleur REST qui gère les requêtes liées à
@@ -29,6 +32,14 @@ public class AuthController {
 
     @Autowired
     private JwtProviderConfig jwtProviderConfig;
+
+    @GetMapping("/hello")
+    public String hello() {
+        // Met un gros block dans la console pour démarquer les logs
+        System.out.println("\n" + "========================================================" + "\n");
+
+        return "Hello World!";
+    }
 
     /**
      * Méthode POST pour l'authentification.
@@ -56,6 +67,21 @@ public class AuthController {
 
         // Retourner la réponse
         return response;
+    }
+
+    /**
+     * Méthode POST pour l'enregistrement.
+     * 
+     * Permet de créer un nouvel utilisateur en fournissant un email et un mot de
+     * passe.
+     * 
+     * @param loginRequest
+     * @return
+     */
+    @PostMapping("/register")
+    public ResponseEntity<String> register(@RequestBody RegisterRequest registerRequest) {
+        authService.register(registerRequest.getEmail(), registerRequest.getPassword());
+        return new ResponseEntity<>("User Registered Successfully", HttpStatus.OK);
     }
 
     /**
