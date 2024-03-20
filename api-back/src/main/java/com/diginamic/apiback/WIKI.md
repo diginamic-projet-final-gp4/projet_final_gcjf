@@ -14,5 +14,8 @@
 
 ### Exemple :
 
-Pour la classe 'Utilisateur', on aura `User` suivi du type de classe (Controller, Service, Repository, Model)
+Pour la classe 'Utilisateur', on aura `User` suivi du type de classe (Controller, Service, Repository)
 Exemple : `UserController`
+
+Sauf pour les classes de modèle qui sont nommées en anglais mais sans suffixe.
+Exemple : `User`
