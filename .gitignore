@@ -30,6 +30,7 @@ api-back/src/resources/application.properties
 api-back/!.mvn/wrapper/maven-wrapper.jar
 api-back/!**/src/main/**/target/
 api-back/!**/src/test/**/target/
+api-back/src/main/resources/application.properties
 
 
 ### STS ###
