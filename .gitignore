@@ -24,12 +24,13 @@ frontend/yarn-error.log*
 
 
 
-backend/HELP.md
-backend/target/
-backend/src/resources/application.properties
-backend/!.mvn/wrapper/maven-wrapper.jar
-backend/!**/src/main/**/target/
-backend/!**/src/test/**/target/
+api-back/HELP.md
+api-back/target/
+api-back/src/resources/application.properties
+api-back/!.mvn/wrapper/maven-wrapper.jar
+api-back/!**/src/main/**/target/
+api-back/!**/src/test/**/target/
+api-back/src/main/resources/application.properties
 
 
 ### STS ###
