@@ -13,4 +13,13 @@ public interface AuthService {
      * @return
      */
     String login(String email, String password);
+
+    /**
+     * Méthode de service pour l'enregistrement.
+     * 
+     * @param email
+     * @param password
+     * @return
+     */
+    String register(String email, String password);
 }
