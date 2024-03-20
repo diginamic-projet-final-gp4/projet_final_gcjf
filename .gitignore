@@ -24,39 +24,40 @@ frontend/yarn-error.log*
 
 
 
-api-back/HELP.md
-api-back/target/
-api-back/src/resources/application.properties
-api-back/!.mvn/wrapper/maven-wrapper.jar
-api-back/!**/src/main/**/target/
-api-back/!**/src/test/**/target/
+backend/HELP.md
+backend/target/
+backend/src/resources/application.properties
+backend/!.mvn/wrapper/maven-wrapper.jar
+backend/!**/src/main/**/target/
+backend/!**/src/test/**/target/
 
 
 ### STS ###
-api-back/.apt_generated
-api-back/.classpath
-api-back/.factorypath
-api-back/.project
-api-back/.settings
-api-back/.springBeans
-api-back/.sts4-cache
+backend/.apt_generated
+backend/.classpath
+backend/.factorypath
+backend/.project
+backend/.settings
+backend/.springBeans
+backend/.sts4-cache
 
 ### IntelliJ IDEA ###
-api-back/.idea
-api-back/*.iws
-api-back/*.iml
-api-back/*.ipr
+backend/.idea
+backend/*.iws
+backend/*.iml
+backend/*.ipr
 
 ### NetBeans ###
-api-back/nbproject/private/
-api-back/nbbuild/
-api-back/dist/
-api-back/nbdist/
-api-back/.nb-gradle/
-api-back/build/
-api-back/!**/src/main/**/build/
-api-back/!**/src/test/**/build/
+backend/nbproject/private/
+backend/nbbuild/
+backend/dist/
+backend/nbdist/
+backend/.nb-gradle/
+backend/build/
+backend/!**/src/main/**/build/
+backend/!**/src/test/**/build/
 
 ### VS Code ###
-api-back/.vscode/
+backend/.vscode/
 .vscode/
+backend/src/main/resources/application.properties
