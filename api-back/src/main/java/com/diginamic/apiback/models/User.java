@@ -23,19 +23,8 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    private String firstname;
-
-    private String lastname;
-
     @Column(nullable = false)
     private String password;
-
-    @Column(name = "actif", nullable = false)
-    private boolean enabled;
-
-    // @OneToMany(mappedBy = "user")
-    // @Column(name = "tokens_id")
-    // private Jwt jwt;
 
     public User() {
     }
