@@ -19,13 +19,13 @@ Si lombok ne marche pas dans l'entité, décommenter les annotations ci-dessous
 // import lombok.Setter;
 
 /**
- * Represents a JWT (JSON Web Token) entity.
+ * Représente un JWT (JSON Web Token).
  * 
- * @Long id: the JWT id
- * @String token: name of the JWT
- * @User user: the user associated with the JWT
- * @Date createdAt: the date of creation of the JWT
- * @Date expiresAt: the date of expiration of the JWT
+ * @Long id: L'identifiant du JWT
+ * @String token: le token JWT
+ * @User user: l'utilisateur associé au JWT
+ * @Date createdAt: la date de création du JWT
+ * @Date expiresAt: la date d'expiration du JWT
  * 
  */
 @Entity
