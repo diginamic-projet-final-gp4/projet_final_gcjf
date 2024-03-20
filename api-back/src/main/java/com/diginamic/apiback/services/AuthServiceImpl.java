@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.diginamic.apiback.config.JwtProviderConfig;
 import com.diginamic.apiback.models.User;
 import com.diginamic.apiback.repository.UserRepository;
 
@@ -22,8 +23,8 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    // @Autowired
-    // private JwtProviderConfig jwtProviderConfig;
+    @Autowired
+    private JwtProviderConfig jwtProviderConfig;
 
     @Autowired
     private TokenService tokenService;
@@ -45,6 +46,31 @@ public class AuthServiceImpl implements AuthService {
         } else {
             throw new RuntimeException("Invalid password");
         }
+    }
+
+    /**
+     * Créer un nouvel utilisateur.
+     * 
+     * @param email
+     * @param password
+     * @return
+     */
+    @Override
+    public String register(String email, String password) {
+        // Check if the user already exists
+        if (userRepository.findByEmail(email).isPresent()) {
+            throw new RuntimeException("User already exists");
+        }
+
+        // Create a new user
+        User user = new User();
+        user.setEmail(email);
+        user.setPassword(passwordEncoder.encode(password));
+
+        // Save the user
+        userRepository.save(user);
+
+        return jwtProviderConfig.createToken(email);
     }
 
 }
