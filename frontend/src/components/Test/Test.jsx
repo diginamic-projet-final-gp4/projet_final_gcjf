@@ -9,3 +9,4 @@ export default function Dish({ dish }) {
 
   return <div></div>;
 }
+
