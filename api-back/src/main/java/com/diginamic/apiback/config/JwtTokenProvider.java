@@ -10,6 +10,14 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+/**
+ * JwtTokenProvider est une classe qui permet de créer, valider et récupérer des
+ * JWT (JSON Web Token).
+ * 
+ * @Value secretKey: la clé secrète pour signer le JWT
+ * @Value validityInMilliseconds: la durée de validité du JWT
+ * 
+ */
 @Component
 public class JwtTokenProvider {
     @Value("${jwt.secret}")
@@ -18,6 +26,13 @@ public class JwtTokenProvider {
     @Value("${jwt.expiration}")
     private long validityInMilliseconds;
 
+    /**
+     * Crée un token JWT à partir de l'email.
+     * 
+     * @param email l'email de l'utilisateur
+     * @return le token JWT
+     * 
+     */
     public String createToken(String email) {
         Claims claims = Jwts.claims().setSubject(email);
 
@@ -32,10 +47,23 @@ public class JwtTokenProvider {
                 .compact();
     }
 
+    /**
+     * Réccupère l'email à partir du token.
+     * 
+     * @param token
+     * @return
+     */
     public String getEmailFromToken(String token) {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 
+    /**
+     * Vérifie si le token est valide.
+     * 
+     * @param token
+     * @return
+     * 
+     */
     public boolean validateToken(String token) {
         try {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
