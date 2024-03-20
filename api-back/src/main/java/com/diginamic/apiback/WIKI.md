@@ -19,3 +19,16 @@ Exemple : `UserController`
 
 Sauf pour les classes de modèle qui sont nommées en anglais mais sans suffixe.
 Exemple : `User`
+
+## Import dans les classes
+
+- Nous allons utiliser `jakarta.persistence`
+
+Exemple
+
+```java
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+```
