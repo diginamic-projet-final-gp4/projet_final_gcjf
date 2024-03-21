@@ -42,5 +42,4 @@ public class SpecificAbsence {
                 + dt_fin + ", type=" + type + ", status=" + status + ", motif=" + motif + "]";
     }
 
-    
 }

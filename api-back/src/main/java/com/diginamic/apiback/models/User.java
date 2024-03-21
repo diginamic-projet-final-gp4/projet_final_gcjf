@@ -26,22 +26,21 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    @OneToMany(mappedBy="manager")
+    @OneToMany
     @JoinColumn(name="user_id", nullable=true)
     private List<User> users = new ArrayList<>();
     
+    @ManyToOne
     private User Manager;
     
     @ManyToOne
-    @JoinColumn(name = "department_id")
-    private List<Service> service = new ArrayList<>();
+    @JoinColumn(name = "service_id")
+    private Service service;
 
-    @ManyToOne
-    @JoinColumn(name="absence_id", nullable=false)
-    private Absence absence;
+    @OneToMany
+    private List<Absence> absences = new ArrayList<>();
 
     private String firstName;
-
 
     private String lastName;
 
@@ -55,9 +54,14 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Profile profile;
 
+    private Float rttEmployee;
+
+    private Float unpaidLeave;
+    
+    private Float paidLeave;
+
 
     @OneToOne(mappedBy = "user")
-    @Column(name = "tokens_id")
     private Jwt jwt;
 
     public User() {
@@ -66,10 +70,11 @@ public class User {
 
     @Override
     public String toString() {
-        return "User [id=" + id + ", Manager=" + Manager + ", users=" + users + ", departments=" + departments
-                + ", absence=" + absence + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-                + ", password=" + password + ", profile=" + profile + ", jwt=" + jwt + "]";
+        return "User [id=" + id + ", users=" + users + ", Manager=" + Manager + ", service=" + service + ", absences="
+                + absences + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", password="
+                + password + ", profile=" + profile + ", rttEmployee=" + rttEmployee + ", unpaidLeave=" + unpaidLeave
+                + ", paidLeave=" + paidLeave + ", jwt=" + jwt + "]";
     }
-  
+
 
 }

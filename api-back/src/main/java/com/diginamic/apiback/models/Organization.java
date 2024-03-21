@@ -1,14 +1,14 @@
 package com.diginamic.apiback.models;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 @lombok.Getter
@@ -18,15 +18,18 @@ public class Organization {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "manager_id")
+    @OneToMany
+    @JoinColumn(name = "specific_abs")
     private List<SpecificAbsence> specificAbsence = new ArrayList<>();
 
     private String Name;
 
-    private float rtt_employer;
+    private Float rtt_employer;
 
-    private float public_holiday;
+    private Float public_holiday;
+
+    @OneToMany
+    private List<Service> services = new ArrayList<>();
 
     public Organization(){
         
@@ -37,7 +40,5 @@ public class Organization {
         return "Organization [id=" + id + ", specificAbsence=" + specificAbsence + ", Name=" + Name + ", rtt_employer="
                 + rtt_employer + ", public_holiday=" + public_holiday + "]";
     }
-
-    
 
 }

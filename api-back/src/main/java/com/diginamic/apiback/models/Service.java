@@ -20,16 +20,14 @@ public class Service {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name="user_id", nullable=false)
-    private User user ;
+    private List<User> user = new ArrayList<>();
 
-    @OneToMany(mappedBy="specificAbsence")
-    private List<Absence> absences = new ArrayList<>();
-
+    @ManyToOne()
+    private Organization organization;
 
     private String lastName;
-
 
     public Service(){
         
