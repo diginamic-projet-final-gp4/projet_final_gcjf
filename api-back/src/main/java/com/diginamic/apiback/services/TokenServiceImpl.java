@@ -66,22 +66,28 @@ public class TokenServiceImpl implements TokenService {
         return token;
     }
 
-    /**
-     * Supprime les tokens expirés.
-     */
     @Override
     public void deleteExpiredTokens() {
-        // Récupérer la date actuelle
-        Date now = new Date();
+        // Affiche tous les tokens
+        jwtRepository.findAll().forEach(jwt -> {
+            // Créer un objet JSON
+            String token = jwt.getToken();
 
-        // Afficher un message dans la console
-        System.out.println("Deleted expired tokens");
+            @SuppressWarnings("unused")
+            Date createdAt = jwt.getCreatedAt();
 
-        // Récupérer les tokens expirés
-        jwtRepository.deleteByExpiresAtBefore(now);
+            @SuppressWarnings("unused")
+            Date expiredAt = jwt.getExpiresAt();
 
-        // Afficher un message dans la console
-        System.out.println("After deleted expired tokens");
-
+            // Afficher les tokens expirés
+            if (jwt.getExpiresAt().before(new Date())) {
+                System.out.println("Token expiré: " + token);
+                jwtRepository.delete(jwt);
+            }
+            // Afficher les tokens non expirés
+            else {
+                System.out.println("Token non expiré: " + token);
+            }
+        });
     }
 }
