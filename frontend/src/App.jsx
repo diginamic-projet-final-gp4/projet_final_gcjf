@@ -30,9 +30,8 @@ function App() {
             <Route path="/" element={<Login />} />
             {/* La route suivante permet de rediriger si on est pas connecter mais elle fait interférence même si on est connecté
             Donc à voir pour plus tard
-
-            <Route path="*" element={<Navigate to="/login" />} />
             */}
+            <Route path="*" element={<Login />} />
           </>
         )}
 
