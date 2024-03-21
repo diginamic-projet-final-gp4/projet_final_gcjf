@@ -35,17 +35,17 @@ public class AuthServiceImpl implements AuthService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
+        tokenService.deleteExpiredTokens();
+
         // Check if the password matches
         if (passwordEncoder.matches(password, user.getPassword())) {
-            // Supprimer les tokens expirés
-            tokenService.deleteExpiredTokens();
-
             // Generate a token
             return tokenService.generateToken(email);
 
         } else {
             throw new RuntimeException("Invalid password");
         }
+
     }
 
     /**
