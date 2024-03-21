@@ -1,37 +1,61 @@
-import { createContext } from 'react';
+import { createContext } from "react";
 // import { useEffect, useState, createContext } from 'react';
 
-
-export const UserContext = createContext()
+export const UserContext = createContext();
 
 export default function UserContextProvider({ children }) {
+  // const [user, setCurrentUser] = useState()
+  // const [loadingData, setLoadingData] = useState(true)
 
-	// const [user, setCurrentUser] = useState()
-	// const [loadingData, setLoadingData] = useState(true)
+  async function postData(url = "", donnees = {}) {
+    // Les options par défaut sont indiquées par *
+    const response = await fetch(url, {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify(donnees), // le type utilisé pour le corps doit correspondre à l'en-tête "Content-Type"
+    });
 
-	// const signIn = (email, password) => new Promise((resolve, reject) => signInWithEmailAndPassword(auth, email, password).then(resolve).catch(reject))
+    console.log(response);
+	
+    return response.json(); // transforme la réponse JSON reçue en objet JavaScript natif
+  }
 
-	// const logOut = async () => {
-	// 	await signOut(auth)
-	// 	setCurrentUser(null)
-	// }
+  const signIn = async (email, password) =>
+    await postData("http://localhost:8082/auth/login", {
+      "email": email,
+      "password": password,
+    });
+  // new Promise((resolve, reject) => {
 
+  //   console.log(email, password);
+  //   // signInWithEmailAndPassword(auth, email, password).then(resolve).catch(reject)
+  // });
 
-	// useEffect(() => {
-	// 	const unsubscribe = onAuthStateChanged(auth, (user) => {
-	// 		setCurrentUser(user)
-	// 		setLoadingData(false)
-	// 	})
+  // const logOut = async () => {
+  // 	await signOut(auth)
+  // 	setCurrentUser(null)
+  // }
 
-	// 	return unsubscribe
-	// }, [])
+  // useEffect(() => {
+  // 	const unsubscribe = onAuthStateChanged(auth, (user) => {
+  // 		setCurrentUser(user)
+  // 		setLoadingData(false)
+  // 	})
 
-	return (
-		<UserContext.Provider value={{ user }}>
-			{children}
-		</UserContext.Provider>
-		// <UserContext.Provider value={{ user, signIn, logOut }}>
-		// 	{!loadingData && children}
-		// </UserContext.Provider>
-	)
-} 
+  // 	return unsubscribe
+  // }, [])
+
+  return (
+    <UserContext.Provider value={{ signIn }}>{children}</UserContext.Provider>
+    // <UserContext.Provider value={{ user, signIn, logOut }}>
+    // 	{!loadingData && children}
+    // </UserContext.Provider>
+  );
+}
