@@ -74,10 +74,14 @@ public class TokenServiceImpl implements TokenService {
         // Récupérer la date actuelle
         Date now = new Date();
 
+        // Afficher un message dans la console
+        System.out.println("Deleted expired tokens");
+
         // Récupérer les tokens expirés
         jwtRepository.deleteByExpiresAtBefore(now);
 
-        // // Afficher un message dans la console
-        // System.out.println("Deleted expired tokens");
+        // Afficher un message dans la console
+        System.out.println("After deleted expired tokens");
+
     }
 }

@@ -65,6 +65,9 @@ public class AuthController {
         response.put("token", token);
         response.put("time", formatDateTime);
 
+        System.out.println("\n" + "========================================================" + "\n");
+        System.out.println(response);
+
         // Retourner la réponse
         return response;
     }
