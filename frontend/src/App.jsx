@@ -1,8 +1,8 @@
 // import { useState } from 'react'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
-// import UserContextProvider from './model/utils/context/UserContext'
-import Body from './components/Navigation/Body'
+import UserContextProvider from './model/utils/context/UserContext'
+import Body from './components/Body/Body'
 import './App.css'
 
 function App() {
@@ -10,9 +10,9 @@ function App() {
 
   return (
     <>
-    {/* <UserContextProvider> */}
+    <UserContextProvider>
       <Body />
-    {/* </UserContextProvider> */}
+    </UserContextProvider>
     </>
   )
 }

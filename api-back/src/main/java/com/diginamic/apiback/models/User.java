@@ -37,7 +37,7 @@ public class User {
     @JoinColumn(name = "service_id")
     private Service service;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private List<Absence> absences = new ArrayList<>();
 
     private String firstName;
