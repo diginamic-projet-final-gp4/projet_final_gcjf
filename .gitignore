@@ -35,31 +35,31 @@ api-back/src/main/resources/application.properties
 
 
 ### STS ###
-backend/.apt_generated
-backend/.classpath
-backend/.factorypath
-backend/.project
-backend/.settings
-backend/.springBeans
-backend/.sts4-cache
+api-back/.apt_generated
+api-back/.classpath
+api-back/.factorypath
+api-back/.project
+api-back/.settings
+api-back/.springBeans
+api-back/.sts4-cache
 
 ### IntelliJ IDEA ###
-backend/.idea
-backend/*.iws
-backend/*.iml
-backend/*.ipr
+api-back/.idea
+api-back/*.iws
+api-back/*.iml
+api-back/*.ipr
 
 ### NetBeans ###
-backend/nbproject/private/
-backend/nbbuild/
-backend/dist/
-backend/nbdist/
-backend/.nb-gradle/
-backend/build/
-backend/!**/src/main/**/build/
-backend/!**/src/test/**/build/
+api-back/nbproject/private/
+api-back/nbbuild/
+api-back/dist/
+api-back/nbdist/
+api-back/.nb-gradle/
+api-back/build/
+api-back/!**/src/main/**/build/
+api-back/!**/src/test/**/build/
 
 ### VS Code ###
-backend/.vscode/
+api-back/.vscode/
 .vscode/
 .conception/.$MCDMPD.drawio.bkp
