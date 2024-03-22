@@ -28,24 +28,19 @@ export default function UserContextProvider({ children }) {
       email: email,
       password: password,
     });
-    if(response.error){
-      throw new Error("Login or password incorrect")
+    if (response.error) {
+      throw new Error("Login or password incorrect");
     } else {
       setCurrentUser(response.token);
       localStorage.setItem("jwt", response.token);
-    }    
+    }
   };
 
-  // new Promise((resolve, reject) => {
-
-  //   console.log(email, password);
-  //   // signInWithEmailAndPassword(auth, email, password).then(resolve).catch(reject)
-  // });
-
-  // const logOut = async () => {
-  // 	await signOut(auth)
-  // 	setCurrentUser(null)
-  // }
+  const logOut = async () => {
+    // TODO: Request deletion for actual token
+    localStorage.removeItem("jwt");
+    setCurrentUser(null);
+  };
 
   // useEffect(() => {
   // 	const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -57,7 +52,7 @@ export default function UserContextProvider({ children }) {
   // }, [])
 
   return (
-    <UserContext.Provider value={{ user, signIn }}>
+    <UserContext.Provider value={{ user, signIn, logOut }}>
       {children}
     </UserContext.Provider>
     // <UserContext.Provider value={{ user, signIn, logOut }}>
