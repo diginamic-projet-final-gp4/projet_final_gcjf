@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 import com.diginamic.apiback.models.User;
-import com.diginamic.apiback.service.UserService;
+import com.diginamic.apiback.services.UserService;
 
 import jakarta.validation.Valid;
 

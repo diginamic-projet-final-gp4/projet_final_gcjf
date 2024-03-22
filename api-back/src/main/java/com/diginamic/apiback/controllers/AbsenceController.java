@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 import com.diginamic.apiback.models.Absence;
-import com.diginamic.apiback.service.AbsenceService;
+import com.diginamic.apiback.services.AbsenceService;
 
 import jakarta.validation.Valid;
 
