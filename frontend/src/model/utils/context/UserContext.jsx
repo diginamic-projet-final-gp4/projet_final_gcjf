@@ -1,13 +1,12 @@
-import { useState, createContext } from 'react';
+import { useState, createContext } from "react";
 
 export const UserContext = createContext();
 
 export default function UserContextProvider({ children }) {
-  const [user, setCurrentUser] = useState({})
+  const [user, setCurrentUser] = useState({});
   // const [loadingData, setLoadingData] = useState(true)
 
   async function postData(url = "", donnees = {}) {
-    // Les options par défaut sont indiquées par *
     const response = await fetch(url, {
       method: "POST",
       mode: "cors",
@@ -21,8 +20,7 @@ export default function UserContextProvider({ children }) {
       body: JSON.stringify(donnees), // le type utilisé pour le corps doit correspondre à l'en-tête "Content-Type"
     });
 
-    console.log(response);
-    return response.json(); // transforme la réponse JSON reçue en objet JavaScript natif
+    return response.json();
   }
 
   const signIn = async (email, password) => {
@@ -30,10 +28,14 @@ export default function UserContextProvider({ children }) {
       email: email,
       password: password,
     });
-    setCurrentUser(response.token)
-    localStorage.setItem("jwt", response.token)
-   
+    if(response.error){
+      throw new Error("Login or password incorrect")
+    } else {
+      setCurrentUser(response.token);
+      localStorage.setItem("jwt", response.token);
+    }    
   };
+
   // new Promise((resolve, reject) => {
 
   //   console.log(email, password);
