@@ -24,7 +24,7 @@ import jakarta.validation.constraints.Email;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     
     @OneToMany
     @JoinColumn(name="user_id", nullable=true)

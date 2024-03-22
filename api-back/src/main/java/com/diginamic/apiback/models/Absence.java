@@ -19,7 +19,7 @@ import jakarta.persistence.ManyToOne;
 public class Absence {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name="absence_id", nullable=false)
