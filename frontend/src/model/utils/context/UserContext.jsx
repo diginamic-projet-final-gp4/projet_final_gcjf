@@ -23,14 +23,14 @@ export default function UserContextProvider({ children }) {
     });
 
     console.log(response);
-	
+
     return response.json(); // transforme la réponse JSON reçue en objet JavaScript natif
   }
 
   const signIn = async (email, password) =>
     await postData("http://localhost:8082/auth/login", {
-      "email": email,
-      "password": password,
+      email: email,
+      password: password,
     });
   // new Promise((resolve, reject) => {
 
