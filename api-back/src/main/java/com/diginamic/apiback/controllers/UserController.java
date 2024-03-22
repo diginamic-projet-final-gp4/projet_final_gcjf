@@ -23,8 +23,8 @@ import jakarta.validation.Valid;
 public class UserController {
     @Autowired
     UserService userService;
-    
-        @GetMapping()
+
+    @GetMapping()
     public List<User> findAll() {
         return userService.findAll();
     }
@@ -35,13 +35,13 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@NonNull @RequestBody @Valid User user, @NonNull @PathVariable("id")Long id){
+    public User updateUser(@NonNull @RequestBody @Valid User user, @NonNull @PathVariable("id") Long id) {
         return userService.updateUser(user, id);
     }
 
     @DeleteMapping("/delete/{id}")
-    public User deleteUser(@NonNull @PathVariable("id")Long id){
-       return userService.deleteUser(id);
+    public User deleteUser(@NonNull @PathVariable("id") Long id) {
+        return userService.deleteUser(id);
     }
 
 }

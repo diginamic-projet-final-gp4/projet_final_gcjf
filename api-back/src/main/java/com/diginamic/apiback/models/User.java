@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.diginamic.apiback.enums.Profile;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,18 +27,18 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @OneToMany
-    @JoinColumn(name="user_id", nullable=true)
+    @OneToMany(mappedBy = "manager")
     private List<User> users = new ArrayList<>();
     
     @ManyToOne
-    private User Manager;
+    private User manager;
     
     @ManyToOne
     @JoinColumn(name = "service_id")
     private Service service;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Absence> absences = new ArrayList<>();
 
     private String firstName;
@@ -70,7 +71,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User [id=" + id + ", users=" + users + ", Manager=" + Manager + ", service=" + service + ", absences="
+        return "User [id=" + id + ", users=" + users + ", Manager=" + manager + ", service=" + service + ", absences="
                 + absences + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", password="
                 + password + ", profile=" + profile + ", rttEmployee=" + rttEmployee + ", unpaidLeave=" + unpaidLeave
                 + ", paidLeave=" + paidLeave + ", jwt=" + jwt + "]";

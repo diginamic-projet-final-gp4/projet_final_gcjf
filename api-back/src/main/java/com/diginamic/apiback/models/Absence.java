@@ -1,6 +1,7 @@
 package com.diginamic.apiback.models;
 
 import com.diginamic.apiback.enums.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Date;
 
@@ -21,6 +22,7 @@ public class Absence {
     private Long id;
 
     @ManyToOne
+    @JsonIgnore
     private User user;
 
     private Date dt_debut;
