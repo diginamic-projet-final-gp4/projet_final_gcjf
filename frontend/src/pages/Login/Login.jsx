@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../model/utils/context/UserContext';
 
 
-export default function Dish() {
+export default function Login() {
 	const navigate = useNavigate()
     const formRef = useRef()
     const inputs = useRef([])
