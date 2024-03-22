@@ -24,7 +24,7 @@ public class Service {
     @JoinColumn(name="user_id", nullable=false)
     private List<User> user = new ArrayList<>();
 
-    @ManyToOne()
+    @ManyToOne
     private Organization organization;
 
     private String lastName;

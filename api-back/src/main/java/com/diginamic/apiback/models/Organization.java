@@ -28,7 +28,7 @@ public class Organization {
 
     private Float public_holiday;
 
-    @OneToMany
+    @OneToMany(mappedBy = "organization")
     private List<Service> services = new ArrayList<>();
 
     public Organization(){
