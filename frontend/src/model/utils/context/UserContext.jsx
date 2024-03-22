@@ -1,10 +1,9 @@
-import { createContext } from "react";
-// import { useEffect, useState, createContext } from 'react';
+import { useState, createContext } from 'react';
 
 export const UserContext = createContext();
 
 export default function UserContextProvider({ children }) {
-  // const [user, setCurrentUser] = useState()
+  const [user, setCurrentUser] = useState({})
   // const [loadingData, setLoadingData] = useState(true)
 
   async function postData(url = "", donnees = {}) {
@@ -23,15 +22,18 @@ export default function UserContextProvider({ children }) {
     });
 
     console.log(response);
-
     return response.json(); // transforme la réponse JSON reçue en objet JavaScript natif
   }
 
-  const signIn = async (email, password) =>
-    await postData("http://localhost:8082/auth/login", {
+  const signIn = async (email, password) => {
+    const response = await postData("http://localhost:8082/auth/login", {
       email: email,
       password: password,
     });
+    setCurrentUser(response.token)
+    localStorage.setItem("jwt", response.token)
+   
+  };
   // new Promise((resolve, reject) => {
 
   //   console.log(email, password);
@@ -53,7 +55,9 @@ export default function UserContextProvider({ children }) {
   // }, [])
 
   return (
-    <UserContext.Provider value={{ signIn }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ user, signIn }}>
+      {children}
+    </UserContext.Provider>
     // <UserContext.Provider value={{ user, signIn, logOut }}>
     // 	{!loadingData && children}
     // </UserContext.Provider>

@@ -24,11 +24,11 @@ export default function Login() {
 
     const handleForm = async (e) => {
 		e.preventDefault()
-		if ((inputs.current[1].value.length || inputs.current[2].value.length) < 6) {
-			//pseudo validation côté front
-			setValidation("6 chars min")
-			return
-		}
+		// if ((inputs.current[1].value.length || inputs.current[2].value.length) < 6) {
+		// 	//pseudo validation côté front
+		// 	setValidation("6 chars min")
+		// 	return
+		// }
 
 		try {
 			await signIn(
