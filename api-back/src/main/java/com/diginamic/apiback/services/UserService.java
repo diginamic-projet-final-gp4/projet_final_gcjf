@@ -1,4 +1,4 @@
-package com.diginamic.apiback.service;
+package com.diginamic.apiback.services;
 
 import java.util.Optional;
 
