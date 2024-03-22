@@ -1,4 +1,4 @@
-### FRONTEND
+### --------------------------------------------- FRONTEND
 # dependencies
 frontend/node_modules
 frontend/.pnp
@@ -21,9 +21,10 @@ frontend/npm-debug.log*
 frontend/yarn-debug.log*
 frontend/yarn-error.log*
 
+### --------------------------------------------- BACKEND 
+api-back/src/main/resources/application.properties
 
-
-
+### STS ###
 api-back/HELP.md
 api-back/target/
 api-back/src/resources/application.properties
@@ -61,4 +62,4 @@ backend/!**/src/test/**/build/
 ### VS Code ###
 backend/.vscode/
 .vscode/
-backend/src/main/resources/application.properties
+.conception/.$MCDMPD.drawio.bkp
