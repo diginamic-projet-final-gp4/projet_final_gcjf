@@ -26,7 +26,7 @@ public class Absence {
     @ManyToOne
     private User user;
 
-    @Column(name = "user_id",insertable=false, updatable=false)
+    @Column(name = "user_id", insertable=false, updatable=false)
     private Long user_id;
 
     private Date dt_debut;

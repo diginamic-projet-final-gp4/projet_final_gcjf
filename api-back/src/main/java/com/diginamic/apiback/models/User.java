@@ -29,13 +29,13 @@ public class User {
     private Long id;
     
     @OneToMany(mappedBy = "manager")
+    @Column(nullable = true)
     private List<User> users = new ArrayList<>();
     
     @ManyToOne
     private User manager;
     
     @ManyToOne
-    @JoinColumn(name = "service_id")
     private Service service;
 
     @OneToMany(mappedBy = "user")

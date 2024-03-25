@@ -21,8 +21,7 @@ public class Service {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @OneToMany
-    @JoinColumn(name="user_id", nullable=false)
+    @OneToMany (mappedBy = "service")
     private List<User> user = new ArrayList<>();
 
     @ManyToOne
