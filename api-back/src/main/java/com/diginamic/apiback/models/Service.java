@@ -3,6 +3,7 @@ package com.diginamic.apiback.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +26,7 @@ public class Service {
     private List<User> user = new ArrayList<>();
 
     @ManyToOne
+    @JsonIgnore
     private Organization organization;
 
     private String lastName;

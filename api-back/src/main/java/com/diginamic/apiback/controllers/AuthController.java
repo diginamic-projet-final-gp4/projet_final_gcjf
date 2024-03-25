@@ -25,7 +25,7 @@ import com.diginamic.apiback.services.AuthService;
  * 
  */
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
     @Autowired
     private AuthService authService;

@@ -37,12 +37,9 @@ export default function Login() {
     try {
       await signIn(inputs.current[0].value, inputs.current[1].value);
 
-      // setValidation("")
-      navigate("/admin/home");
+      setValidation("")
+      navigate("/home");
     } catch (e) {
-      // if(e.code === "auth/invalid-email") {
-      // 	setValidation("Error in email")
-      // }
       setValidation("Error, email or password incorrect");
     }
 
