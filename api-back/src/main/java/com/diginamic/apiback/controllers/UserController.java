@@ -24,6 +24,7 @@ import java.util.Map;
 import com.diginamic.apiback.config.JwtProviderConfig;
 import com.diginamic.apiback.dto.LoginRequestDTO;
 import com.diginamic.apiback.dto.RegisterRequest;
+import com.diginamic.apiback.dto.UserDTO;
 import com.diginamic.apiback.models.User;
 import com.diginamic.apiback.services.AuthService;
 import com.diginamic.apiback.services.UserService;
@@ -43,7 +44,7 @@ public class UserController {
     private JwtProviderConfig jwtProviderConfig;
 
     @GetMapping()
-    public List<User> findAll() {
+    public List<UserDTO> findAll() {
         return userService.findAll();
     }
 
