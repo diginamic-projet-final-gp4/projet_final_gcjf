@@ -18,7 +18,7 @@ function Nav() {
     <nav className="site-navigation">
       <div className="navbar-logo">
         <a href="/">
-          <img src="./logo.jpg" alt="logo" />
+          <img src="/logo.jpg" alt="logo" />
         </a>
       </div>
       <div className="navbar-links">
