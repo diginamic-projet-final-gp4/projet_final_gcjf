@@ -12,6 +12,8 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+import "./HistogrammePage.css";
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -91,12 +93,14 @@ export default function HistogrammePage() {
   return (
     <>
       <h1>Histogramme</h1>
-      <DatePicker
-        selected={selectedDate}
-        onChange={handleDateChange}
-        dateFormat="dd/MM/yyyy"
-      />
-      <Bar data={data} options={options} />
+      <div className="histogramme">
+        <DatePicker
+          selected={selectedDate}
+          onChange={handleDateChange}
+          dateFormat="dd/MM/yyyy"
+        />
+        <Bar data={data} options={options} />
+      </div>
     </>
   );
 }
