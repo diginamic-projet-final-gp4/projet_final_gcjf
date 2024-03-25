@@ -29,11 +29,22 @@ public class AbsenceService {
     }
 
         public Absence updateAbsence(@Valid @NonNull Absence absence,@NonNull Long id) {
-        boolean idUser = absenceRepository.existsById(id);
-        if (idUser != true) {
-            throw new EntityNotFoundException("cette user n'existe pas");
+        boolean idAbsence = absenceRepository.existsById(id);
+        if (idAbsence != true) {
+            throw new EntityNotFoundException("cette absence n'existe pas");
         }
         return absenceRepository.save(absence);
+    }
+
+    public Absence createAbsence(@Valid Absence absence) {
+        System.err.println("absence post" + absence);
+        if (absence.getId() != null) {
+            throw new EntityNotFoundException("présence d'un ID ");
+        }else{
+            return absenceRepository.save(absence);
+
+        }
+
     }
 
     public Absence deleteAbsence(@NonNull Long id) {

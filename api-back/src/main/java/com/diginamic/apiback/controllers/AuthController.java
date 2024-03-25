@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.diginamic.apiback.config.JwtProviderConfig;
-import com.diginamic.apiback.dto.LoginRequest;
+import com.diginamic.apiback.dto.LoginRequestDTO;
 import com.diginamic.apiback.dto.RegisterRequest;
 import com.diginamic.apiback.services.AuthService;
 
@@ -25,7 +25,7 @@ import com.diginamic.apiback.services.AuthService;
  * 
  */
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
     @Autowired
     private AuthService authService;
@@ -51,7 +51,7 @@ public class AuthController {
      * @return
      */
     @PostMapping("/login")
-    public Map<String, String> login(@RequestBody LoginRequest loginRequest) {
+    public Map<String, String> login(@RequestBody LoginRequestDTO loginRequest) {
         // Génération des données de réponse
         String token = authService.login(loginRequest.getEmail(), loginRequest.getPassword());
 

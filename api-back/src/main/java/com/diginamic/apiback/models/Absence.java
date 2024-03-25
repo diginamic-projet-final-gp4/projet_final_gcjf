@@ -1,6 +1,7 @@
 package com.diginamic.apiback.models;
 
 import com.diginamic.apiback.enums.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Date;
 
@@ -10,17 +11,21 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@lombok.Getter
-@lombok.Setter
+@Setter
+@Getter
 public class Absence {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
+    @JsonIgnore
     private User user;
 
     private Date dt_debut;
@@ -39,7 +44,6 @@ public class Absence {
     public Absence(){
         
     }
-
 
     @Override
     public String toString() {
