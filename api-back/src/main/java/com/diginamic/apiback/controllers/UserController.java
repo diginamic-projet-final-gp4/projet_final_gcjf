@@ -37,7 +37,7 @@ public class UserController {
     private AuthService authService;
 
     @GetMapping()
-    public List<UserDTO> findAll() {
+    public List<User> findAll() {
         return userService.findAll();
     }
 
