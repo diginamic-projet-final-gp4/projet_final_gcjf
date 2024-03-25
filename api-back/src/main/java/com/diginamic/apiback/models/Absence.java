@@ -11,11 +11,14 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@lombok.Getter
-@lombok.Setter
+@Setter
+@Getter
 public class Absence {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,7 +44,6 @@ public class Absence {
     public Absence(){
         
     }
-
 
     @Override
     public String toString() {

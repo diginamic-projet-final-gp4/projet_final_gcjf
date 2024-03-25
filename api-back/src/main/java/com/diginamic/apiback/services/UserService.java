@@ -1,12 +1,13 @@
 package com.diginamic.apiback.services;
 
 import java.util.Optional;
-
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
+import com.diginamic.apiback.dto.UserDTO;
 import com.diginamic.apiback.models.User;
 import com.diginamic.apiback.repository.UserRepository;
 
@@ -19,8 +20,15 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-     public List<User> findAll() {
-        return userRepository.findAll();
+     public List<UserDTO> findAll() {
+        List <User> users = userRepository.findAll();
+        List <UserDTO> userDTOs = new ArrayList<>();
+        for (User user : users) {
+            UserDTO newUserDTO = new UserDTO(user);
+            userDTOs.add(newUserDTO);
+            
+        }
+        return userDTOs;
     }
 
     public Optional<User> findById(@NonNull Long id) {
