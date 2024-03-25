@@ -1,7 +1,7 @@
 package com.diginamic.apiback.enums;
 
 
-public enum Profile {
+public enum Role {
     MANAGER ,
     ADMIN  ,
     EMPLOYEE  

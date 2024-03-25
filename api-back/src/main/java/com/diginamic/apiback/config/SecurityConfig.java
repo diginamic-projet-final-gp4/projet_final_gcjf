@@ -58,6 +58,7 @@ public class SecurityConfig {
         // Autorise les requêtes HTTP
         httpSecurity.authorizeHttpRequests(authorize -> authorize
                 // TODO : à modifier
+                .requestMatchers(GET, "/test").hasAuthority(null)
                 .requestMatchers(GET, "/test").permitAll()
                 .requestMatchers(POST, "/test").permitAll()
                 .requestMatchers(POST, "/auth/**").permitAll()

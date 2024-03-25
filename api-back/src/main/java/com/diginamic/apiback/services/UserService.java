@@ -20,14 +20,13 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-     public List<UserDTO> findAll() {
-        List <User> users = userRepository.findAll();
-        List <UserDTO> userDTOs = new ArrayList<>();
+    public List<UserDTO> findAll() {
+        List<User> users = userRepository.findAll();
+        List<UserDTO> userDTOs = new ArrayList<>();
         for (User user : users) {
-            UserDTO newUserDTO = new UserDTO(user);
-            userDTOs.add(newUserDTO);
-            
+            userDTOs.add(user.toDto());
         }
+
         return userDTOs;
     }
 
@@ -35,10 +34,10 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    public User updateUser(@Valid @NonNull User user,@NonNull Long id) {
+    public User updateUser(@Valid @NonNull User user, @NonNull Long id) {
         boolean idUser = userRepository.existsById(id);
         if (idUser != true) {
-            throw new EntityNotFoundException("cette user n'existe pas");
+            throw new EntityNotFoundException("cet user n'existe pas");
         }
         return userRepository.save(user);
     }
