@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./Body.css";
 
 import Login from "../../pages/Login/Login";
@@ -16,23 +16,29 @@ import TraitementAbs from "../../pages/Administration/TraitementAbs";
 function Nav() {
   return (
     <nav className="site-navigation">
-      <ul>
-        <li>
-          <Link to="/">Connexion</Link>
-        </li>
-        <li>
-          <Link to="/profile">Profil</Link>
-        </li>
-        <li>
-          <Link to="/absence">Absence</Link>
-        </li>
-        <li>
-          <Link to="/rapport">Rapport</Link>
-        </li>
-        <li>
-          <Link to="/admin">Administration</Link>
-        </li>
-        {/* {user && (
+      <div className="navbar-logo">
+        <a href="/">
+          <img src="/logo.jpg" alt="logo" />
+        </a>
+      </div>
+      <div className="navbar-links">
+        <ul>
+          <li>
+            <a href="/">Connexion</a>
+          </li>
+          <li>
+            <a href="/profile">Profil</a>
+          </li>
+          <li>
+            <a href="/absence">Absence</a>
+          </li>
+          <li>
+            <a href="/rapport">Rapport</a>
+          </li>
+          <li>
+            <a href="/admin">Administration</a>
+          </li>
+          {/* {user && (
 					<li className="site-nav-admin">
 						Administration
 						<ul>
@@ -41,7 +47,8 @@ function Nav() {
 						</ul>
 					</li>
 				)} */}
-      </ul>
+        </ul>
+      </div>
     </nav>
   );
 }
