@@ -23,10 +23,14 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Email;
+import lombok.Getter;
+import lombok.Setter;
 
 @Component
+@Getter
+@Setter
 public class UserDTO {
-        @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
