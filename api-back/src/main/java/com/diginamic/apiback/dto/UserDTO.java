@@ -21,8 +21,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Email;
+import lombok.Getter;
+import lombok.Setter;
 
 @Component
+@Getter
+@Setter
 public class UserDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -68,102 +72,6 @@ public class UserDTO {
                 + ", absences=" + absences + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
                 + ", role=" + role + ", rttEmployee=" + rttEmployee + ", unpaidLeave=" + unpaidLeave
                 + ", paidLeave=" + paidLeave + "]";
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
-
-    public User getManager() {
-        return manager;
-    }
-
-    public void setManager(User manager) {
-        this.manager = manager;
-    }
-
-    public Service getService() {
-        return service;
-    }
-
-    public void setService(Service service) {
-        this.service = service;
-    }
-
-    public List<Absence> getAbsences() {
-        return absences;
-    }
-
-    public void setAbsences(List<Absence> absences) {
-        this.absences = absences;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public Float getRttEmployee() {
-        return rttEmployee;
-    }
-
-    public void setRttEmployee(Float rttEmployee) {
-        this.rttEmployee = rttEmployee;
-    }
-
-    public Float getUnpaidLeave() {
-        return unpaidLeave;
-    }
-
-    public void setUnpaidLeave(Float unpaidLeave) {
-        this.unpaidLeave = unpaidLeave;
-    }
-
-    public Float getPaidLeave() {
-        return paidLeave;
-    }
-
-    public void setPaidLeave(Float paidLeave) {
-        this.paidLeave = paidLeave;
     }
 
 }

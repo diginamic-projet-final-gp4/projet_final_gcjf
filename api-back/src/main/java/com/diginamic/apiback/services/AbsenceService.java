@@ -8,6 +8,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import com.diginamic.apiback.models.Absence;
+import com.diginamic.apiback.models.User;
 import com.diginamic.apiback.repository.AbsenceRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -19,6 +20,8 @@ public class AbsenceService {
 
     @Autowired
     AbsenceRepository absenceRepository;
+    @Autowired
+    UserService userService;
 
      public List<Absence> findAll() {
         return absenceRepository.findAll();
@@ -37,15 +40,16 @@ public class AbsenceService {
     }
 
     public Absence createAbsence(@Valid Absence absence) {
-        System.err.println("absence post" + absence);
-        if (absence.getId() != null) {
-            throw new EntityNotFoundException("présence d'un ID ");
-        }else{
+        Optional<User> userOptional = userService.findById(absence.getUser_id());
+        if (userOptional.isPresent()) {
+            User userObject = userOptional.get();
+            absence.setUser(userObject);
             return absenceRepository.save(absence);
-
+        } else {
+            throw new EntityNotFoundException("User not found");
         }
-
     }
+
 
     public Absence deleteAbsence(@NonNull Long id) {
         Absence absenceToDelete = absenceRepository.findById(id)

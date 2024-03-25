@@ -1,10 +1,10 @@
 package com.diginamic.apiback.models;
 
 import com.diginamic.apiback.enums.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -24,8 +24,10 @@ public class Absence {
     private Long id;
 
     @ManyToOne
-    @JsonIgnore
     private User user;
+
+    @Column(name = "user_id",insertable=false, updatable=false)
+    private Long user_id;
 
     private Date dt_debut;
     
@@ -44,12 +46,13 @@ public class Absence {
         
     }
 
+
     @Override
     public String toString() {
-        return "Absence [id=" + id + ", user=" + user + ", dt_debut=" + dt_debut + ", dt_fin=" + dt_fin + ", type="
-                + type + ", status=" + status + ", motif=" + motif + "]";
+        return "Absence [id=" + id + ", dt_debut=" + dt_debut + ", dt_fin=" + dt_fin + ", type=" + type + ", status="
+                + status + ", motif=" + motif + "]";
     }
-
+    
 
     
 }
