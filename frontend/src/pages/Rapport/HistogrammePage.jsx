@@ -8,6 +8,9 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 ChartJS.register(
   CategoryScale,
@@ -46,12 +49,6 @@ const options = {
   },
 };
 
-const labels = Array.from({ length: 6 }, (_, i) => {
-  const date = new Date();
-  date.setMonth(date.getMonth() - i);
-  return date.toLocaleString("default", { month: "long" });
-}).reverse();
-
 const datasets = userData.map((user) => {
   /**
    * Génère une couleur aléatoire pour chaque utilisateur
@@ -71,15 +68,34 @@ const datasets = userData.map((user) => {
   };
 });
 
-const data = {
-  labels,
-  datasets,
-};
+function getLabelsForDate(date) {
+  return Array.from({ length: 6 }, (_, i) => {
+    const newDate = new Date(date);
+    newDate.setMonth(date.getMonth() - i);
+    return newDate.toLocaleString("default", { month: "long" });
+  }).reverse();
+}
 
 export default function HistogrammePage() {
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const labels = getLabelsForDate(selectedDate);
+
+  const data = {
+    labels,
+    datasets,
+  };
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
   return (
     <>
       <h1>Histogramme</h1>
+      <DatePicker
+        selected={selectedDate}
+        onChange={handleDateChange}
+        dateFormat="dd/MM/yyyy"
+      />
       <Bar data={data} options={options} />
     </>
   );
