@@ -9,7 +9,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
@@ -22,6 +21,7 @@ public class Service {
     private Long id;
     
     @OneToMany (mappedBy = "service")
+    @JsonIgnore
     private List<User> user = new ArrayList<>();
 
     @ManyToOne
