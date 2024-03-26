@@ -3,7 +3,10 @@ package com.diginamic.apiback.models;
 import java.util.Date;
 import com.diginamic.apiback.enums.*;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,21 +22,26 @@ public class SpecificAbsence {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="organization_id", nullable=false)
+    @JoinColumn(nullable = false)
     private Organization organization;
 
     private Date dt_debut;
-    
+
     private Date dt_fin;
 
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private AbsenceType type;
 
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     private String motif;
 
-    public SpecificAbsence(){
-        
+    @Column(name = "organization_id", insertable=false, updatable=false)
+    private Long organization_id;
+
+    public SpecificAbsence() {
+
     }
 
     @Override

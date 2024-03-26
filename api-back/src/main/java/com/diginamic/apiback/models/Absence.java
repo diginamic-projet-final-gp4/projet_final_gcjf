@@ -51,11 +51,7 @@ public class Absence {
     public String toString() {
         return "Absence [id=" + id + ", user=" + user + ", user_id=" + user_id + ", dt_debut=" + dt_debut + ", dt_fin="
                 + dt_fin + ", type=" + type + ", status=" + status + ", motif=" + motif + "]";
-    }
-
-
-
-    
+    }    
 
     
 }

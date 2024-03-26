@@ -1,13 +1,15 @@
 package com.diginamic.apiback.models;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -18,8 +20,8 @@ public class Organization {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
-    @JoinColumn(name = "specific_abs")
+    @JsonIgnore
+    @OneToMany(mappedBy = "organization")
     private List<SpecificAbsence> specificAbsence = new ArrayList<>();
 
     private String Name;

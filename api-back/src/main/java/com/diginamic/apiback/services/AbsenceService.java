@@ -20,6 +20,7 @@ public class AbsenceService {
 
     @Autowired
     AbsenceRepository absenceRepository;
+    
     @Autowired
     UserService userService;
 
@@ -43,6 +44,7 @@ public class AbsenceService {
         System.out.println("test absence" + absence);
         Optional<User> userOptional = userService.findById(absence.getUser_id());
         if (userOptional.isPresent()) {
+            System.out.println("=========================== \n");
             User userObject = userOptional.get();
             absence.setUser(userObject);
             return absenceRepository.save(absence);
