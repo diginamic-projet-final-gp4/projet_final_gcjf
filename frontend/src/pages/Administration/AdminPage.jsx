@@ -79,7 +79,10 @@ export default function AdminPage() {
     <>
       <h1>Administration</h1>
       <div>
-        <a href="admin/traitement-abs">Traitement des absence</a>
+        <div className="admin-links">
+          <a href="admin/traitement-abs">Traitement des absence</a>
+          <a href="absence/group/create">Créer une absence de groupe</a>
+        </div>
         <h2>Nouvelle absence</h2>
         <div className="new-abs">
           <table>
