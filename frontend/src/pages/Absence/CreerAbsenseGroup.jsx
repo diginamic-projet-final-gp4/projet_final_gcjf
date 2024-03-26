@@ -1,8 +1,23 @@
 import "./CreerAbs.css";
 
-export default function CreateAbs() {
+export default function CreerAbsenseGroup() {
   // Récupèrera le nom de l'utilisateur connecté une fois l'authentification implémentée
   const collaborateur = "Testing Name";
+
+  const collaborateursImpactes = [
+    {
+      nom: "Jean",
+      prenom: "Pierre",
+      service: "Service 1",
+      poste: "Compta",
+    },
+    {
+      nom: "Pierre",
+      prenom: "Jean",
+      service: "Service 2",
+      poste: "Informatique",
+    },
+  ];
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -14,7 +29,7 @@ export default function CreateAbs() {
 
   return (
     <div className="create-abs">
-      <h1>Créer une absence</h1>
+      <h1>Créer une absence de groupe</h1>
 
       <form className="create-abs-form" onSubmit={handleSubmit}>
         <label>
@@ -29,9 +44,8 @@ export default function CreateAbs() {
         <label>
           <span>Type d&apos;absence</span>
           <select name="typeAbsence">
-            <option value="conge">Congé</option>
-            <option value="congeSansSolde">Congé sans solde</option>
-            <option value="rtt">RTT</option>
+            <option value="jourFerie">Jour férié</option>
+            <option value="rttEmployeur">RTT employeur</option>
           </select>
         </label>
         <label>
@@ -43,8 +57,27 @@ export default function CreateAbs() {
           <input type="date" name="dateFin" />
         </label>
         <label>
-          <span>Motif</span>
-          <input type="text" name="motif" />
+          <span>Liste des collaborateurs impactés</span>
+          <table>
+            <thead>
+              <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Service</th>
+                <th>Poste</th>
+              </tr>
+            </thead>
+            <tbody>
+              {collaborateursImpactes.map((collaborateur, index) => (
+                <tr key={index}>
+                  <td>{collaborateur.nom}</td>
+                  <td>{collaborateur.prenom}</td>
+                  <td>{collaborateur.service}</td>
+                  <td>{collaborateur.poste}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </label>
         <button type="submit">Créer</button>
       </form>
