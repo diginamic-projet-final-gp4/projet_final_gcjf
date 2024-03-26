@@ -1,5 +1,6 @@
 package com.diginamic.apiback.models;
 
+import com.diginamic.apiback.dto.AbsenceDTO;
 import com.diginamic.apiback.enums.*;
 
 import java.util.Date;
@@ -53,5 +54,15 @@ public class Absence {
                 + dt_fin + ", type=" + type + ", status=" + status + ", motif=" + motif + "]";
     }    
 
+    public AbsenceDTO toDto(){
+        AbsenceDTO absenceDTO = new AbsenceDTO();
+        absenceDTO.setDt_debut(dt_debut);
+        absenceDTO.setDt_fin(dt_fin);
+        absenceDTO.setId(id);
+        absenceDTO.setMotif(motif);
+        absenceDTO.setStatus(status);
+        absenceDTO.setType(type);
+        return absenceDTO;
+    }
     
 }
