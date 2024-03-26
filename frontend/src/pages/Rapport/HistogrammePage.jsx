@@ -64,18 +64,78 @@ const datasets = userData.map((user) => {
    */
   return {
     label: `${user.firstName} ${user.lastName}`,
-    data: Array.from({ length: 6 }, () => Math.floor(Math.random() * 10)), // Simule le nombre d'absences pour chaque mois
+    // "length: xx" permet de sortir le nombre de semaine à afficher
+    data: Array.from({ length: 24 }, () => Math.floor(Math.random() * 10)), // Simule le nombre d'absences pour chaque mois
     backgroundColor: randomColor,
     borderColor: randomColor,
   };
 });
 
-function getLabelsForDate(date) {
-  return Array.from({ length: 6 }, (_, i) => {
-    const newDate = new Date(date);
-    newDate.setMonth(date.getMonth() - i);
-    return newDate.toLocaleString("default", { month: "long" });
+/**
+ * Récupère les 6 derniers mois à partir de la date donnée
+ *
+ */
+function getLabelsForDate(date, options = {}) {
+  const {
+    startOfWeek = 0, // 0: dimanche, 1: lundi, etc.
+    showWeekNumber = false,
+    showYear = false,
+    locale = "default",
+  } = options;
+
+  // Récupère les 24 dernières semaines à partir de la date donnée (6 mois)
+  const labels = Array.from({ length: 24 }, (_, i) => {
+    const newDate = new Date(date.getTime() - i * 7 * 24 * 60 * 60 * 1000);
+    const startDate = getWeekStartDate(newDate, startOfWeek);
+    const endDate = getWeekEndDate(startDate, 6);
+
+    // Mois de début et de fin
+    const startMonth = startDate.toLocaleString(locale, { month: "short" });
+    const endMonth = endDate.toLocaleString(locale, { month: "short" });
+
+    // Formatage de la chaîne de sortie
+    let label = "";
+    if (showWeekNumber) {
+      label += getWeekNumber(startDate, locale) + " ";
+    }
+
+    // Affichage de la fourchette de semaine si nécessaire
+    if (startMonth === endMonth) {
+      label += `${startDate.getDate()} - ${endDate.getDate()} ${startMonth}`;
+    } else {
+      label += `${startDate.getDate()} ${startMonth} - ${endDate.getDate()} ${endMonth}`;
+    }
+
+    if (showYear) {
+      label += ` ${startDate.getFullYear()}`;
+    }
+    return label;
   }).reverse();
+
+  return labels;
+
+  // Fonctions utilitaires
+
+  function getWeekStartDate(date, startOfWeek) {
+    const day = date.getDay();
+    const diff = day - startOfWeek;
+    const newDate = new Date(date.getTime() - diff * 24 * 60 * 60 * 1000);
+    return newDate;
+  }
+
+  function getWeekEndDate(startDate, days) {
+    const endDate = new Date(startDate.getTime() + days * 24 * 60 * 60 * 1000);
+    return endDate;
+  }
+
+  function getWeekNumber(date) {
+    const d = new Date(
+      Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
+    );
+    const d1 = new Date(Date.UTC(d.getFullYear(), 0, 1));
+    const diff = d - d1;
+    return Math.floor(diff / (7 * 24 * 60 * 60 * 1000)) + 1;
+  }
 }
 
 export default function HistogrammePage() {
