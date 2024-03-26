@@ -54,6 +54,8 @@ public class UserDTO {
     @Column(nullable = false, unique = true)
     private String email;
 
+    private String password;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
