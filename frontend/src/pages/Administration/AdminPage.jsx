@@ -83,53 +83,6 @@ export default function AdminPage() {
           <a href="admin/traitement-abs">Traitement des absence</a>
           <a href="absence/group/create">Créer une absence de groupe</a>
         </div>
-        <h2>Nouvelle absence</h2>
-        <div className="new-abs">
-          <table>
-            <thead>
-              <tr>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Type</th>
-                <th>Date de début</th>
-                <th>Date de fin</th>
-                <th>Nb de jours ouvrés</th>
-                <th>Motif</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {absences.map((absence, index) => (
-                <tr key={index}>
-                  <td>{absence.nom}</td>
-                  <td>{absence.prenom}</td>
-                  <td>{absence.type}</td>
-                  <td>{absence.dateDebut}</td>
-                  <td>{absence.dateFin}</td>
-                  <td>{absence.nbJoursOuvres}</td>
-                  <td>{absence.motif}</td>
-                  <td className="actions">
-                    <button
-                      onClick={() => handleAccept(absence)}
-                      className="accept"
-                    >
-                      {" "}
-                      Accepter{" "}
-                    </button>
-                    <button
-                      onClick={() => handleRefuse(absence)}
-                      className="refuse"
-                    >
-                      {" "}
-                      Refuser{" "}
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
         <h2>Collaborateurs</h2>
         <div className="collab-list">
           <table>

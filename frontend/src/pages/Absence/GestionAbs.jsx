@@ -16,7 +16,7 @@ export default function SeeAbs() {
       motif: "Congé",
       dateDebut: "2021-07-10",
       dateFin: "2021-07-15",
-      statut: "En attente de validation",
+      statut: "Waiting",
       type: "Congé",
     },
     {
@@ -39,7 +39,7 @@ export default function SeeAbs() {
 
   return (
     <>
-      <h1>Gérer les absences</h1>
+      <h1>Gérer les demandes d&apos;absences</h1>
       <div>
         <ul>
           <li>
@@ -73,10 +73,12 @@ export default function SeeAbs() {
                     {absence.statut === "Initiale" && (
                       <button className="modifier">Modifier</button>
                     )}
-                    {absence.statut !== "Validée" &&
-                      absence.statut !== "Refusée" && (
-                        <button className="supprimer">Supprimer</button>
-                      )}
+                    {absence.statut === "Initiale" && (
+                      <button className="supprimer">Supprimer</button>
+                    )}
+                    {absence.statut === "Waiting" && (
+                      <span>En attente</span>
+                    )}
                     {absence.statut === "Validée" && (
                       <span>Demande validée</span>
                     )}
