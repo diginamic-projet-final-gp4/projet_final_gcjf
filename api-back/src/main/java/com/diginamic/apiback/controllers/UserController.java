@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import com.diginamic.apiback.models.User;
 import com.diginamic.apiback.services.AbsenceService;
 import com.diginamic.apiback.services.UserService;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 
 @RestController
@@ -30,8 +32,6 @@ public class UserController {
 
     @Autowired
     private AbsenceService absenceService;
-
-    @Autowired
 
     @GetMapping()
     public List<UserDTO> findAll() {
@@ -48,28 +48,33 @@ public class UserController {
         return userService.updateUser(user, id);
     }
 
+    @GetMapping("/{id}/absence")
+    public List<AbsenceDTO> getAbsencesForUser(Authentication authentication, @NonNull @PathVariable Long id) {
+        final User user = userService.loadUserByUsername(authentication.getName());
+        if (id != user.getId())
+            throw new EntityNotFoundException("TU NA PAS LE DROIT");
+        return absenceService.findAbscenceForUserId(id);
+    }
+
     @DeleteMapping("/delete/{id}")
     public User deleteUser(@NonNull @PathVariable Long id) {
         return userService.deleteUser(id);
     }
 
-    @GetMapping("/{id}/absence")
-    public List<AbsenceDTO> getAbsencesForUser(@NonNull @PathVariable Long id) {
-        return absenceService.findAbscenceForUserId(id);
-    }
-
     // @PostMapping("")
     // public ResponseEntity<?> login(@RequestBody UserDTO userLoginDTO) {
-    //     // Authentification
-    //     User user = userService.authenticateUser(userLoginDTO.getEmail(), userLoginDTO.getPassword());
+    // // Authentification
+    // User user = userService.authenticateUser(userLoginDTO.getEmail(),
+    // userLoginDTO.getPassword());
 
-    //     if (user != null) {
-    //         // L'authentification a réussi, vous pouvez retourner des informations
-    //         // utilisateur ou un token JWT ici
-    //         return ResponseEntity.ok(user);
-    //     } else {
-    //         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Échec de l'authentification");
-    //     }
+    // if (user != null) {
+    // // L'authentification a réussi, vous pouvez retourner des informations
+    // // utilisateur ou un token JWT ici
+    // return ResponseEntity.ok(user);
+    // } else {
+    // return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Échec de
+    // l'authentification");
+    // }
     // }
 
 }

@@ -1,10 +1,13 @@
 package com.diginamic.apiback.services;
 
 import java.util.Optional;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +19,23 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     @Autowired
     UserRepository userRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Override
+    public User loadUserByUsername(final String username) throws UsernameNotFoundException {
+        final Optional<User> user = userRepository.findByEmail(username);
+
+        if (user.isPresent()) {
+            return user.get();
+        }
+        throw new UsernameNotFoundException("Invalid credentials.");
+    }
 
     public List<UserDTO> findAll() {
         List<User> users = userRepository.findAll();
@@ -68,7 +81,6 @@ public class UserService {
         }
         return null;
     }
-
 
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);

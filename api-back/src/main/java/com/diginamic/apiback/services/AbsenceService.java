@@ -30,14 +30,14 @@ public class AbsenceService {
 
     public List<AbsenceDTO> findAbscenceForUserId(@NonNull Long id) {
         Optional<User> user = userService.findById(id);
-        if(user.isPresent()) {
+        if (user.isPresent()) {
             List<AbsenceDTO> absenceDTOs = new ArrayList<>();
-            for(Absence abs: absenceRepository.findByUser(user.get())){
+            for (Absence abs : absenceRepository.findByUser(user.get())) {
                 absenceDTOs.add(abs.toDto());
             }
             return absenceDTOs;
         }
-        
+
         throw new EntityNotFoundException("L'utilisateur recherché n'a pas été trouvé");
     }
 
