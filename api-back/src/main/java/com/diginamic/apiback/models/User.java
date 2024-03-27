@@ -26,14 +26,14 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @OneToMany(mappedBy = "manager")
     @Column(nullable = true)
     private List<User> users = new ArrayList<>();
-    
+
     @ManyToOne
     private User manager;
-    
+
     @ManyToOne
     private Service service;
 
@@ -58,9 +58,8 @@ public class User {
     private Float rttEmployee;
 
     private Float unpaidLeave;
-    
-    private Float paidLeave;
 
+    private Float paidLeave;
 
     @OneToOne(mappedBy = "user")
     private Jwt jwt;
@@ -77,8 +76,7 @@ public class User {
                 + ", paidLeave=" + paidLeave + ", jwt=" + jwt + "]";
     }
 
-
-    public UserDTO toDto(){
+    public UserDTO toDto() {
         UserDTO userDTO = new UserDTO();
         userDTO.setId(id);
         userDTO.setEmail(email);
