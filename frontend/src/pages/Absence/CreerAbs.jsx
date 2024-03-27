@@ -1,15 +1,31 @@
+import { useContext } from "react";
+import { UserContext } from "../../model/utils/context/UserContext";
+
 import "./CreerAbs.css";
 
 export default function CreateAbs() {
   // Récupèrera le nom de l'utilisateur connecté une fois l'authentification implémentée
-  const collaborateur = "Testing Name";
+  const collaborateur = "1";
 
-  const handleSubmit = (event) => {
+  const { postData } = useContext(UserContext);
+
+  console.log(postData);
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // TODO: Envoi des données du formulaire au backend
 
-    // Redirection vers la page de gestion des absences
-    window.location.href = "/absence";
+    // Affiche un le json des données du formulaire
+    const formData = new FormData(event.target);
+    const data = {};
+    formData.forEach((value, key) => {
+      data[key] = value;
+    });
+    data.status = "INITIALE";
+    console.log(data);
+
+    postData("http://localhost:8082/api/absence/create", data);
+
+    // window.location.href = "/absence";
   };
 
   return (
@@ -18,29 +34,24 @@ export default function CreateAbs() {
 
       <form className="create-abs-form" onSubmit={handleSubmit}>
         <label>
-          <span>Collaborateur</span>
-          <input
-            type="text"
-            name="collaborateur"
-            value={collaborateur}
-            disabled
-          />
+          <span>Votre identifiant utilisateur</span>
+          <input type="text" name="user_id" value={collaborateur} readOnly />
         </label>
         <label>
           <span>Type d&apos;absence</span>
-          <select name="typeAbsence">
-            <option value="conge">Congé</option>
-            <option value="congeSansSolde">Congé sans solde</option>
-            <option value="rtt">RTT</option>
+          <select name="type">
+            <option value="PAID_LEAVE">Congé</option>
+            <option value="UNPAID_LEAVE">Congé sans solde</option>
+            <option value="RTT_EMPLOYEE">RTT</option>
           </select>
         </label>
         <label>
           <span>Date de début</span>
-          <input type="date" name="dateDebut" />
+          <input type="date" name="dt_debut" />
         </label>
         <label>
           <span>Date de fin</span>
-          <input type="date" name="dateFin" />
+          <input type="date" name="dt_fin" />
         </label>
         <label>
           <span>Motif</span>
