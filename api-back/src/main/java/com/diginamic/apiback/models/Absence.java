@@ -1,5 +1,6 @@
 package com.diginamic.apiback.models;
 
+import com.diginamic.apiback.dto.AbsenceDTO;
 import com.diginamic.apiback.enums.*;
 
 import java.util.Date;
@@ -26,26 +27,24 @@ public class Absence {
     @ManyToOne
     private User user;
 
-    @Column(name = "user_id", insertable=false, updatable=false)
+    @Column(name = "user_id", insertable = false, updatable = false)
     private Long user_id;
 
     private Date dt_debut;
-    
+
     private Date dt_fin;
 
     @Enumerated(EnumType.STRING)
     private AbsenceType type;
 
     @Enumerated(EnumType.STRING)
-    private Status status ;
+    private Status status;
 
     private String motif;
 
+    public Absence() {
 
-    public Absence(){
-        
     }
-
 
     @Override
     public String toString() {
@@ -53,9 +52,15 @@ public class Absence {
                 + dt_fin + ", type=" + type + ", status=" + status + ", motif=" + motif + "]";
     }
 
+    public AbsenceDTO toDto() {
+        AbsenceDTO absenceDTO = new AbsenceDTO();
+        absenceDTO.setDt_debut(dt_debut);
+        absenceDTO.setDt_fin(dt_fin);
+        absenceDTO.setId(id);
+        absenceDTO.setMotif(motif);
+        absenceDTO.setStatus(status);
+        absenceDTO.setType(type);
+        return absenceDTO;
+    }
 
-
-    
-
-    
 }

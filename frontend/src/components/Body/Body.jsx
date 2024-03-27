@@ -7,11 +7,13 @@ import Profile from "../../pages/Profile/MonProfile";
 import SeeAbs from "../../pages/Absence/GestionAbs";
 import CreateAbs from "../../pages/Absence/CreerAbs";
 import ModifAbs from "../../pages/Absence/ModifAbs";
+import CreerAbsenseGroup from "../../pages/Absence/CreerAbsenseGroup";
 import RappGlobPage from "../../pages/Rapport/RapportGlobPage";
 import HistogrammePage from "../../pages/Rapport/HistogrammePage";
 import ListCollabActuel from "../../pages/Rapport/ListCollabActuel";
 import AdminPage from "../../pages/Administration/AdminPage";
 import TraitementAbs from "../../pages/Administration/TraitementAbs";
+import TraitementDemande from "../../pages/Manager/TraitementDemande";
 
 function Nav() {
   return (
@@ -34,6 +36,9 @@ function Nav() {
           </li>
           <li>
             <a href="/rapport">Rapport</a>
+          </li>
+          <li>
+            <a href="/manager/traitement">Traitement demande</a>
           </li>
           <li>
             <a href="/admin">Administration</a>
@@ -64,9 +69,11 @@ export default function Body() {
           <Route path="/absence" element={<SeeAbs />} />
           <Route path="/absence/create" element={<CreateAbs />} />
           <Route path="/absence/modif" element={<ModifAbs />} />
+          <Route path="/absence/group/create" element={<CreerAbsenseGroup />} />
           <Route path="/rapport" element={<RappGlobPage />} />
           <Route path="/rapport/histogramme" element={<HistogrammePage />} />
           <Route path="/rapport/collab-actu" element={<ListCollabActuel />} />
+          <Route path="/manager/traitement" element={<TraitementDemande />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/admin/traitement-abs" element={<TraitementAbs />} />
 

@@ -19,8 +19,8 @@ public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @OneToMany (mappedBy = "service")
+
+    @OneToMany(mappedBy = "service")
     @JsonIgnore
     private List<User> user = new ArrayList<>();
 
@@ -30,7 +30,7 @@ public class Service {
 
     private String lastName;
 
-    public Service(){
-        
+    public Service() {
+
     }
 }
