@@ -16,7 +16,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Email;
 
 @Entity
@@ -61,20 +60,17 @@ public class User {
     
     private Float paidLeave;
 
-
-    @OneToOne(mappedBy = "user")
-    private Jwt jwt;
-
     public User() {
 
     }
 
+
     @Override
     public String toString() {
-        return "User [id=" + id + ", users=" + users + ", Manager=" + manager + ", service=" + service + ", absences="
+        return "User [id=" + id + ", users=" + users + ", manager=" + manager + ", service=" + service + ", absences="
                 + absences + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", password="
                 + password + ", role=" + role + ", rttEmployee=" + rttEmployee + ", unpaidLeave=" + unpaidLeave
-                + ", paidLeave=" + paidLeave + ", jwt=" + jwt + "]";
+                + ", paidLeave=" + paidLeave + "]";
     }
 
 
