@@ -26,7 +26,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/login")
 public class SessionController {
     private UserService userService;
     private PasswordEncoder passwordEncoder;
@@ -54,9 +54,10 @@ public class SessionController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
-    @PostMapping("/login")
+    @PostMapping("")
     public ResponseEntity<?> login(@RequestBody LoginRequestDTO userLoginDTO) {
         // Authentification
+        System.out.println("========================================== \n");
         System.out.println("test" + userLoginDTO);
         User user = userService.authenticateUser(userLoginDTO.getEmail(), userLoginDTO.getPassword());
 
