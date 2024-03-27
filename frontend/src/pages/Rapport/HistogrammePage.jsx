@@ -8,7 +8,7 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -50,26 +50,6 @@ const options = {
     },
   },
 };
-
-const datasets = userData.map((user) => {
-  /**
-   * Génère une couleur aléatoire pour chaque utilisateur
-   */
-  const randomColor = `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(
-    Math.random() * 256
-  )}, ${Math.floor(Math.random() * 256)}, 0.7)`;
-
-  /**
-   * Retourne un objet contenant les données de l'utilisateur
-   */
-  return {
-    label: `${user.firstName} ${user.lastName}`,
-    // "length: xx" permet de sortir le nombre de semaine à afficher
-    data: Array.from({ length: 24 }, () => Math.floor(Math.random() * 10)), // Simule le nombre d'absences pour chaque mois
-    backgroundColor: randomColor,
-    borderColor: randomColor,
-  };
-});
 
 /**
  * Récupère les 6 derniers mois à partir de la date donnée
@@ -138,14 +118,56 @@ function getLabelsForDate(date, options = {}) {
   }
 }
 
+import loadData from './../../model/utils/hooks.jsx' 
+
 export default function HistogrammePage() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const labels = getLabelsForDate(selectedDate);
 
-  const data = {
-    labels,
-    datasets,
-  };
+  const [data, setData] = useState()
+  
+  const { loadedData } = loadData("http://localhost:8082/api/absence/all")
+  
+  useEffect(() => {
+    console.log("data", loadedData)
+
+    const datasets = loadedData.map((absence) => {
+      /**
+       * Génère une couleur aléatoire pour chaque utilisateur
+       */
+
+      const randomColor = `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(
+        Math.random() * 256
+      )}, ${Math.floor(Math.random() * 256)}, 0.7)`;
+    
+      /**
+       * Retourne un objet contenant les données de l'utilisateur
+       */
+      return {
+        label: `${absence.fullName}`,
+        // "length: xx" permet de sortir le nombre de semaine à afficher
+        data: Array.from({ length: 24 }, () => Math.floor(Math.random() * 10)), // Simule le nombre d'absences pour chaque mois
+        backgroundColor: randomColor,
+        borderColor: randomColor,
+      };
+    })
+
+
+  
+
+
+
+
+
+
+    setData({
+      labels,
+      datasets,
+    })
+  }, [loadedData, selectedDate])
+
+
+  
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -159,7 +181,9 @@ export default function HistogrammePage() {
           onChange={handleDateChange}
           dateFormat="dd/MM/yyyy"
         />
-        <Bar data={data} options={options} />
+        { data && 
+          <Bar data={data} options={options} />
+        }
       </div>
     </>
   );

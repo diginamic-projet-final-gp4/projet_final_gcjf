@@ -60,6 +60,7 @@ public class Absence {
         absenceDTO.setMotif(motif);
         absenceDTO.setStatus(status);
         absenceDTO.setType(type);
+        absenceDTO.setFullName(user.getFirstName() + " " + user.getLastName());
         return absenceDTO;
     }
 

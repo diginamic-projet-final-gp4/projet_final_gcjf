@@ -23,6 +23,7 @@ export default function UserContextProvider({ children }) {
     return response.json();
   }
 
+
   const signIn = async (email, password) => {
     const response = await postData("http://localhost:8082/auth/login", {
       email: email,

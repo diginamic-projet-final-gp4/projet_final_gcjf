@@ -16,6 +16,7 @@ public class AbsenceDTO {
     private Long id;
     private Date dt_debut;
     private Date dt_fin;
+    private String fullName;
     private AbsenceType type;
     @Enumerated(EnumType.STRING)
     private Status status;

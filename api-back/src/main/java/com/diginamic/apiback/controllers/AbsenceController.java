@@ -39,6 +39,39 @@ public class AbsenceController {
         return absenceDtoList;
     }
 
+    // Create route to retrieve absence by user
+    // that would take a get param like:
+    // http .... /absence?end_date=2024-04-24
+    /*
+     *[
+        {
+            "fullname": "Juan miguel"
+            "absences": [
+                {
+                    "id": 4,
+                    "dt_debut": "2024-04-24T23:00:00.000+00:00",
+                    "dt_fin": "2024-04-25T23:00:00.000+00:00",
+                    "type": "PAID_LEAVE",
+                    "status": "INITIALE",
+                    "motif": "test"
+                },
+                {
+                    "id": 5,
+                    "dt_debut": "2024-04-24T23:00:00.000+00:00",
+                    "dt_fin": "2024-04-25T23:00:00.000+00:00",
+                    "type": "PAID_LEAVE",
+                    "status": "INITIALE",
+                    "motif": "test"
+                }
+            ]
+        }
+     ] 
+     */
+
+
+
+
+
 
     @GetMapping("/{id}")
     public AbsenceDTO findById(@NonNull @PathVariable("id") Long id) {
