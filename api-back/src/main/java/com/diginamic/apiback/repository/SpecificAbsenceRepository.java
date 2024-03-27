@@ -8,5 +8,4 @@ import com.diginamic.apiback.models.SpecificAbsence;
 @Repository
 public interface SpecificAbsenceRepository extends JpaRepository<SpecificAbsence, Long> {
 
-    
 }

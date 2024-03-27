@@ -8,5 +8,4 @@ import com.diginamic.apiback.models.Organization;
 @Repository
 public interface OrganizationRepository extends JpaRepository<Organization, Long> {
 
-    
 }

@@ -1,6 +1,8 @@
 package com.diginamic.apiback.models;
 
 import java.util.Date;
+
+import com.diginamic.apiback.dto.SpecificAbsenceDTO;
 import com.diginamic.apiback.enums.*;
 
 import jakarta.persistence.Column;
@@ -37,7 +39,7 @@ public class SpecificAbsence {
 
     private String motif;
 
-    @Column(name = "organization_id", insertable=false, updatable=false)
+    @Column(name = "organization_id", insertable = false, updatable = false)
     private Long organization_id;
 
     public SpecificAbsence() {
@@ -50,4 +52,14 @@ public class SpecificAbsence {
                 + dt_fin + ", type=" + type + ", status=" + status + ", motif=" + motif + "]";
     }
 
+    public SpecificAbsenceDTO toDto() {
+        SpecificAbsenceDTO absenceDTO = new SpecificAbsenceDTO();
+        absenceDTO.setDt_debut(dt_debut);
+        absenceDTO.setDt_fin(dt_fin);
+        absenceDTO.setId(id);
+        absenceDTO.setMotif(motif);
+        absenceDTO.setStatus(status);
+        absenceDTO.setType(type);
+        return absenceDTO;
+    }
 }

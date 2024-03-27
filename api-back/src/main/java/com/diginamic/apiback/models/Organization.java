@@ -33,8 +33,8 @@ public class Organization {
     @OneToMany(mappedBy = "organization")
     private List<Service> services = new ArrayList<>();
 
-    public Organization(){
-        
+    public Organization() {
+
     }
 
     @Override
