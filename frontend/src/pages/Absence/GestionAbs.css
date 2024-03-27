@@ -46,3 +46,7 @@
 .classAction {
   width: 10%;
 }
+
+.action a {
+  color: #000000;
+}

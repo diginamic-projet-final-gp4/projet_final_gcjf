@@ -56,7 +56,6 @@ export default function CreateAbs() {
   return (
     <div className="create-abs">
       <h1>Créer une absence</h1>
-
       <form className="create-abs-form" onSubmit={handleSubmit}>
         <label>
           <span>Votre identifiant utilisateur</span>

@@ -47,10 +47,14 @@ export default function SeeAbs() {
                   <td>{absence.type}</td>
                   <td className="action">
                     {absence.status === "INITIALE" && (
-                      <button className="modifier">Modifier</button>
+                      <button className="modifier">
+                        <a href={`/absence/update/${absence.id}`}>Modifier</a>
+                      </button>
                     )}
                     {absence.status === "INITIALE" && (
-                      <button className="supprimer">Supprimer</button>
+                      <button className="supprimer">
+                        <a href={`/absence/delete/${absence.id}`}>Supprimer</a>
+                      </button>
                     )}
                     {absence.status === "EN_ATTENTE_VALIDATION" && (
                       <span>En attente</span>

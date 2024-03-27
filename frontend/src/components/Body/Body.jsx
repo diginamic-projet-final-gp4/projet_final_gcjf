@@ -7,6 +7,7 @@ import Profile from "../../pages/Profile/MonProfile";
 import SeeAbs from "../../pages/Absence/GestionAbs";
 import CreateAbs from "../../pages/Absence/CreerAbs";
 import ModifAbs from "../../pages/Absence/ModifAbs";
+import DeleteAbs from "../../pages/Absence/DeleteAbs";
 import CreerAbsenseGroup from "../../pages/Absence/CreerAbsenseGroup";
 import RappGlobPage from "../../pages/Rapport/RapportGlobPage";
 import HistogrammePage from "../../pages/Rapport/HistogrammePage";
@@ -67,8 +68,9 @@ export default function Body() {
           <Route path="/" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/absence" element={<SeeAbs />} />
+          <Route path="/absence/update/:id" element={<ModifAbs />} />
+          <Route path="/absence/delete/:id" element={<DeleteAbs />} />
           <Route path="/absence/create" element={<CreateAbs />} />
-          <Route path="/absence/modif" element={<ModifAbs />} />
           <Route path="/absence/group/create" element={<CreerAbsenseGroup />} />
           <Route path="/rapport" element={<RappGlobPage />} />
           <Route path="/rapport/histogramme" element={<HistogrammePage />} />
