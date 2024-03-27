@@ -32,7 +32,8 @@ public class JwtConfig {
 
     @PostConstruct
     public void buildKey() {
-        secretKey = new SecretKeySpec(Base64.getDecoder().decode(secret), SignatureAlgorithm.HS256.getJcaName());
+        System.out.println("test secret" + secret);
+        secretKey = new SecretKeySpec(Base64.getDecoder().decode(secret), SignatureAlgorithm.HS512.getJcaName());
     }
 
     public long getExpireIn() {

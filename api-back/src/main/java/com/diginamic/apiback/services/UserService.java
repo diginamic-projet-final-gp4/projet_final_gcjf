@@ -62,7 +62,7 @@ public class UserService {
             User user = userOptional.get();
 
             String encodedPassword = user.getPassword();
-            if (passwordEncoder.matches(motDePasse, "$2a$10$nn2CjaBXKEDgT4NZEZg52ONmu.brfOuNlIb8.yCnIumhAprKUQ11q")) {
+            if (passwordEncoder.matches(motDePasse, encodedPassword)) {
                 return user;
             }
         }
