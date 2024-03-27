@@ -9,6 +9,7 @@
   flex-direction: column;
   width: 95%;
   margin: 0 auto;
+  margin-bottom: 2em;
 }
 
 .action {
@@ -32,6 +33,9 @@
 
 .classNum {
   width: 5%;
+}
+.classStatus {
+  width: 10%;
 }
 .classDate {
   width: 10%;

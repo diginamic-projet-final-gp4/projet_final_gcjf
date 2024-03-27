@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../model/utils/context/UserContext";
 
 import "./CreerAbs.css";
@@ -6,10 +6,35 @@ import "./CreerAbs.css";
 export default function CreateAbs() {
   // Récupèrera le nom de l'utilisateur connecté une fois l'authentification implémentée
   const collaborateur = "1";
+  const [dt_debut, setDtDebut] = useState(null);
+  const dateAujourdhui = new Date();
 
   const { postData } = useContext(UserContext);
 
   console.log(postData);
+
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  useEffect(() => {
+    const form = document.querySelector(".create-abs-form");
+    const dtDebutInput = form.querySelector('[name="dt_debut"]');
+    const dtFinInput = form.querySelector('[name="dt_fin"]');
+
+    const handleFormChange = () => {
+      const isDtDebutValid = dtDebutInput.validity.valid;
+      const isDtFinValid =
+        dtFinInput.validity.valid && dtFinInput.value >= dtDebutInput.value;
+      setIsFormValid(isDtDebutValid && isDtFinValid);
+    };
+
+    dtDebutInput.addEventListener("change", handleFormChange);
+    dtFinInput.addEventListener("change", handleFormChange);
+
+    return () => {
+      dtDebutInput.removeEventListener("change", handleFormChange);
+      dtFinInput.removeEventListener("change", handleFormChange);
+    };
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,7 +50,7 @@ export default function CreateAbs() {
 
     postData("http://localhost:8082/api/absence/create", data);
 
-    // window.location.href = "/absence";
+    window.location.href = "/absence";
   };
 
   return (
@@ -47,17 +72,25 @@ export default function CreateAbs() {
         </label>
         <label>
           <span>Date de début</span>
-          <input type="date" name="dt_debut" />
+          <input
+            type="date"
+            name="dt_debut"
+            min={dateAujourdhui.toISOString().split("T")[0]}
+            required
+            onChange={(e) => setDtDebut(e.target.value)}
+          />
         </label>
         <label>
           <span>Date de fin</span>
-          <input type="date" name="dt_fin" />
+          <input type="date" name="dt_fin" required min={dt_debut} />
         </label>
         <label>
           <span>Motif</span>
           <input type="text" name="motif" />
         </label>
-        <button type="submit">Créer</button>
+        <button type="submit" disabled={!isFormValid}>
+          Créer
+        </button>
       </form>
     </div>
   );
