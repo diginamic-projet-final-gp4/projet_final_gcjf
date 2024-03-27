@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.diginamic.apiback.dto.UserDTO;
@@ -19,6 +20,9 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     public List<UserDTO> findAll() {
         List<User> users = userRepository.findAll();
@@ -50,6 +54,21 @@ public class UserService {
         }
         return userToDelete;
     }
+
+    public User authenticateUser(String email, String motDePasse) {
+        Optional<User> userOptional = userRepository.findByEmail(email);
+        System.out.println("mot de passe et email " + email + motDePasse);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+
+            String encodedPassword = user.getPassword();
+            if (passwordEncoder.matches(motDePasse, encodedPassword)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
 
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
