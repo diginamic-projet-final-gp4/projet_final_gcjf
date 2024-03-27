@@ -1,12 +1,13 @@
 package com.diginamic.apiback.services;
 
 import java.util.Optional;
-
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
+import com.diginamic.apiback.dto.AbsenceDTO;
 import com.diginamic.apiback.models.Absence;
 import com.diginamic.apiback.models.User;
 import com.diginamic.apiback.repository.AbsenceRepository;
@@ -27,11 +28,18 @@ public class AbsenceService {
         return absenceRepository.findAll();
     }
 
-    // TODO: findAbscenceByUserId
-    // public List<Absence> findAbscenceByUserId(@NonNull Long id) {
-    // Optional<User> user = userService.findById(id);
-
-    // }
+    public List<AbsenceDTO> findAbscenceForUserId(@NonNull Long id) {
+        Optional<User> user = userService.findById(id);
+        if(user.isPresent()) {
+            List<AbsenceDTO> absenceDTOs = new ArrayList<>();
+            for(Absence abs: absenceRepository.findByUser(user.get())){
+                absenceDTOs.add(abs.toDto());
+            }
+            return absenceDTOs;
+        }
+        
+        throw new EntityNotFoundException("L'utilisateur recherché n'a pas été trouvé");
+    }
 
     public Optional<Absence> findById(@NonNull Long id) {
         return absenceRepository.findById(id);

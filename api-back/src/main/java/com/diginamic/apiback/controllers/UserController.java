@@ -22,10 +22,13 @@ import java.util.List;
 import java.util.Map;
 
 import com.diginamic.apiback.config.JwtProviderConfig;
+import com.diginamic.apiback.dto.AbsenceDTO;
 import com.diginamic.apiback.dto.LoginRequestDTO;
 import com.diginamic.apiback.dto.RegisterRequest;
 import com.diginamic.apiback.dto.UserDTO;
+import com.diginamic.apiback.models.Absence;
 import com.diginamic.apiback.models.User;
+import com.diginamic.apiback.services.AbsenceService;
 import com.diginamic.apiback.services.AuthService;
 import com.diginamic.apiback.services.UserService;
 
@@ -39,6 +42,9 @@ public class UserController {
 
     @Autowired
     private AuthService authService;
+
+    @Autowired
+    private AbsenceService absenceService;
 
     @Autowired
     private JwtProviderConfig jwtProviderConfig;
@@ -98,8 +104,13 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public User deleteUser(@NonNull @PathVariable("id") Long id) {
+    public User deleteUser(@NonNull @PathVariable Long id) {
         return userService.deleteUser(id);
+    }
+
+    @GetMapping("/{id}/absence")
+    public List<AbsenceDTO> getAbsencesForUser(@NonNull @PathVariable Long id){
+        return absenceService.findAbscenceForUserId(id);
     }
 
 }
