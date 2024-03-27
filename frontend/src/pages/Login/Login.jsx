@@ -1,70 +1,42 @@
-import "./Login.css";
-import { useRef, useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-
+import { useContext } from "react";
 import { UserContext } from "../../model/utils/context/UserContext";
 
+import "./Login.css";
+
 export default function Login() {
-  const navigate = useNavigate();
-  const formRef = useRef();
-  const inputs = useRef([]);
-  const [validation, setValidation] = useState("");
-  const { signIn } = useContext(UserContext);
+  const validation = "";
 
-  function resetAll() {
-    inputs.current = [];
-  }
-
-  const addInputs = (el) => {
-    if (el && !inputs.current.includes(el)) {
-      inputs.current.push(el);
-    }
-  };
+  const { postData } = useContext(UserContext);
 
   const handleForm = async (e) => {
     e.preventDefault();
-    if (
-      (inputs.current[1].value.length || inputs.current[2].value.length) < 6
-    ) {
-      //pseudo validation côté front
-      setValidation("Le mot de passe doit contenir au moins 6 caractères");
-      setTimeout(() => {
-        setValidation("");
-      }, 7000);
-      return;
-    }
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
 
     try {
-      await signIn(inputs.current[0].value, inputs.current[1].value);
+      console.log(email, password);
+      const response = await postData("http://localhost:8082/api/user/login", {
+        email: email,
+        password: password,
+      });
+      console.log(response);
 
-      setValidation("")
-      navigate("/home");
-    } catch (e) {
-      setValidation("Error, email or password incorrect");
+      // Enregistrement du token en local
+      if (response && response.token) {
+        localStorage.token = `auth=${response.token}`;
+      }
+    } catch (error) {
+      console.error(error);
+      // eslint-disable-next-line no-alert
+      alert("Login or password incorrect");
     }
-
-    resetAll();
   };
 
   return (
     <>
       <h1>Login</h1>
-      {/* <form >
-        <label htmlFor="email">Email</label>
-        <input ref={addInputs} type="email" name="email" />
-
-        <label htmlFor="password">Password</label>
-        <input ref={addInputs} type="password" name="password" />
-        {validation !== "" && <p>{validation}</p>}
-        <button type="submit">Envoyer</button>
-      </form> */}
-
-      <form
-        className="form card"
-        ref={formRef}
-        onSubmit={handleForm}
-        id="login-form"
-      >
+      <form className="form card" onSubmit={handleForm} id="login-form">
         <div className="card_header">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -82,18 +54,11 @@ export default function Login() {
         </div>
         <div className="field">
           <label htmlFor="email">Email</label>
-          <input
-            ref={addInputs}
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Email"
-          />
+          <input type="email" name="email" id="email" placeholder="Email" />
         </div>
         <div className="field">
           <label htmlFor="password">Password</label>
           <input
-            ref={addInputs}
             type="password"
             name="password"
             id="password"
