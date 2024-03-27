@@ -39,7 +39,7 @@ public class SessionController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Object> create(@RequestBody UserDTO userDto) {
         Optional<User> userOptional = this.userService.findByEmail(userDto.getEmail());
         System.out.println("test" +userOptional);
@@ -54,7 +54,7 @@ public class SessionController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
-        @PostMapping("/test")
+        @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequestDTO userLoginDTO ) {
         // Authentification
         System.out.println("test" + userLoginDTO);
@@ -62,7 +62,9 @@ public class SessionController {
 
         if (user != null) {
             // L'authentification a réussi, vous pouvez retourner des informations utilisateur ou un token JWT ici
-            return ResponseEntity.ok(user);
+            String cookie = buildJWTCookie(user);
+            System.err.println("test cookie " + cookie);
+            return ResponseEntity.ok(Map.of("user", user,"jwt",cookie));
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Échec de l'authentification");
         }
@@ -70,6 +72,7 @@ public class SessionController {
     
 
     private String buildJWTCookie(User user) {
+        System.out.println("test cookie2 " + user);
         Key secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS512); // Génération de la clé secrète
         byte[] secretKeyBytes = secretKey.getEncoded(); // Obtention des bytes de la clé secrète
         String jetonJWT = Jwts.builder()

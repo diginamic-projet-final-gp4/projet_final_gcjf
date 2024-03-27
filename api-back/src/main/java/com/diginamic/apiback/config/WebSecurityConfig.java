@@ -70,7 +70,7 @@ public class WebSecurityConfig {
 
                         // .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/user")).permitAll()
                         // .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/user/**")).permitAll()
-
+                        .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/**")).permitAll()
                         .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/**")).permitAll()
 
                         // .requestMatchers(mvc.pattern("/admin/**")).hasAuthority("ROLE_ADMIN")
