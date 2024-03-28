@@ -38,6 +38,7 @@ export default function Login() {
     await signIn(inputs.current[0].value, inputs.current[1].value)
       .then(() => {
         navigate("/profile");
+        window.location.reload();
         setValidation("");
       })
       .catch((e) => {
@@ -51,15 +52,6 @@ export default function Login() {
   return (
     <>
       <h1>Login</h1>
-      {/* <form >
-        <label htmlFor="email">Email</label>
-        <input ref={addInputs} type="email" name="email" />
-
-        <label htmlFor="password">Password</label>
-        <input ref={addInputs} type="password" name="password" />
-        {validation !== "" && <p>{validation}</p>}
-        <button type="submit">Envoyer</button>
-      </form> */}
 
       <form
         className="form card"
