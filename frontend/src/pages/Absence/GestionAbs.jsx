@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { format, parseISO } from "date-fns";
+import { Link } from "react-router-dom";
 
 import loadData from "./../../model/utils/hooks.jsx";
 
-import "./GestionAbs.css";
 import "react-calendar/dist/Calendar.css";
 
 export default function SeeAbs() {
@@ -22,7 +22,7 @@ export default function SeeAbs() {
             <a href="/absence/create">Créer une absence</a>
           </li>
         </ul>
-        <div className="absences">
+        <div className="classForTable">
           <h2>Absenses</h2>
           <table>
             <thead>
@@ -45,15 +45,19 @@ export default function SeeAbs() {
                   <td>{format(parseISO(absence.dt_fin), "dd/MM/yyyy")}</td>
                   <td>{absence.status}</td>
                   <td>{absence.type}</td>
-                  <td className="action">
+                  <td className="classActionButtons">
                     {absence.status === "INITIALE" && (
                       <button className="modifier">
-                        <a href={`/absence/update/${absence.id}`}>Modifier</a>
+                        <Link to={`/absence/update/${absence.id}`}>
+                          Modifier
+                        </Link>
                       </button>
                     )}
                     {absence.status === "INITIALE" && (
                       <button className="supprimer">
-                        <a href={`/absence/delete/${absence.id}`}>Supprimer</a>
+                        <Link to={`/absence/delete/${absence.id}`}>
+                          Supprimer
+                        </Link>
                       </button>
                     )}
                     {absence.status === "EN_ATTENTE_VALIDATION" && (

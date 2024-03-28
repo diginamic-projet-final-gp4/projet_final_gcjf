@@ -2,8 +2,6 @@ import { useEffect } from "react";
 
 import loadData from "./../../model/utils/hooks.jsx";
 
-import "./GestionAbs.css";
-
 export default function DeleteAbs() {
   let id;
   if (window.location && window.location.pathname) {

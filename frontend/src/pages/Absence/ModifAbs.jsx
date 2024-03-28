@@ -3,8 +3,6 @@ import { UserContext } from "../../model/utils/context/UserContext";
 
 import loadData from "./../../model/utils/hooks.jsx";
 
-import "./GestionAbs.css";
-
 export default function ModifAbs() {
   const collaborateur = "1";
 
