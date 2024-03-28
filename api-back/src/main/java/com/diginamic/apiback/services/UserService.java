@@ -70,7 +70,6 @@ public class UserService implements UserDetailsService {
 
     public User authenticateUser(String email, String motDePasse) {
         Optional<User> userOptional = userRepository.findByEmail(email);
-        System.out.println("mot de passe et email " + email + motDePasse);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
 

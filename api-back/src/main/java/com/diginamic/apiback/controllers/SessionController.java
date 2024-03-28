@@ -23,10 +23,9 @@ import com.diginamic.apiback.services.UserService;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 
 @RestController
-@RequestMapping("/api/login")
+@RequestMapping("/api")
 public class SessionController {
     private UserService userService;
     private PasswordEncoder passwordEncoder;
@@ -39,26 +38,9 @@ public class SessionController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<Object> create(@RequestBody UserDTO userDto) {
-        Optional<User> userOptional = this.userService.findByEmail(userDto.getEmail());
-        System.out.println("test" + userOptional);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-
-            if (passwordEncoder.matches(userDto.getPassword(), user.getPassword())) {
-                return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, buildJWTCookie(user)).build();
-            }
-        }
-
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-    }
-
-    @PostMapping("")
+    @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequestDTO userLoginDTO) {
         // Authentification
-        System.out.println("========================================== \n");
-        System.out.println("test" + userLoginDTO);
         User user = userService.authenticateUser(userLoginDTO.getEmail(), userLoginDTO.getPassword());
         String cookie = buildJWTCookie(user);
         if (user != null) {
@@ -69,7 +51,6 @@ public class SessionController {
     }
 
     private String buildJWTCookie(User user) {
-        System.out.println("test cookie2 " + user);
         byte[] secretKeyBytes = jwtConfig.getSecretKey().getEncoded();
         String jetonJWT = Jwts.builder()
                 .setSubject(user.getEmail())
