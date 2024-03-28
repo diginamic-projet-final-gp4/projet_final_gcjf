@@ -10,27 +10,29 @@ export default function Login() {
 
   const handleForm = async (e) => {
     e.preventDefault();
-    const form = e.target;
-    const email = form.email.value;
-    const password = form.password.value;
 
-    try {
-      console.log(email, password);
-      const response = await postData("http://localhost:8082/api/user/login", {
-        email: email,
-        password: password,
+    // if (
+    //   (inputs.current[1].value.length || inputs.current[2].value.length) < 6
+    // ) {
+    //   //pseudo validation côté front
+    //   setValidation("Le mot de passe doit contenir au moins 6 caractères");
+    //   setTimeout(() => {
+    //     setValidation("");
+    //   }, 7000);
+    //   return;
+    // }
+
+    await signIn(inputs.current[0].value, inputs.current[1].value)
+      .then(() => {
+        navigate("/home");
+        setValidation("");
+      })
+      .catch((e) => {
+        console.log(e);
+        setValidation("Error, email or password incorrect");
       });
-      console.log(response);
 
-      // Enregistrement du token en local
-      if (response && response.token) {
-        localStorage.token = `auth=${response.token}`;
-      }
-    } catch (error) {
-      console.error(error);
-      // eslint-disable-next-line no-alert
-      alert("Login or password incorrect");
-    }
+    resetAll();
   };
 
   return (

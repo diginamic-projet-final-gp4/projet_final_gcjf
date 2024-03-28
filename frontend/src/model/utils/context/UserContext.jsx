@@ -25,15 +25,17 @@ export default function UserContextProvider({ children }) {
   }
 
   const signIn = async (email, password) => {
-    const response = await postData("http://localhost:8082/auth/login", {
+    const response = await postData("http://localhost:8082/api/login", {
       email: email,
       password: password,
     });
     if (response.error) {
       throw new Error("Login or password incorrect");
     } else {
+      console.log(response)
+      localStorage.setItem("jwt", response.token)
       setCurrentUser(response.token);
-      localStorage.setItem("jwt", response.token);
+      return true
     }
   };
 
