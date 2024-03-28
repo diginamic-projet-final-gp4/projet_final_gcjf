@@ -17,8 +17,8 @@ export default function DeleteAbs() {
   return (
     <>
       <h1>Confirmer la suppression</h1>
-      <div className="absences">
-        <table>
+      <div className="abs">
+        <table className="abs-recap">
           <thead>
             <tr>
               <th>Numéro de demande</th>

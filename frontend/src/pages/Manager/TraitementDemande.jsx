@@ -24,6 +24,7 @@ export default function TraitementDemande() {
             <tr>
               <th className="classNum">Numéro de demande</th>
               <th>Nom et prénom</th>
+              <th>Motif</th>
               <th className="classDate">Date de début</th>
               <th className="classDate">Date de fin</th>
               <th className="classType">Type</th>
@@ -38,6 +39,7 @@ export default function TraitementDemande() {
                   <tr key={absence.id}>
                     <td>{absence.id}</td>
                     <td>{absence.fullName}</td>
+                    <td>{absence.motif}</td>
                     <td>{formatDate(absence.dt_debut)}</td>
                     <td>{formatDate(absence.dt_fin)}</td>
                     <td>{absence.type}</td>

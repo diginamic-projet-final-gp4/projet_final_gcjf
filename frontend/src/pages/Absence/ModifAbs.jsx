@@ -25,7 +25,7 @@ export default function ModifAbs() {
   }, [loadedData]);
 
   useEffect(() => {
-    const form = document.querySelector(".modify-abs-form");
+    const form = document.querySelector(".abs-form");
     const dtDebutInput = form.querySelector('[name="dt_debut"]');
     const dtFinInput = form.querySelector('[name="dt_fin"]');
     const handleFormChange = () => {
@@ -63,8 +63,8 @@ export default function ModifAbs() {
   return (
     <>
       <h1>Modifier une demande d&apos;absence</h1>
-      <div className="absences">
-        <table>
+      <div className="abs">
+        <table className="abs-recap">
           <thead>
             <tr>
               <th>Numéro de demande</th>
@@ -88,7 +88,7 @@ export default function ModifAbs() {
         </table>
         <h2>Informations à modifier</h2>
         <form
-          className="modify-abs-form"
+          className="abs-form"
           action={`/absence/update/${id}`}
           method="post"
           onSubmit={handleSubmit}
@@ -124,7 +124,7 @@ export default function ModifAbs() {
             <input type="text" name="motif" />
           </label>
           <button type="submit" disabled={!isFormValid}>
-            Créer
+            Modifier
           </button>
         </form>
       </div>

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { UserContext } from "../../model/utils/context/UserContext";
 
-import "./CreerAbs.css";
+import "./Absense.css";
 
 export default function CreerAbsenseGroup() {
   // Récupèrera le nom de l'utilisateur connecté une fois l'authentification implémentée
