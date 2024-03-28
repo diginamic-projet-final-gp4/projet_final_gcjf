@@ -44,10 +44,11 @@ public class WebSecurityConfig {
     @Bean
     CorsConfigurationSource corsConfiguration() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:5173"));
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(List.of("Content-Type"));
-        configuration.setAllowCredentials(true);
+        configuration.applyPermitDefaultValues();
+        // configuration.setAllowedOrigins(List.of("http://localhost:5173"));
+        // configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        // configuration.setAllowedHeaders(List.of("Content-Type"));
+        // configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
@@ -62,8 +63,9 @@ public class WebSecurityConfig {
                 auth -> auth
                         // .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/user")).permitAll()
                         // .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/user/**")).permitAll()
+                        .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/login/**")).permitAll()
                         .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/**")).permitAll()
-                        .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/**")).permitAll()
+                        .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/**")).authenticated()
                         // .requestMatchers(mvc.pattern("/admin/**")).hasAuthority("ROLE_ADMIN")
                         .anyRequest().authenticated())
 

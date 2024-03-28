@@ -62,7 +62,7 @@ public class SessionController {
         User user = userService.authenticateUser(userLoginDTO.getEmail(), userLoginDTO.getPassword());
         String cookie = buildJWTCookie(user);
         if (user != null) {
-            return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie).body(Map.of("token", cookie));
+            return ResponseEntity.ok().body(Map.of("token", cookie ));
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Échec de l'authentification");
         }

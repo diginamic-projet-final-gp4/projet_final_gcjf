@@ -7,20 +7,27 @@ export default function UserContextProvider({ children }) {
   // const [loadingData, setLoadingData] = useState(true)
 
   async function postData(url = "", donnees = {}) {
-    const response = await fetch(url, {
+    let options = {
       method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
+      // cache: "no-cache",
+      // credentials: "same-origin",
       headers: {
         "Content-Type": "application/json",
       },
-      redirect: "follow",
-      referrerPolicy: "no-referrer",
+      // redirect: "follow",
+      // referrerPolicy: "no-referrer",
       body: JSON.stringify(donnees), // le type utilisé pour le corps doit correspondre à l'en-tête "Content-Type"
-    });
+    }
+    let bearer = sessionStorage.getItem("jwt")
+    if(bearer) options.headers["Authorization"] = `Bearer ${bearer}`
 
-    return response.json();
+    console.log(bearer)
+    console.log(options)
+
+    const response = await fetch(url, options);
+
+    return response;
+    // return response.json();
   }
 
 
@@ -32,16 +39,16 @@ export default function UserContextProvider({ children }) {
     if (response.error) {
       throw new Error("Login or password incorrect");
     } else {
-      console.log(response)
-      localStorage.setItem("jwt", response.token)
-      setCurrentUser(response.token);
+      let token = response.token
+      sessionStorage.setItem("jwt", token)
+      setCurrentUser(token);
       return true
     }
   };
 
   const logOut = async () => {
     // TODO: Request deletion for actual token
-    localStorage.removeItem("jwt");
+    sessionStorage.removeItem("jwt");
     setCurrentUser(null);
   };
 
@@ -55,7 +62,7 @@ export default function UserContextProvider({ children }) {
   // }, [])
 
   return (
-    <UserContext.Provider value={{ user, signIn, logOut }}>
+    <UserContext.Provider value={{ user, signIn, logOut, postData }}>
       {children}
     </UserContext.Provider>
     // <UserContext.Provider value={{ user, signIn, logOut }}>
