@@ -60,9 +60,9 @@ public class SessionController {
         System.out.println("========================================== \n");
         System.out.println("test" + userLoginDTO);
         User user = userService.authenticateUser(userLoginDTO.getEmail(), userLoginDTO.getPassword());
-
+        String cookie = buildJWTCookie(user);
         if (user != null) {
-            return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, buildJWTCookie(user)).build();
+            return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie).body(Map.of("token", cookie));
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Échec de l'authentification");
         }
