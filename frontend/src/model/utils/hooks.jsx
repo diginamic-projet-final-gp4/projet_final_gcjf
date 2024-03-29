@@ -26,6 +26,5 @@ export default function useFetchData(url = "") {
     loadData();
   }, []);
 
-
   return { loadedData, loading };
 }

@@ -1,30 +1,31 @@
-import "./CreerAbs.css";
+import { useContext } from "react";
+import { UserContext } from "../../model/utils/context/UserContext";
+
+import "./Absense.css";
 
 export default function CreerAbsenseGroup() {
   // Récupèrera le nom de l'utilisateur connecté une fois l'authentification implémentée
-  const collaborateur = "Testing Name";
+  const orgaId = "1";
 
-  const collaborateursImpactes = [
-    {
-      nom: "Jean",
-      prenom: "Pierre",
-      service: "Service 1",
-      poste: "Compta",
-    },
-    {
-      nom: "Pierre",
-      prenom: "Jean",
-      service: "Service 2",
-      poste: "Informatique",
-    },
-  ];
+  const { postData } = useContext(UserContext);
 
-  const handleSubmit = (event) => {
+  console.log(postData);
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // TODO: Envoi des données du formulaire au backend
 
-    // Redirection vers la page de gestion des absences
-    window.location.href = "/absence";
+    // Affiche un le json des données du formulaire
+    const formData = new FormData(event.target);
+    const data = {};
+    formData.forEach((value, key) => {
+      data[key] = value;
+    });
+    data.status = "INITIALE";
+    console.log(data);
+
+    postData("http://localhost:8082/api/specific-absence/create", data);
+
+    // window.location.href = "/absence";
   };
 
   return (
@@ -33,51 +34,27 @@ export default function CreerAbsenseGroup() {
 
       <form className="create-abs-form" onSubmit={handleSubmit}>
         <label>
-          <span>Collaborateur</span>
-          <input
-            type="text"
-            name="collaborateur"
-            value={collaborateur}
-            disabled
-          />
+          <span>Votre identifiant d&apos;organisation</span>
+          <input type="text" name="organization_id" value={orgaId} readOnly />
         </label>
         <label>
           <span>Type d&apos;absence</span>
-          <select name="typeAbsence">
-            <option value="jourFerie">Jour férié</option>
-            <option value="rttEmployeur">RTT employeur</option>
+          <select name="type">
+            <option value="FERIEE">Fériée</option>
+            <option value="RTT_EMPLOYER">RTT Employeur</option>
           </select>
         </label>
         <label>
           <span>Date de début</span>
-          <input type="date" name="dateDebut" />
+          <input type="date" name="dt_debut" />
         </label>
         <label>
           <span>Date de fin</span>
-          <input type="date" name="dateFin" />
+          <input type="date" name="dt_fin" />
         </label>
         <label>
-          <span>Liste des collaborateurs impactés</span>
-          <table>
-            <thead>
-              <tr>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Service</th>
-                <th>Poste</th>
-              </tr>
-            </thead>
-            <tbody>
-              {collaborateursImpactes.map((collaborateur, index) => (
-                <tr key={index}>
-                  <td>{collaborateur.nom}</td>
-                  <td>{collaborateur.prenom}</td>
-                  <td>{collaborateur.service}</td>
-                  <td>{collaborateur.poste}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <span>Motif</span>
+          <input type="text" name="motif" />
         </label>
         <button type="submit">Créer</button>
       </form>
