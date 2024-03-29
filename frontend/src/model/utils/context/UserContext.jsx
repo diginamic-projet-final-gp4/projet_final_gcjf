@@ -1,30 +1,25 @@
-import { useState, createContext } from "react";
+import { createContext } from "react";
 
 export const UserContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 export default function UserContextProvider({ children }) {
-  const [user, setCurrentUser] = useState({});
-  // const [loadingData, setLoadingData] = useState(true)
-
   async function postData(url = "", donnees = {}) {
     let options = {
       method: "POST",
-      // cache: "no-cache",
+      cache: "no-cache",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
-      // redirect: "follow",
-      // referrerPolicy: "no-referrer",
-      body: JSON.stringify(donnees), // le type utilisé pour le corps doit correspondre à l'en-tête "Content-Type"
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify(donnees)
     }
-    console.log(options)
 
     const response = await fetch(url, options);
 
     return response;
-    // return response.json();
   }
 
   const signIn = async (email, password) => {
@@ -34,35 +29,25 @@ export default function UserContextProvider({ children }) {
     });
     if (response.error) {
       throw new Error("Login or password incorrect");
-    } else {
-      // let token = response.token
-      localStorage.setItem("isLogged", true)
-      // setCurrentUser(token);
-      return true
-    }
+    } 
+
+    localStorage.setItem("isLogged", true)
   };
 
   const logOut = async () => {
-    // TODO: Request deletion for actual token
-    localStorage.removeItem("jwt");
-    setCurrentUser(null);
+    const response = await postData("http://localhost:8082/logout")
+    if(response.ok) {
+      localStorage.removeItem("isLogged")
+      return
+    }
+
+    alert("There was a problem trying to log you out")
   };
 
-  // useEffect(() => {
-  // 	const unsubscribe = onAuthStateChanged(auth, (user) => {
-  // 		setCurrentUser(user)
-  // 		setLoadingData(false)
-  // 	})
-
-  // 	return unsubscribe
-  // }, [])
 
   return (
-    <UserContext.Provider value={{ user, signIn, logOut, postData }}>
+    <UserContext.Provider value={{ signIn, logOut, postData }}>
       {children}
     </UserContext.Provider>
-    // <UserContext.Provider value={{ user, signIn, logOut }}>
-    // 	{!loadingData && children}
-    // </UserContext.Provider>
   );
 }

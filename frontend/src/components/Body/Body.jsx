@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from "react-router-dom";
 import "./Body.css";
 
 import Login from "../../pages/Login/Login";
@@ -15,9 +15,18 @@ import ListCollabActuel from "../../pages/Rapport/ListCollabActuel";
 import AdminPage from "../../pages/Administration/AdminPage";
 import TraitementAbs from "../../pages/Administration/TraitementAbs";
 import TraitementDemande from "../../pages/Manager/TraitementDemande";
+import { useContext } from "react";
+import { UserContext } from "../../model/utils/context/UserContext";
 
 function Nav() {
   const isLogged = localStorage.getItem("isLogged");
+  const { logOut } = useContext(UserContext)
+  const navigate = useNavigate()
+
+  async function handleLogout(){
+    await logOut()
+    window.location.href = '/'
+  }
 
   return (
     <nav className="site-navigation">
@@ -46,6 +55,9 @@ function Nav() {
               </li>
               <li>
                 <Link to="/admin">Administration</Link>
+              </li>
+              <li>
+                <button onClick={handleLogout}>Logout</button>
               </li>
             </>
           )}
