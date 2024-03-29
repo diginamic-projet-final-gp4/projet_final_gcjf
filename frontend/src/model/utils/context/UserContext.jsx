@@ -10,7 +10,7 @@ export default function UserContextProvider({ children }) {
     let options = {
       method: "POST",
       // cache: "no-cache",
-      // credentials: "same-origin",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -18,16 +18,12 @@ export default function UserContextProvider({ children }) {
       // referrerPolicy: "no-referrer",
       body: JSON.stringify(donnees), // le type utilisé pour le corps doit correspondre à l'en-tête "Content-Type"
     }
-    let bearer = sessionStorage.getItem("jwt")
-    if(bearer) options.headers["Authorization"] = `Bearer ${bearer}`
-
-    console.log(bearer)
     console.log(options)
 
     const response = await fetch(url, options);
 
-    return response;
-    // return response.json();
+    // return response;
+    return response.json();
   }
 
 

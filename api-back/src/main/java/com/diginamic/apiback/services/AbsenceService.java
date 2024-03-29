@@ -63,9 +63,9 @@ public class AbsenceService {
             User userObject = userOptional.get();
             absence.setUser(userObject);
             return absenceRepository.save(absence);
-        } else {
-            throw new EntityNotFoundException("User not found");
-        }
+        } 
+
+        throw new EntityNotFoundException("User not found");
     }
 
     public Absence deleteAbsence(@NonNull Long id) {
