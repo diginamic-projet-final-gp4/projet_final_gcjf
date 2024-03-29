@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function RappGlobPage() {
   return (
     <>
@@ -6,18 +8,18 @@ export default function RappGlobPage() {
         <h2>Collaborateurs</h2>
         <ul>
           <li>
-            <a href="/rapport/collab-actu">
+            <Link to="/rapport/collab-actu">
               Voir la liste des collaborateurs actuels
-            </a>
+            </Link>
           </li>
         </ul>
 
         <h2>Histogramme</h2>
         <ul>
           <li>
-            <a href="/rapport/histogramme">
+            <Link to="/rapport/histogramme">
               Voir l&apos;histogramme des absences
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

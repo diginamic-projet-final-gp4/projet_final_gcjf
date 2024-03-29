@@ -15,8 +15,8 @@ export default function AdminPage() {
       <h1>Administration</h1>
       <div>
         <div className="admin-links">
-          <a href="admin/traitement-abs">Traitement des absence</a>
-          <a href="absence/group/create">Créer une absence de groupe</a>
+          <Link to={`admin/traitement-abs`}>Traitement des absences</Link>
+          <Link to={`absence/group/create`}>Créer une absence de groupe</Link>
         </div>
         <h2>Collaborateurs</h2>
         <div className="classForTable">

@@ -19,7 +19,7 @@ export default function SeeAbs() {
       <div>
         <ul>
           <li>
-            <a href="/absence/create">Créer une absence</a>
+            <Link to="/absence/create">Créer une absence</Link>
           </li>
         </ul>
         <div className="classForTable">
