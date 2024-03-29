@@ -3,6 +3,7 @@ package com.diginamic.apiback.config;
 import java.util.Date;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseCookie;
 
@@ -13,11 +14,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @Configuration
 public class JWTCookieConfig {
-private JwtConfig jwtConfig;
-
-    public JWTCookieConfig(JwtConfig jwtConfig) {
-        this.jwtConfig = jwtConfig;
-    }
+    @Autowired
+    private JwtConfig jwtConfig;
 
     public String buildJWTCookie(User user) {
         byte[] secretKeyBytes = jwtConfig.getSecretKey().getEncoded();

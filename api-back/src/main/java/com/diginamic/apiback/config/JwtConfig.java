@@ -25,8 +25,6 @@ public class JwtConfig {
 
     private Key secretKey;
 
-    
-
     public JwtConfig() {
     }
 

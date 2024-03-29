@@ -2,6 +2,7 @@ package com.diginamic.apiback.controllers;
 
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,13 +20,10 @@ import com.diginamic.apiback.services.UserService;
 @RestController
 @RequestMapping("/api")
 public class SessionController {
-    private UserService userService;;
+    @Autowired
+    private UserService userService;
+    @Autowired
     private JWTCookieConfig jwtCookieConfig;
-
-    public SessionController(UserService userService, JWTCookieConfig jwtCookieConfig) {
-        this.userService = userService;
-        this.jwtCookieConfig = jwtCookieConfig;
-    }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequestDTO userLoginDTO) {
