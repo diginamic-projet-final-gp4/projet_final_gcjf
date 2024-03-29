@@ -1,7 +1,5 @@
 package com.diginamic.apiback.controllers;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -29,7 +27,6 @@ public class SessionController {
     public ResponseEntity<?> login(@RequestBody LoginRequestDTO userLoginDTO) {
         // Authentification
         User user = userService.authenticateUser(userLoginDTO.getEmail(), userLoginDTO.getPassword());
-        String cookie = jwtCookieConfig.buildJWTCookie(user);
         if (user != null) {
             return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookieConfig.buildJWTCookie(user)).build();
         } else {
