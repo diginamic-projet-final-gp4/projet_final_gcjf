@@ -62,8 +62,9 @@ public class WebSecurityConfig {
                 auth -> auth
                         // .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/user")).permitAll()
                         // .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/user/**")).permitAll()
+                        .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/login/**")).permitAll()
                         .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/**")).permitAll()
-                        .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/**")).permitAll()
+                        .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/**")).authenticated()
                         // .requestMatchers(mvc.pattern("/admin/**")).hasAuthority("ROLE_ADMIN")
                         .anyRequest().authenticated())
 

@@ -33,13 +33,15 @@ public class UserController {
     @Autowired
     private AbsenceService absenceService;
 
-    @GetMapping()
-    public List<UserDTO> findAll() {
-        return userService.findAll();
-    }
+    // @GetMapping()
+    // public List<UserDTO> findAll() {
+    //     return userService.findAll();
+    // }
 
-    @GetMapping("/{id}")
-    public Optional<User> findById(@NonNull @PathVariable("id") Long id) {
+    @GetMapping()
+    public Optional<User> findById(Authentication authentication) {
+        final User user = userService.loadUserByUsername(authentication.getName());
+        Long id = user.getId();
         return userService.findById(id);
     }
 
@@ -48,11 +50,11 @@ public class UserController {
         return userService.updateUser(user, id);
     }
 
-    @GetMapping("/{id}/absence")
-    public List<AbsenceDTO> getAbsencesForUser(Authentication authentication, @NonNull @PathVariable Long id) {
+    @GetMapping("/absence")
+    public List<AbsenceDTO> getAbsencesForUser(Authentication authentication) {
         final User user = userService.loadUserByUsername(authentication.getName());
-        if (id != user.getId())
-            throw new EntityNotFoundException("TU NA PAS LE DROIT");
+        Long id = user.getId();
+        // if (id != user.getId()) throw new EntityNotFoundException("TU NA PAS LE DROIT");
         return absenceService.findAbscenceForUserId(id);
     }
 

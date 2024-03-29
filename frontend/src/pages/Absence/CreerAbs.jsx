@@ -46,8 +46,8 @@ export default function CreateAbs() {
       data[key] = value;
     });
     data.status = "INITIALE";
+    data["user_id"]=1
     console.log(data);
-
     postData("http://localhost:8082/api/absence/create", data);
 
     window.location.href = "/absence";
