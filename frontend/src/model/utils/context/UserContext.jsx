@@ -23,8 +23,8 @@ export default function UserContextProvider({ children }) {
 
     const response = await fetch(url, options);
 
-    // return response;
-    return response.json();
+    return response;
+    // return response.json();
   }
 
   const signIn = async (email, password) => {
@@ -35,16 +35,16 @@ export default function UserContextProvider({ children }) {
     if (response.error) {
       throw new Error("Login or password incorrect");
     } else {
-      let token = response.token
-      sessionStorage.setItem("jwt", token)
-      setCurrentUser(token);
+      // let token = response.token
+      localStorage.setItem("isLogged", true)
+      // setCurrentUser(token);
       return true
     }
   };
 
   const logOut = async () => {
     // TODO: Request deletion for actual token
-    sessionStorage.removeItem("jwt");
+    localStorage.removeItem("jwt");
     setCurrentUser(null);
   };
 

@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./Body.css";
+import Cookies from 'js-cookie';
 
 import Login from "../../pages/Login/Login";
 import NotFound from "../../pages/NotFound/NotFound";
@@ -17,8 +18,7 @@ import TraitementAbs from "../../pages/Administration/TraitementAbs";
 import TraitementDemande from "../../pages/Manager/TraitementDemande";
 
 function Nav() {
-  const jwt = localStorage.getItem("jwt");
-  console.log(jwt);
+  const isLogged = localStorage.getItem("isLogged");
 
   return (
     <nav className="site-navigation">
@@ -27,7 +27,7 @@ function Nav() {
       </div>
       <div className="navbar-links">
         <ul>
-          {!jwt ? (
+          {!isLogged ? (
             <li>
               <Link to="/">Login</Link>
             </li>
@@ -57,14 +57,14 @@ function Nav() {
 }
 
 export default function Body() {
-  const jwt = localStorage.getItem("jwt");
+  const isLogged = localStorage.getItem("isLogged");
 
   return (
     <div className="main">
       <Router>
         <Nav />
         <Routes>
-          {!jwt ? (
+          {!isLogged ? (
             <Route path="/" element={<Login />} />
           ) : (
             <>
