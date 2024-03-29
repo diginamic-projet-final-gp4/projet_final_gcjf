@@ -27,10 +27,6 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
     @Autowired
     private JwtConfig jwtConfig;
 
-    public JWTAuthorizationFilter(JwtConfig jwtConfig) {
-        this.jwtConfig = jwtConfig;
-    }
-
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain)
             throws ServletException, IOException {
