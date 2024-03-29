@@ -19,6 +19,7 @@ import com.diginamic.apiback.dto.AbsenceDTO;
 import com.diginamic.apiback.dto.UserDTO;
 import com.diginamic.apiback.models.User;
 import com.diginamic.apiback.services.AbsenceService;
+import com.diginamic.apiback.services.ServiceService;
 import com.diginamic.apiback.services.UserService;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -33,10 +34,13 @@ public class UserController {
     @Autowired
     private AbsenceService absenceService;
 
-    // @GetMapping()
-    // public List<UserDTO> findAll() {
-    //     return userService.findAll();
-    // }
+    @Autowired
+    private ServiceService serviceService;
+
+    @GetMapping("/all")
+    public List<UserDTO> findAll() {
+        return userService.findAll();
+    }
 
     @GetMapping()
     public Optional<User> findById(Authentication authentication) {
@@ -63,20 +67,14 @@ public class UserController {
         return userService.deleteUser(id);
     }
 
-    // @PostMapping("")
-    // public ResponseEntity<?> login(@RequestBody UserDTO userLoginDTO) {
-    // // Authentification
-    // User user = userService.authenticateUser(userLoginDTO.getEmail(),
-    // userLoginDTO.getPassword());
+    @GetMapping("/service/{id}")
+    public List<User> findByServiceId(@NonNull @PathVariable Long id) {
+        Optional<com.diginamic.apiback.models.Service> service = serviceService.findById(id);
+        if(service.isPresent()){
+            return userService.findByService(service.get());
+        }
 
-    // if (user != null) {
-    // // L'authentification a réussi, vous pouvez retourner des informations
-    // // utilisateur ou un token JWT ici
-    // return ResponseEntity.ok(user);
-    // } else {
-    // return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Échec de
-    // l'authentification");
-    // }
-    // }
+        throw new EntityNotFoundException("MES COUIILLLLES");
+    }
 
 }

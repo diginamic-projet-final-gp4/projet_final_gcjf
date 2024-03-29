@@ -23,6 +23,9 @@ public class AbsenceService {
 
     @Autowired
     UserService userService;
+    
+    @Autowired
+    ServiceService serviceService;
 
     public List<Absence> findAll() {
         return absenceRepository.findAll();
@@ -36,6 +39,19 @@ public class AbsenceService {
                 absenceDTOs.add(abs.toDto());
             }
             return absenceDTOs;
+        }
+
+        throw new EntityNotFoundException("L'utilisateur recherché n'a pas été trouvé");
+    }
+    
+    public List<User> findUserForServiceId(@NonNull Long id) {
+        Optional<com.diginamic.apiback.models.Service> service = serviceService.findById(id);
+        if (service.isPresent()) {
+            List<User> users = new ArrayList<>();
+            for (User user : userService.findByService(service.get())) {
+                users.add(user);
+            }
+            return users;
         }
 
         throw new EntityNotFoundException("L'utilisateur recherché n'a pas été trouvé");

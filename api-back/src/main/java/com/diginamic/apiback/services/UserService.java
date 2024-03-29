@@ -51,6 +51,10 @@ public class UserService implements UserDetailsService {
         return userRepository.findById(id);
     }
 
+    public List<User> findByService(com.diginamic.apiback.models.Service service) {
+        return userRepository.findByService(service);
+    }
+
     public User updateUser(@Valid @NonNull User user, @NonNull Long id) {
         boolean idUser = userRepository.existsById(id);
         if (idUser != true) {
