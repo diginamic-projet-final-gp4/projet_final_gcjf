@@ -2,6 +2,7 @@ import { useState, createContext } from "react";
 
 export const UserContext = createContext();
 
+// eslint-disable-next-line react/prop-types
 export default function UserContextProvider({ children }) {
   const [user, setCurrentUser] = useState({});
   // const [loadingData, setLoadingData] = useState(true)
@@ -25,7 +26,6 @@ export default function UserContextProvider({ children }) {
     // return response;
     return response.json();
   }
-
 
   const signIn = async (email, password) => {
     const response = await postData("http://localhost:8082/api/login", {

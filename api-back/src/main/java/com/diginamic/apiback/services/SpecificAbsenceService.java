@@ -42,11 +42,9 @@ public class SpecificAbsenceService {
     }
 
     public SpecificAbsence createSpecificAbsence(@Valid SpecificAbsence specificAbsence) {
-        System.out.println("test absence" + specificAbsence);
         Optional<Organization> organizationOptional = organizationService
                 .findById(specificAbsence.getOrganization_id());
         if (organizationOptional.isPresent()) {
-            System.out.println("=========================== \n");
             Organization organizationObject = organizationOptional.get();
             specificAbsence.setOrganization(organizationObject);
             return specificAbsenceRepository.save(specificAbsence);

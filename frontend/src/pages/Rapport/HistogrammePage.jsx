@@ -24,22 +24,6 @@ ChartJS.register(
 );
 
 /**
- * Données des utilisateurs simulées à la place d'une requête API
- */
-const userData = [
-  { firstName: "Jean", lastName: "1" },
-  { firstName: "Albert", lastName: "2" },
-  { firstName: "Leo", lastName: "3" },
-  { firstName: "Kevin", lastName: "4" },
-  { firstName: "Marc", lastName: "5" },
-  { firstName: "Paul", lastName: "6" },
-  { firstName: "Pierre", lastName: "7" },
-  { firstName: "Jacques", lastName: "8" },
-  { firstName: "Benoit", lastName: "9" },
-  { firstName: "Julien", lastName: "10" },
-];
-
-/**
  * Options de configuration du graphique
  */
 const options = {

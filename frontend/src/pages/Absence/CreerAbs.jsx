@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../model/utils/context/UserContext";
 
-import "./CreerAbs.css";
+import "./Absense.css";
 
 export default function CreateAbs() {
   // Récupèrera le nom de l'utilisateur connecté une fois l'authentification implémentée
@@ -11,11 +11,12 @@ export default function CreateAbs() {
 
   const { postData } = useContext(UserContext);
 
+  console.log(postData);
 
   const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
-    const form = document.querySelector(".create-abs-form");
+    const form = document.querySelector(".abs-form");
     const dtDebutInput = form.querySelector('[name="dt_debut"]');
     const dtFinInput = form.querySelector('[name="dt_fin"]');
 
@@ -46,17 +47,16 @@ export default function CreateAbs() {
     });
     data.status = "INITIALE";
     data["user_id"]=1
-    console.log("DATCHOIN", data);
-
+    console.log(data);
     postData("http://localhost:8082/api/absence/create", data);
 
-    // window.location.href = "/absence";
+    window.location.href = "/absence";
   };
 
   return (
-    <div className="create-abs">
+    <div className="abs">
       <h1>Créer une absence</h1>
-      <form className="create-abs-form" onSubmit={handleSubmit}>
+      <form className="abs-form" onSubmit={handleSubmit}>
         <label>
           <span>Votre identifiant utilisateur</span>
           <input type="text" name="user_id" value={collaborateur} readOnly />

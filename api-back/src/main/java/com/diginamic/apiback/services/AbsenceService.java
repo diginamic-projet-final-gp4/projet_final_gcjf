@@ -56,10 +56,8 @@ public class AbsenceService {
     }
 
     public Absence createAbsence(@Valid Absence absence) {
-        System.out.println("test absence" + absence);
         Optional<User> userOptional = userService.findById(absence.getUser_id());
         if (userOptional.isPresent()) {
-            System.out.println("=========================== \n");
             User userObject = userOptional.get();
             absence.setUser(userObject);
             return absenceRepository.save(absence);

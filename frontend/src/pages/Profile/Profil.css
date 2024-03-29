@@ -1,0 +1,15 @@
+.informations-personnelles {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.informations-personnelles span {
+  margin-bottom: 1rem;
+}
+
+.informations-personnelles table {
+  width: 50%;
+  margin: 0 auto;
+}
