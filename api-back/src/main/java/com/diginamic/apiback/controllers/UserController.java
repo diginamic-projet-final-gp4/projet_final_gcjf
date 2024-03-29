@@ -17,6 +17,7 @@ import java.security.Provider.Service;
 import java.util.List;
 
 import com.diginamic.apiback.dto.AbsenceDTO;
+import com.diginamic.apiback.dto.UserDTO;
 import com.diginamic.apiback.models.User;
 import com.diginamic.apiback.services.AbsenceService;
 import com.diginamic.apiback.services.ServiceService;
@@ -37,10 +38,10 @@ public class UserController {
     @Autowired
     private ServiceService serviceService;
 
-    // @GetMapping()
-    // public List<UserDTO> findAll() {
-    //     return userService.findAll();
-    // }
+    @GetMapping("/all")
+    public List<UserDTO> findAll() {
+        return userService.findAll();
+    }
 
     @GetMapping()
     public Optional<User> findById(Authentication authentication) {
