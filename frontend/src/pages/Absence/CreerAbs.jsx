@@ -1,16 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../model/utils/context/UserContext";
+import loadData from "./../../model/utils/hooks.jsx";
 
 import "./Absense.css";
 
 export default function CreateAbs() {
-  // Récupèrera le nom de l'utilisateur connecté une fois l'authentification implémentée
-  const collaborateur = "1";
   const [dt_debut, setDtDebut] = useState(null);
   const dateAujourdhui = new Date();
 
   const { postData } = useContext(UserContext);
 
+  const { loadedData } = loadData("http://localhost:8082/api/user");
 
   const [isFormValid, setIsFormValid] = useState(false);
 
@@ -45,8 +45,7 @@ export default function CreateAbs() {
       data[key] = value;
     });
     data.status = "INITIALE";
-    data["user_id"]=1
-    console.log(data);
+    data["user_id"] = loadedData.id;
     postData("http://localhost:8082/api/absence/create", data);
 
     window.location.href = "/absence";
@@ -58,7 +57,7 @@ export default function CreateAbs() {
       <form className="abs-form" onSubmit={handleSubmit}>
         <label>
           <span>Votre identifiant utilisateur</span>
-          <input type="text" name="user_id" value={collaborateur} readOnly />
+          <input type="text" name="user_id" value={loadedData.email} readOnly />
         </label>
         <label>
           <span>Type d&apos;absence</span>

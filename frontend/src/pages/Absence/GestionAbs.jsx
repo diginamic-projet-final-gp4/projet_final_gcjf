@@ -7,7 +7,7 @@ import loadData from "./../../model/utils/hooks.jsx";
 import "react-calendar/dist/Calendar.css";
 
 export default function SeeAbs() {
-  const { loadedData } = loadData("http://localhost:8082/api/absence/all");
+  const { loadedData } = loadData("http://localhost:8082/api/user/absence");
 
   useEffect(() => {
   }, [loadedData]);

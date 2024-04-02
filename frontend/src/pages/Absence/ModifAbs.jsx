@@ -1,23 +1,21 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../model/utils/context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 import loadData from "./../../model/utils/hooks.jsx";
 
 export default function ModifAbs() {
-  const collaborateur = "1";
-
-  let id;
-  if (window.location && window.location.pathname) {
-    id = window.location.pathname.split("/").pop();
-  }
   const [dt_debut, setDtDebut] = useState(null);
   const dateAujourdhui = new Date();
+  const navigate = useNavigate();
   const { postData } = useContext(UserContext);
-
 
   const [isFormValid, setIsFormValid] = useState(false);
 
-  const { loadedData } = loadData("http://localhost:8082/api/absence/" + id);
+  const { loadedData } = loadData(
+    "http://localhost:8082/api/absence/" +
+      window.location.pathname.split("/").pop()
+  );
 
   useEffect(() => {
   }, [loadedData]);
@@ -45,18 +43,14 @@ export default function ModifAbs() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Affiche un le json des données du formulaire
     const formData = new FormData(event.target);
     const data = {};
     formData.forEach((value, key) => {
       data[key] = value;
     });
-    data.status = "INITIALE";
-    console.log(data);
+    postData("http://localhost:8082/api/absence/update", data);
 
-    // postData("http://localhost:8082/api/absence/create", data);
-
-    window.location.href = "/absence";
+    navigate("/absence");
   };
   return (
     <>
@@ -87,13 +81,14 @@ export default function ModifAbs() {
         <h2>Informations à modifier</h2>
         <form
           className="abs-form"
-          action={`/absence/update/${id}`}
+          action={`/absence/update/`}
           method="post"
           onSubmit={handleSubmit}
         >
           <label>
-            <span>Votre identifiant utilisateur</span>
-            <input type="text" name="user_id" value={collaborateur} readOnly />
+            <span>
+              Demande N°{loadedData.id} de {loadedData.fullName}
+            </span>
           </label>
           <label>
             <span>Type d&apos;absence</span>
@@ -121,7 +116,7 @@ export default function ModifAbs() {
             <span>Motif</span>
             <input type="text" name="motif" />
           </label>
-          <button type="submit" disabled={!isFormValid}>
+          <button type="submit" disabled={!isFormValid} onClick={handleSubmit}>
             Modifier
           </button>
         </form>

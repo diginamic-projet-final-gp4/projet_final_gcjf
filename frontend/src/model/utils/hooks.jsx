@@ -7,7 +7,7 @@ export default function useFetchData(url = "") {
   useEffect(() => {
     async function loadData() {
       setLoading(true);
-      const res = await fetch(url);
+      const res = await fetch(url, { credentials: "include" });
       try {
         if (res.ok) {
           const dataReceived = await res.json();
@@ -24,7 +24,7 @@ export default function useFetchData(url = "") {
     }
 
     loadData();
-  }, []);
+  }, [url]);
 
   return { loadedData, loading };
 }

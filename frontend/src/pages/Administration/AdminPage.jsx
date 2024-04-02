@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import loadData from "./../../model/utils/hooks.jsx";
 
 export default function AdminPage() {
-  const { loadedData } = loadData("http://localhost:8082/api/user");
+  const { loadedData } = loadData("http://localhost:8082/api/user/all");
 
   useEffect(() => {
     console.log(loadedData);
@@ -15,8 +15,8 @@ export default function AdminPage() {
       <h1>Administration</h1>
       <div>
         <div className="admin-links">
-          <Link to={`admin/traitement-abs`}>Traitement des absences</Link>
-          <Link to={`absence/group/create`}>Créer une absence de groupe</Link>
+          <Link to={`/admin/traitement-abs`}>Traitement des absences</Link>
+          <Link to={`/absence/group/create`}>Créer une absence de groupe</Link>
         </div>
         <h2>Collaborateurs</h2>
         <div className="classForTable">

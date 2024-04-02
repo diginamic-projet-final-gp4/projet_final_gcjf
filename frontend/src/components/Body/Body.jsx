@@ -1,4 +1,10 @@
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+} from "react-router-dom";
 import "./Body.css";
 
 import Login from "../../pages/Login/Login";
@@ -20,12 +26,13 @@ import { UserContext } from "../../model/utils/context/UserContext";
 
 function Nav() {
   const isLogged = localStorage.getItem("isLogged");
-  const { logOut } = useContext(UserContext)
-  const navigate = useNavigate()
+  const { logOut } = useContext(UserContext);
+  // eslint-disable-next-line no-unused-vars
+  const navigate = useNavigate();
 
-  async function handleLogout(){
-    await logOut()
-    window.location.href = '/'
+  async function handleLogout() {
+    await logOut();
+    window.location.href = "/";
   }
 
   return (
@@ -57,7 +64,10 @@ function Nav() {
                 <Link to="/admin">Administration</Link>
               </li>
               <li>
-                <button onClick={handleLogout}>Logout</button>
+                {/* <button onClick={handleLogout}>Logout</button> */}
+                <Link to="/" onClick={handleLogout} className="red">
+                  Logout
+                </Link>
               </li>
             </>
           )}
@@ -113,7 +123,6 @@ export default function Body() {
 						<Route path='/admin//dish/:id' element={<DishAuthPage />} />
 						<Route path="/admin/create-dish" element={<CreateDishPage />} />
 						<Route path="/admin/dish/:id/update" element={<UpdateDishPage />} /> */}
-
         </Routes>
       </Router>
     </div>
