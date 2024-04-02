@@ -21,6 +21,8 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
+import com.diginamic.apiback.enums.Role;
+
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
 public class WebSecurityConfig {
