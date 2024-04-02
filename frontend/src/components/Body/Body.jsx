@@ -75,8 +75,11 @@ export default function Body() {
       <Router>
         <Nav />
         <Routes>
+          <Route path="*" element={<NotFound />} />
           {!isLogged ? (
-            <Route path="/" element={<Login />} />
+            <>
+              <Route path="/" element={<Login />} />
+            </>
           ) : (
             <>
               <Route path="/profile" element={<Profile />} />
@@ -111,7 +114,6 @@ export default function Body() {
 						<Route path="/admin/create-dish" element={<CreateDishPage />} />
 						<Route path="/admin/dish/:id/update" element={<UpdateDishPage />} /> */}
 
-          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </div>
