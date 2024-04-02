@@ -11,7 +11,6 @@ export default function CreateAbs() {
 
   const { postData } = useContext(UserContext);
 
-  console.log(postData);
 
   const [isFormValid, setIsFormValid] = useState(false);
 

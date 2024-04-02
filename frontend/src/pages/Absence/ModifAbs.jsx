@@ -14,14 +14,12 @@ export default function ModifAbs() {
   const dateAujourdhui = new Date();
   const { postData } = useContext(UserContext);
 
-  console.log(postData);
 
   const [isFormValid, setIsFormValid] = useState(false);
 
   const { loadedData } = loadData("http://localhost:8082/api/absence/" + id);
 
   useEffect(() => {
-    console.log("data", loadedData);
   }, [loadedData]);
 
   useEffect(() => {

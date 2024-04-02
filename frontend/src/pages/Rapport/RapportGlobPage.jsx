@@ -9,7 +9,7 @@ export default function RappGlobPage() {
         <ul>
           <li>
             <Link to="/rapport/collab-actu">
-              Voir la liste des collaborateurs actuels
+            Vue par département et par jour
             </Link>
           </li>
         </ul>

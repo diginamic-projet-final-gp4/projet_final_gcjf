@@ -19,6 +19,7 @@ import lombok.Setter;
 @Entity
 @Setter
 @Getter
+
 public class Absence {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

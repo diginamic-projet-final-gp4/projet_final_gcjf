@@ -10,7 +10,6 @@ export default function SeeAbs() {
   const { loadedData } = loadData("http://localhost:8082/api/absence/all");
 
   useEffect(() => {
-    console.log("data", loadedData);
   }, [loadedData]);
 
   return (
