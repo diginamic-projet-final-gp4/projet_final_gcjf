@@ -5,6 +5,33 @@
   text-align: center;
 }
 
+h1 {
+  font-family: "Bowlby One SC", sans-serif;
+  font-size: 3em;
+}
+
+h2 {
+  font-family: "Bowlby One SC", sans-serif;
+  font-size: 2em;
+}
+
+h3 {
+  font-family: "Bowlby One SC", sans-serif;
+  font-size: 1.5em;
+}
+
+a {
+  font-weight: 500;
+}
+
+a:hover {
+  color: #478d7e;
+}
+
+* {
+  font-family: "Yantramanav", sans-serif;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -42,16 +69,7 @@
 }
 
 table {
-  width: 100%;
   border-collapse: collapse;
-}
-
-thead {
-  background-color: #efefef;
-}
-
-tbody {
-  background-color: #f8f8f8;
 }
 
 td,
@@ -62,18 +80,16 @@ th {
 
 th {
   border: 1px solid #dddddd;
-}
-
-th {
-  background-color: #f2f2f2;
+  background-color: #2f5059;
+  color: white;
 }
 
 tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: #e1f1ed;
 }
 
 tr:hover {
-  background-color: #0d00ff15;
+  background-color: #478d7e7e;
 }
 
 .valider {
