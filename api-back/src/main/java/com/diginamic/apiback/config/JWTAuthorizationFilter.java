@@ -28,6 +28,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
     private JwtConfig jwtConfig;
 
     @Override
+    @SuppressWarnings({ "deprecation", "null" })
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain)
             throws ServletException, IOException {
         // Recherche du jeton par Cookie

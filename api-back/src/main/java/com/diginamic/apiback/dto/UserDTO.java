@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.diginamic.apiback.enums.Role;
 import com.diginamic.apiback.models.Service;
-import com.diginamic.apiback.dto.AbsenceDTO;
 import com.diginamic.apiback.models.User;
 
 import jakarta.persistence.EnumType;

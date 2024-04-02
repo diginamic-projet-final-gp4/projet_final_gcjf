@@ -45,6 +45,7 @@ public class UserController {
         return userService.findAll();
     }
 
+    @SuppressWarnings("null")
     @GetMapping()
     public ResponseEntity<?> findById(Authentication authentication) {
         final User user = userService.loadUserByUsername(authentication.getName());
@@ -61,6 +62,7 @@ public class UserController {
         return userService.updateUser(user, id);
     }
 
+    @SuppressWarnings("null")
     @GetMapping("/absence")
     public List<AbsenceDTO> getAbsencesForUser(Authentication authentication) {
         final User user = userService.loadUserByUsername(authentication.getName());
