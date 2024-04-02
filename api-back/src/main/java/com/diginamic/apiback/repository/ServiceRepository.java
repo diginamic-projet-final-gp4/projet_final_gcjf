@@ -14,4 +14,5 @@ import com.diginamic.apiback.models.Service;
 @Repository
 public interface ServiceRepository extends JpaRepository<Service, Long> {
 
+    
 }

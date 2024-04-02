@@ -1,16 +1,18 @@
 package com.diginamic.apiback.services;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
-import org.springframework.stereotype.Service;
+import com.diginamic.apiback.models.Service;
 
 import com.diginamic.apiback.repository.ServiceRepository;
 
 
 
-@Service
+@org.springframework.stereotype.Service
 public class ServiceService {
 
     @Autowired
@@ -19,6 +21,11 @@ public class ServiceService {
 
     public Optional<com.diginamic.apiback.models.Service> findById(@NonNull Long id) {
         return serviceRepository.findById(id);
+    }
+
+        public List<Service> findAll() {
+        List<Service> services = serviceRepository.findAll();
+        return services;
     }
 
 }

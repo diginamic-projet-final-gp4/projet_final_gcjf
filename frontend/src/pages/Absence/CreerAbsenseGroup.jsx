@@ -9,7 +9,6 @@ export default function CreerAbsenseGroup() {
 
   const { postData } = useContext(UserContext);
 
-  console.log(postData);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,8 +19,6 @@ export default function CreerAbsenseGroup() {
     formData.forEach((value, key) => {
       data[key] = value;
     });
-    data.status = "INITIALE";
-    console.log(data);
 
     postData("http://localhost:8082/api/specific-absence/create", data);
 

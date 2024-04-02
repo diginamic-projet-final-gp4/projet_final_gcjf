@@ -2,10 +2,8 @@ package com.diginamic.apiback.controllers;
 
 import java.util.Optional;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.security.access.annotation.Secured;
@@ -53,7 +51,7 @@ public class UserController {
     public ResponseEntity<?> findById(Authentication authentication) {
         final User user = userService.loadUserByUsername(authentication.getName());
         Long id = user.getId();
-        if(user.isCredentialsNonExpired()) {
+        if (user.isCredentialsNonExpired()) {
             return ResponseEntity.ok(userService.findById(id).get().toDto());
         }
 
@@ -81,15 +79,16 @@ public class UserController {
     @GetMapping("/service/{id}")
     public ResponseEntity<?> findByServiceId(@NonNull @PathVariable Long id) {
         Optional<com.diginamic.apiback.models.Service> service = serviceService.findById(id);
-        if(service.isPresent()){
+        if (service.isPresent()) {
             List<UserDTO> userDtos = new ArrayList<>();
-            for(User user: userService.findByService(service.get())){
+            for (User user : userService.findByService(service.get())) {
                 userDtos.add(user.toDto());
             }
             return ResponseEntity.ok(userDtos);
         }
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "the service you are looking for does not exists"));
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(Map.of("message", "the service you are looking for does not exists"));
     }
 
 }

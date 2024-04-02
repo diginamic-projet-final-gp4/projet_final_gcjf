@@ -1,15 +1,49 @@
+.profil {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+/* Block gauche */
 .informations-personnelles {
   display: flex;
   flex-direction: column;
-  width: 50%;
-  margin: 0 auto;
 }
 
-.informations-personnelles span {
-  margin-bottom: 1rem;
+.profil {
+  ul {
+    flex-direction: column;
+    /* Cadre */
+    border: 1px solid #e0e0e0;
+    border-radius: 1em;
+
+    li {
+      text-align: left;
+      padding: 1em;
+
+      border-bottom: 1px solid #e0e0e0;
+
+      span {
+        display: block;
+      }
+
+      span:first-child {
+        font-weight: bold;
+      }
+    }
+
+    li:last-child {
+      border-bottom: none;
+    }
+  }
 }
 
-.informations-personnelles table {
-  width: 50%;
-  margin: 0 auto;
+/* Block droit */
+.conges {
+  display: flex;
+  flex-direction: column;
+}
+
+.conges-restants span {
+  display: block;
 }

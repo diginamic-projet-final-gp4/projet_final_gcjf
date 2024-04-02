@@ -113,7 +113,6 @@ export default function HistogrammePage() {
   const { loadedData } = loadData("http://localhost:8082/api/absence/all")
   
   useEffect(() => {
-    console.log("data", loadedData)
 
     const datasets = loadedData.map((absence) => {
       /**
