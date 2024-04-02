@@ -85,10 +85,10 @@ public class AbsenceController {
                 .body(Map.of("message", "No absence entity with corresponding id found in db"));
     }
 
-    @GetMapping("/absenceservice/{id}")
-    public ResponseEntity<?> findAbsenceWithServiceMonthAndYear(@NonNull @PathVariable("id") Long id,
-            @RequestParam(value = "month") String month,
-            @RequestParam(value = "year") String year ) {
+    @GetMapping("/service")
+    public ResponseEntity<?> findAbsenceWithServiceMonthAndYear( @RequestParam Long id,
+            @RequestParam String month,
+            @RequestParam String year ) {
                 List<Absence> absencesMonthAndYear = absenceService.findAbsenceServiceMonthYear(id, month, year);
 
                 if (absencesMonthAndYear.isEmpty()) {
