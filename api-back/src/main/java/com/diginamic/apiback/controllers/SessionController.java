@@ -20,6 +20,7 @@ import com.diginamic.apiback.services.UserService;
 public class SessionController {
     @Autowired
     private UserService userService;
+    
     @Autowired
     private JWTCookieConfig jwtCookieConfig;
 

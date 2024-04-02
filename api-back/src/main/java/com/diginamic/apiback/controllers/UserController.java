@@ -2,7 +2,11 @@ package com.diginamic.apiback.controllers;
 
 import java.util.Optional;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.diginamic.apiback.dto.AbsenceDTO;
 import com.diginamic.apiback.dto.UserDTO;
@@ -43,10 +49,14 @@ public class UserController {
     }
 
     @GetMapping()
-    public Optional<User> findById(Authentication authentication) {
+    public ResponseEntity<?> findById(Authentication authentication) {
         final User user = userService.loadUserByUsername(authentication.getName());
         Long id = user.getId();
-        return userService.findById(id);
+        if(user.isCredentialsNonExpired()) {
+            return ResponseEntity.ok(userService.findById(id).get().toDto());
+        }
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     @PutMapping("/{id}")
@@ -68,13 +78,17 @@ public class UserController {
     }
 
     @GetMapping("/service/{id}")
-    public List<User> findByServiceId(@NonNull @PathVariable Long id) {
+    public ResponseEntity<?> findByServiceId(@NonNull @PathVariable Long id) {
         Optional<com.diginamic.apiback.models.Service> service = serviceService.findById(id);
         if(service.isPresent()){
-            return userService.findByService(service.get());
+            List<UserDTO> userDtos = new ArrayList<>();
+            for(User user: userService.findByService(service.get())){
+                userDtos.add(user.toDto());
+            }
+            return ResponseEntity.ok(userDtos);
         }
 
-        throw new EntityNotFoundException("MES COUIILLLLES");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "the service you are looking for does not exists"));
     }
 
 }

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.diginamic.apiback.enums.Role;
-import com.diginamic.apiback.models.Absence;
 import com.diginamic.apiback.models.Service;
+import com.diginamic.apiback.dto.AbsenceDTO;
 import com.diginamic.apiback.models.User;
 
 import jakarta.persistence.EnumType;
@@ -20,13 +20,10 @@ public class UserDTO {
     private List<User> users = new ArrayList<>();
     private User manager;
     private Service service;
-    private List<Absence> absences = new ArrayList<>();
+    private List<AbsenceDTO> absences = new ArrayList<>();
     private String firstName;
     private String lastName;
     private String email;
-
-    private String password;
-
     @Enumerated(EnumType.STRING)
     private Role role;
     private Float rttEmployee;

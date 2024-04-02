@@ -10,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.diginamic.apiback.dto.AbsenceDTO;
 import com.diginamic.apiback.dto.UserDTO;
 import com.diginamic.apiback.enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -90,7 +91,12 @@ public class User implements UserDetails {
         userDTO.setRttEmployee(rttEmployee);
         userDTO.setUnpaidLeave(unpaidLeave);
         userDTO.setService(service);
-        userDTO.setAbsences(absences);
+        
+        List<AbsenceDTO> absenceDTOs = new ArrayList<>();
+        for(Absence abs: absences){
+            absenceDTOs.add(abs.toDto());
+        }
+        userDTO.setAbsences(absenceDTOs);
 
         return userDTO;
     }
