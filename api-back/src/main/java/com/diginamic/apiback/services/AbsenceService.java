@@ -91,4 +91,8 @@ public class AbsenceService {
         return absenceToDelete;
     }
 
+    public List<Absence> findAbsenceServiceMonthYear(Long id_service, String month, String year){
+        return absenceRepository.findAbsencesByServiceIdAndMonthAndYear(id_service, month, year);
+    }
+
 }

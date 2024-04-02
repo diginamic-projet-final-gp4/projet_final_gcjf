@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -42,35 +43,6 @@ public class AbsenceController {
         return ResponseEntity.ok().body(absenceDtoList);
     }
 
-    // Create route to retrieve absence by user
-    // that would take a get param like:
-    // http .... /absence?end_date=2024-04-24
-    /*
-     * [
-     * {
-     * "fullname": "Juan miguel"
-     * "absences": [
-     * {
-     * "id": 4,
-     * "dt_debut": "2024-04-24T23:00:00.000+00:00",
-     * "dt_fin": "2024-04-25T23:00:00.000+00:00",
-     * "type": "PAID_LEAVE",
-     * "status": "INITIALE",
-     * "motif": "test"
-     * },
-     * {
-     * "id": 5,
-     * "dt_debut": "2024-04-24T23:00:00.000+00:00",
-     * "dt_fin": "2024-04-25T23:00:00.000+00:00",
-     * "type": "PAID_LEAVE",
-     * "status": "INITIALE",
-     * "motif": "test"
-     * }
-     * ]
-     * }
-     * ]
-     */
-
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@NonNull @PathVariable("id") Long id) {
         Optional<Absence> absence = absenceService.findById(id);
@@ -82,7 +54,7 @@ public class AbsenceController {
                 .body(Map.of("message", "No absence entity with corresponding id found in db"));
     }
 
-    // @CrossOrigin(origins = "http://localhost:5173")
+
     @PostMapping("/create")
     public ResponseEntity<?> createAbsence(@RequestBody @Valid Absence absence) {
         Absence abs = absenceService.createAbsence(absence);
@@ -112,6 +84,20 @@ public class AbsenceController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(Map.of("message", "No absence entity with corresponding id found in db"));
     }
+
+    @GetMapping("/absenceservice/{id}")
+    public ResponseEntity<?> findAbsenceWithServiceMonthAndYear(@NonNull @PathVariable("id") Long id,
+            @RequestParam(value = "month") String month,
+            @RequestParam(value = "year") String year ) {
+                List<Absence> absencesMonthAndYear = absenceService.findAbsenceServiceMonthYear(id, month, year);
+
+                if (absencesMonthAndYear.isEmpty()) {
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                            .body(Map.of("message", "Aucune absence trouvée pour le service, le mois et l'année spécifiés."));
+                } else {
+                    return ResponseEntity.ok(absencesMonthAndYear);
+                }
+            }
 
     // @DeleteMapping("/{id}")
     // public ResponseEntity<?> deleteAbsenceRequest(final Authentication
