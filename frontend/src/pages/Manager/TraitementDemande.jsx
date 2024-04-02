@@ -12,7 +12,6 @@ export default function TraitementDemande() {
   };
 
   useEffect(() => {
-    console.log(loadedData);
   }, [loadedData]);
 
   return (

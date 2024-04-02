@@ -18,7 +18,6 @@ export default function ModifAbs() {
   );
 
   useEffect(() => {
-    console.log("data", loadedData);
   }, [loadedData]);
 
   useEffect(() => {
