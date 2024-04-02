@@ -33,11 +33,11 @@
   padding: 0.5em 1em;
   font-size: 1.2em;
   border-radius: 5px;
-  background-color: #007bff;
+  background-color: #2f5059;
   color: white;
   cursor: pointer;
 }
 
 .abs-form button:hover {
-  background-color: #0056b3;
+  background-color: #2f5059b2;
 }

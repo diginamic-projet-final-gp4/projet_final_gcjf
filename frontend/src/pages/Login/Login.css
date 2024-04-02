@@ -6,9 +6,9 @@
   width: 20%;
   height: 30%;
   margin: 0 auto;
-
-  background: #f4f6fb;
-  border: 1px solid white;
+  border-radius: 1em;
+  background: #e1f1ed;
+  border: 1px solid #2f505941;
   box-shadow: 10px 10px 64px 0px rgba(180, 180, 207, 0.75);
   -webkit-box-shadow: 10px 10px 64px 0px rgba(186, 186, 202, 0.75);
   -moz-box-shadow: 10px 10px 64px 0px rgba(208, 208, 231, 0.75);
@@ -30,7 +30,7 @@
 
   .form_heading {
     font-size: 21px;
-    color: #7878bd;
+    color: #478d7e;
   }
 
   .field {
@@ -42,7 +42,7 @@
     background-color: #e9e9f7;
     padding: 5px;
     width: 80%;
-    color: #7a7ab3;
+    color: #478d7e;
     border: 1px solid #dadaf7;
   }
 
@@ -55,14 +55,14 @@
   }
 
   label {
-    color: #b2bac8;
+    color: #478d7e;
     font-size: 14px;
     display: block;
     padding-bottom: 4px;
   }
 
   button {
-    background-color: #7878bd !important;
+    background-color: #2f5059 !important;
     margin-top: 10px;
     font-size: 14px;
     padding: 7px 12px;
@@ -73,6 +73,6 @@
   }
 
   button:hover {
-    background-color: #5f5f9c !important;
+    background-color: #4bbfaa !important;
   }
 }
