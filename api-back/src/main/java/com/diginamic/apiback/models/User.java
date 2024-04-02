@@ -91,7 +91,6 @@ public class User implements UserDetails {
         userDTO.setRttEmployee(rttEmployee);
         userDTO.setUnpaidLeave(unpaidLeave);
         userDTO.setService(service);
-        
         List<AbsenceDTO> absenceDTOs = new ArrayList<>();
         for(Absence abs: absences){
             absenceDTOs.add(abs.toDto());
@@ -104,40 +103,31 @@ public class User implements UserDetails {
     @Override
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        final Set<GrantedAuthority> authorities = new HashSet<>();
+        Set<GrantedAuthority> authorities = new HashSet<>();
 
-        authorities.add(new SimpleGrantedAuthority(role.toString()));
+        authorities.add(role);
 
         return authorities;
     }
 
     @Override
     public String getUsername() {
-        // TODO Auto-generated method stub
         return email;
     }
-
     @Override
     public boolean isAccountNonExpired() {
-        // TODO Auto-generated method stub
         return true;
     }
-
     @Override
     public boolean isAccountNonLocked() {
-        // TODO Auto-generated method stub
         return true;
     }
-
     @Override
     public boolean isCredentialsNonExpired() {
-        // TODO Auto-generated method stub
         return true;
     }
-
     @Override
     public boolean isEnabled() {
-        // TODO Auto-generated method stub
         return true;
     }
 }

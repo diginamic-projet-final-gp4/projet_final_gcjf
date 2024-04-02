@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +29,6 @@ import com.diginamic.apiback.services.AbsenceService;
 import com.diginamic.apiback.services.ServiceService;
 import com.diginamic.apiback.services.UserService;
 
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 
 @RestController
@@ -43,11 +43,12 @@ public class UserController {
     @Autowired
     private ServiceService serviceService;
 
+    @Secured("MANAGER")
     @GetMapping("/all")
     public List<UserDTO> findAll() {
         return userService.findAll();
     }
-
+    
     @GetMapping()
     public ResponseEntity<?> findById(Authentication authentication) {
         final User user = userService.loadUserByUsername(authentication.getName());
@@ -68,7 +69,7 @@ public class UserController {
     public List<AbsenceDTO> getAbsencesForUser(Authentication authentication) {
         final User user = userService.loadUserByUsername(authentication.getName());
         Long id = user.getId();
-        // if (id != user.getId()) throw new EntityNotFoundException("TU NA PAS LE DROIT");
+
         return absenceService.findAbscenceForUserId(id);
     }
 
