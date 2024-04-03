@@ -8,6 +8,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import com.diginamic.apiback.dto.AbsenceDTO;
+import com.diginamic.apiback.enums.Status;
 import com.diginamic.apiback.models.Absence;
 import com.diginamic.apiback.models.User;
 import com.diginamic.apiback.repository.AbsenceRepository;
@@ -23,7 +24,7 @@ public class AbsenceService {
 
     @Autowired
     UserService userService;
-    
+
     @Autowired
     ServiceService serviceService;
 
@@ -43,7 +44,7 @@ public class AbsenceService {
 
         throw new EntityNotFoundException("L'utilisateur recherché n'a pas été trouvé");
     }
-    
+
     public List<User> findUserForServiceId(@NonNull Long id) {
         Optional<com.diginamic.apiback.models.Service> service = serviceService.findById(id);
         if (service.isPresent()) {
@@ -61,6 +62,7 @@ public class AbsenceService {
         return absenceRepository.findById(id);
     }
 
+    @SuppressWarnings("null")
     public Absence updateAbsence(@Valid @NonNull Absence absence, @NonNull Long id) {
         boolean idAbsence = absenceRepository.existsById(id);
         if (idAbsence != true) {
@@ -71,13 +73,14 @@ public class AbsenceService {
         return absenceRepository.save(absence);
     }
 
+    @SuppressWarnings("null")
     public Absence createAbsence(@Valid Absence absence) {
         Optional<User> userOptional = userService.findById(absence.getUser_id());
         if (userOptional.isPresent()) {
             User userObject = userOptional.get();
             absence.setUser(userObject);
             return absenceRepository.save(absence);
-        } 
+        }
 
         throw new EntityNotFoundException("User not found");
     }
@@ -93,6 +96,22 @@ public class AbsenceService {
 
     public List<Absence> findAbsenceServiceMonthYear(String id_service, String month, String year){
         return absenceRepository.findAbsencesByServiceIdAndMonthAndYear(id_service, month, year);
+    }
+
+    public void validateAbsence(Long id) {
+        @SuppressWarnings("null")
+        Absence absence = absenceRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("ID : " + id + " introuvable"));
+        absence.setStatus(Status.VALIDEE);
+        absenceRepository.save(absence);
+    }
+
+    public void rejeteAbsence(Long id) {
+        @SuppressWarnings("null")
+        Absence absence = absenceRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("ID : " + id + " introuvable"));
+        absence.setStatus(Status.REJETEE);
+        absenceRepository.save(absence);
     }
 
 }

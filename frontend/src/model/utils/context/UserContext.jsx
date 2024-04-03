@@ -4,7 +4,6 @@ export const UserContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 export default function UserContextProvider({ children }) {
-  
   async function postData(url = "", donnees = {}) {
     let options = {
       method: "POST",
@@ -15,8 +14,8 @@ export default function UserContextProvider({ children }) {
       },
       redirect: "follow",
       referrerPolicy: "no-referrer",
-      body: JSON.stringify(donnees)
-    }
+      body: JSON.stringify(donnees),
+    };
 
     const response = await fetch(url, options);
 
@@ -30,24 +29,40 @@ export default function UserContextProvider({ children }) {
     });
     if (response.error) {
       throw new Error("Login or password incorrect");
-    } 
+    }
 
-    localStorage.setItem("isLogged", true)
+    localStorage.setItem("isLogged", true);
   };
 
   const logOut = async () => {
-    const response = await postData("http://localhost:8082/logout")
-    if(response.ok) {
-      localStorage.removeItem("isLogged")
-      return
+    const response = await postData("http://localhost:8082/logout");
+    if (response.ok) {
+      localStorage.removeItem("isLogged");
+      return;
     }
 
-    alert("There was a problem trying to log you out")
+    alert("There was a problem trying to log you out");
   };
 
+  async function deleteData(url = "") {
+    let options = {
+      method: "DELETE",
+      cache: "no-cache",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+    };
+
+    const response = await fetch(url, options);
+
+    return response;
+  }
 
   return (
-    <UserContext.Provider value={{ signIn, logOut, postData }}>
+    <UserContext.Provider value={{ signIn, logOut, postData, deleteData }}>
       {children}
     </UserContext.Provider>
   );
