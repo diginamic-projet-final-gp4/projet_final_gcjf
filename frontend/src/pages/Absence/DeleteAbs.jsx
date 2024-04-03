@@ -1,18 +1,31 @@
-import { useEffect } from "react";
-
+import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import loadData from "./../../model/utils/hooks.jsx";
+import { UserContext } from "../../model/utils/context/UserContext.jsx";
 
 export default function DeleteAbs() {
   let id;
+
+  const navigate = useNavigate();
+
+  const { deleteData } = useContext(UserContext);
+
   if (window.location && window.location.pathname) {
     id = window.location.pathname.split("/").pop();
   }
 
   const { loadedData } = loadData("http://localhost:8082/api/absence/" + id);
 
+  function handleDeleteData() {
+    deleteData("http://localhost:8082/api/absence/delete/" + id);
+    navigate("/absence");
+  }
+
   useEffect(() => {
-    console.log("data", loadedData);
-  }, [loadedData]);
+    if (loadedData) {
+      console.log(loadedData);
+    }
+  }, []);
 
   return (
     <>
@@ -40,6 +53,8 @@ export default function DeleteAbs() {
             )}
           </tbody>
         </table>
+
+        <button onClick={handleDeleteData}>Confirmer</button>
       </div>
     </>
   );
