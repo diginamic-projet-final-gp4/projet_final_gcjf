@@ -13,7 +13,6 @@ export default function ListCollabActuelTable({service, month, year}) {
    console.log(data)
   return(
   <>
-  
   </>
   )
 }
