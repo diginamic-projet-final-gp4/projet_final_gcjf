@@ -23,7 +23,7 @@ public class AbsenceService {
 
     @Autowired
     UserService userService;
-    
+
     @Autowired
     ServiceService serviceService;
 
@@ -43,7 +43,7 @@ public class AbsenceService {
 
         throw new EntityNotFoundException("L'utilisateur recherché n'a pas été trouvé");
     }
-    
+
     public List<User> findUserForServiceId(@NonNull Long id) {
         Optional<com.diginamic.apiback.models.Service> service = serviceService.findById(id);
         if (service.isPresent()) {
@@ -61,6 +61,7 @@ public class AbsenceService {
         return absenceRepository.findById(id);
     }
 
+    @SuppressWarnings("null")
     public Absence updateAbsence(@Valid @NonNull Absence absence, @NonNull Long id) {
         boolean idAbsence = absenceRepository.existsById(id);
         if (idAbsence != true) {
@@ -71,13 +72,14 @@ public class AbsenceService {
         return absenceRepository.save(absence);
     }
 
+    @SuppressWarnings("null")
     public Absence createAbsence(@Valid Absence absence) {
         Optional<User> userOptional = userService.findById(absence.getUser_id());
         if (userOptional.isPresent()) {
             User userObject = userOptional.get();
             absence.setUser(userObject);
             return absenceRepository.save(absence);
-        } 
+        }
 
         throw new EntityNotFoundException("User not found");
     }
