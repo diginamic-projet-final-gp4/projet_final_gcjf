@@ -16,7 +16,6 @@ import java.util.List;
 
 import com.diginamic.apiback.dto.UserDTO;
 import com.diginamic.apiback.models.User;
-// import com.diginamic.apiback.services.AuthService;
 import com.diginamic.apiback.services.UserService;
 
 import jakarta.validation.Valid;
@@ -26,9 +25,6 @@ import jakarta.validation.Valid;
 public class ManagerController {
     @Autowired
     private UserService userService;
-
-    // @Autowired
-    // private AuthService authService;
 
     @GetMapping()
     public List<UserDTO> findAll() {
