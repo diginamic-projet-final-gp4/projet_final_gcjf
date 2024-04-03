@@ -4,7 +4,6 @@ import java.util.Optional;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
@@ -99,8 +98,6 @@ public class AbsenceService {
     }
 
     public ResponseEntity<?> getAbsenceForYearAndMonth(User user, int year, int month){
-
-
         return ResponseEntity.ok("Succès");
     }
 
