@@ -1,0 +1,27 @@
+
+#table {
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+  }
+  
+  .user {
+    margin-right: 20px;
+  }
+  
+  .user h4 {
+    margin-bottom: 10px;
+  }
+
+  .days {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+  
+  .day {
+    list-style: none;
+    margin-bottom: 5px;
+  }
+
+  
