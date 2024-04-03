@@ -55,7 +55,7 @@ export default function Histogramme({
     });
 
     console.log("turbo tchoin", loadedData);
-  }, [loadedData, selectedService, selectedYear, selectedMonth]);
+  }, []);
 
   function createLabel(year, month) {
     const daysInMonth = new Date(year, month, 0).getDate();
