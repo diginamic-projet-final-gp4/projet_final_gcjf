@@ -1,9 +1,11 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
 export const UserContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 export default function UserContextProvider({ children }) {
+  const [role, setRole] = useState()
+
   async function postData(url = "", donnees = {}) {
     let options = {
       method: "POST",
@@ -31,13 +33,14 @@ export default function UserContextProvider({ children }) {
       throw new Error("Login or password incorrect");
     }
 
-    localStorage.setItem("isLogged", true);
+    const res = await fetch("http://localhost:8082/api/user", {credentials: "include"}).then(response=>response.json())
+    setRole(res.role)
   };
 
   const logOut = async () => {
     const response = await postData("http://localhost:8082/logout");
     if (response.ok) {
-      localStorage.removeItem("isLogged");
+      setRole()
       return;
     }
 
@@ -62,7 +65,7 @@ export default function UserContextProvider({ children }) {
   }
 
   return (
-    <UserContext.Provider value={{ signIn, logOut, postData, deleteData }}>
+    <UserContext.Provider value={{ signIn, logOut, postData, deleteData, role }}>
       {children}
     </UserContext.Provider>
   );

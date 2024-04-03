@@ -86,6 +86,7 @@ public class User implements UserDetails {
         userDTO.setFirstName(firstName);
         userDTO.setLastName(lastName);
         userDTO.setManager(manager);
+        userDTO.setRole(role);
         userDTO.setPaidLeave(paidLeave);
         userDTO.setRttEmployee(rttEmployee);
         userDTO.setUnpaidLeave(unpaidLeave);

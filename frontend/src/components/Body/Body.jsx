@@ -26,15 +26,12 @@ import TraitementDemande from "../../pages/Manager/TraitementDemande";
 import ValideeAbs from "../../pages/Manager/ValideeAbs";
 import RejeteeAbs from "../../pages/Manager/RejeteeAbs";
 
-function Nav() {
-  const isLogged = localStorage.getItem("isLogged");
-  const { logOut } = useContext(UserContext);
-  // eslint-disable-next-line no-unused-vars
+function Nav({ logOut, role }) {
   const navigate = useNavigate();
 
   async function handleLogout() {
     await logOut();
-    window.location.href = "/";
+    navigate("/");
   }
 
   return (
@@ -44,7 +41,7 @@ function Nav() {
       </div>
       <div className="navbar-links">
         <ul>
-          {!isLogged ? (
+          {!role ? (
             <li>
               <Link to="/">Login</Link>
             </li>
@@ -56,17 +53,26 @@ function Nav() {
               <li>
                 <Link to="/absence">Absence</Link>
               </li>
+              {role && role === "MANAGER" ? (
+                <>
+                  <li>
+                    <Link to="/rapport">Rapport</Link>
+                  </li>
+                  <li>
+                    <Link to="/manager/traitement">Traitement demande</Link>
+                  </li>
+                </>
+              ) : role === "ADMIN" ? (
+                <>
+                  <li>
+                    <Link to="/admin">Administration</Link>
+                  </li>
+                </>
+              ) : (
+                <></>
+              )}
+
               <li>
-                <Link to="/rapport">Rapport</Link>
-              </li>
-              <li>
-                <Link to="/manager/traitement">Traitement demande</Link>
-              </li>
-              <li>
-                <Link to="/admin">Administration</Link>
-              </li>
-              <li>
-                {/* <button onClick={handleLogout}>Logout</button> */}
                 <Link to="/" onClick={handleLogout} className="red">
                   Logout
                 </Link>
@@ -80,15 +86,15 @@ function Nav() {
 }
 
 export default function Body() {
-  const isLogged = localStorage.getItem("isLogged");
+  const { role, logOut } = useContext(UserContext);
 
   return (
     <div className="main">
       <Router>
-        <Nav />
+        <Nav logOut={logOut} role={role} />
         <Routes>
           <Route path="*" element={<NotFound />} />
-          {!isLogged ? (
+          {!role ? (
             <>
               <Route path="/" element={<Login />} />
             </>
@@ -99,35 +105,42 @@ export default function Body() {
               <Route path="/absence/update/:id" element={<ModifAbs />} />
               <Route path="/absence/delete/:id" element={<DeleteAbs />} />
               <Route path="/absence/create" element={<CreateAbs />} />
-              <Route
-                path="/absence/group/create"
-                element={<CreerAbsenseGroup />}
-              />
-              <Route path="/rapport" element={<RappGlobPage />} />
-              <Route
-                path="/rapport/histogramme"
-                element={<HistogrammePage />}
-              />
-              <Route
-                path="/rapport/collab-actu"
-                element={<ListCollabActuel />}
-              />
-              <Route
-                path="/manager/traitement"
-                element={<TraitementDemande />}
-              />
-              <Route path="/manager/:id/validee" element={<ValideeAbs />} />
-              <Route path="/manager/:id/rejetee" element={<RejeteeAbs />} />
 
-              <Route path="/admin" element={<AdminPage />} />
-              <Route path="/admin/traitement-abs" element={<TraitementAbs />} />
+              {role && role === "MANAGER" ? (
+                <>
+                  <Route path="/rapport" element={<RappGlobPage />} />
+                  <Route
+                    path="/rapport/histogramme"
+                    element={<HistogrammePage />}
+                  />
+                  <Route
+                    path="/rapport/collab-actu"
+                    element={<ListCollabActuel />}
+                  />
+                  <Route
+                    path="/manager/traitement"
+                    element={<TraitementDemande />}
+                  />
+                  <Route path="/manager/:id/validee" element={<ValideeAbs />} />
+                  <Route path="/manager/:id/rejetee" element={<RejeteeAbs />} />
+                </>
+              ) : role == "ADMIN" ? (
+                <>
+                  <Route path="/admin" element={<AdminPage />} />
+                  <Route
+                    path="/absence/group/create"
+                    element={<CreerAbsenseGroup />}
+                  />
+                  <Route
+                    path="/admin/traitement-abs"
+                    element={<TraitementAbs />}
+                  />
+                </>
+              ) : (
+                <></>
+              )}
             </>
           )}
-
-          {/* <Route path='/admin/home' element={<AdminPage />} />
-						<Route path='/admin//dish/:id' element={<DishAuthPage />} />
-						<Route path="/admin/create-dish" element={<CreateDishPage />} />
-						<Route path="/admin/dish/:id/update" element={<UpdateDishPage />} /> */}
         </Routes>
       </Router>
     </div>
