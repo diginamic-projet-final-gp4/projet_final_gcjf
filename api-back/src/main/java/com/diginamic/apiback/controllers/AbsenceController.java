@@ -109,6 +109,17 @@ public class AbsenceController {
         }
     }
 
+    @GetMapping("/{id}/rejete")
+    public ResponseEntity<?> rejeteAbsence(@PathVariable Long id) {
+        try {
+            absenceService.rejeteAbsence(id);
+            return ResponseEntity.ok().body(Map.of("message", "Absence rejete successfully"));
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("message", "The absence you are trying to rejete does not exists"));
+        }
+    }
+
     // @DeleteMapping("/{id}")
     // public ResponseEntity<?> deleteAbsenceRequest(final Authentication
     // authentication, @PathVariable final Long id) {

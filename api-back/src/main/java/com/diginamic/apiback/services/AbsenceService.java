@@ -106,4 +106,12 @@ public class AbsenceService {
         absenceRepository.save(absence);
     }
 
+    public void rejeteAbsence(Long id) {
+        @SuppressWarnings("null")
+        Absence absence = absenceRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("ID : " + id + " introuvable"));
+        absence.setStatus(Status.REJETEE);
+        absenceRepository.save(absence);
+    }
+
 }
