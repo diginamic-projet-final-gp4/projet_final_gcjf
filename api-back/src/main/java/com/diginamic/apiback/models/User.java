@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.diginamic.apiback.dto.AbsenceDTO;
@@ -92,7 +91,7 @@ public class User implements UserDetails {
         userDTO.setUnpaidLeave(unpaidLeave);
         userDTO.setService(service);
         List<AbsenceDTO> absenceDTOs = new ArrayList<>();
-        for(Absence abs: absences){
+        for (Absence abs : absences) {
             absenceDTOs.add(abs.toDto());
         }
         userDTO.setAbsences(absenceDTOs);
@@ -114,18 +113,22 @@ public class User implements UserDetails {
     public String getUsername() {
         return email;
     }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
+
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
+
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
+
     @Override
     public boolean isEnabled() {
         return true;

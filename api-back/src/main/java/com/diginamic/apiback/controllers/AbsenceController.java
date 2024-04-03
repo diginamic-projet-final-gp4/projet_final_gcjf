@@ -54,7 +54,6 @@ public class AbsenceController {
                 .body(Map.of("message", "No absence entity with corresponding id found in db"));
     }
 
-
     @PostMapping("/create")
     public ResponseEntity<?> createAbsence(@RequestBody @Valid Absence absence) {
         Absence abs = absenceService.createAbsence(absence);
@@ -86,18 +85,29 @@ public class AbsenceController {
     }
 
     @GetMapping("/service")
-    public ResponseEntity<?> findAbsenceWithServiceMonthAndYear( @RequestParam Long id,
+    public ResponseEntity<?> findAbsenceWithServiceMonthAndYear(@RequestParam Long id,
             @RequestParam String month,
-            @RequestParam String year ) {
-                List<Absence> absencesMonthAndYear = absenceService.findAbsenceServiceMonthYear(id, month, year);
+            @RequestParam String year) {
+        List<Absence> absencesMonthAndYear = absenceService.findAbsenceServiceMonthYear(id, month, year);
 
-                if (absencesMonthAndYear.isEmpty()) {
-                    return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                            .body(Map.of("message", "Aucune absence trouvée pour le service, le mois et l'année spécifiés."));
-                } else {
-                    return ResponseEntity.ok(absencesMonthAndYear);
-                }
-            }
+        if (absencesMonthAndYear.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("message", "Aucune absence trouvée pour le service, le mois et l'année spécifiés."));
+        } else {
+            return ResponseEntity.ok(absencesMonthAndYear);
+        }
+    }
+
+    @GetMapping("/{id}/validate")
+    public ResponseEntity<?> validateAbsence(@PathVariable Long id) {
+        try {
+            absenceService.validateAbsence(id);
+            return ResponseEntity.ok().body(Map.of("message", "Absence validated successfully"));
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("message", "The absence you are trying to validate does not exists"));
+        }
+    }
 
     // @DeleteMapping("/{id}")
     // public ResponseEntity<?> deleteAbsenceRequest(final Authentication
