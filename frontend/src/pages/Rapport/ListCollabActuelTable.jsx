@@ -43,6 +43,9 @@ export default function ListCollabActuelTable({ service, month, year }) {
             ))}
           </div>
         <div className="test">
+                {Array.from(fullNameSet).map((fullName) => (
+              <p key={fullName}>{fullName}</p>
+            ))}
         {daysOfMonth.map(day => (
           <p className="day" key={day}>{day}</p>
           ))}
