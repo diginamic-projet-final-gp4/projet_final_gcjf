@@ -20,7 +20,7 @@ public interface AbsenceRepository extends JpaRepository<Absence, Long> {
     "where service.id= :id " +
     "AND EXTRACT(MONTH FROM absence.dt_debut) = :month " +
     "AND EXTRACT(YEAR FROM absence.dt_debut) = :year", nativeQuery = true )
-    List<Absence> findAbsencesByServiceIdAndMonthAndYear(Long id, String month, String year);
+    List<Absence> findAbsencesByServiceIdAndMonthAndYear(String id, String month, String year);
     
     
 }

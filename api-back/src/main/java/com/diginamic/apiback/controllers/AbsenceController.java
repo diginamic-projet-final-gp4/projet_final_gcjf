@@ -85,7 +85,7 @@ public class AbsenceController {
     }
 
     @GetMapping("/service")
-    public ResponseEntity<?> findAbsenceWithServiceMonthAndYear(@RequestParam Long id,
+    public ResponseEntity<?> findAbsenceWithServiceMonthAndYear( @RequestParam String id,
             @RequestParam String month,
             @RequestParam String year) {
         List<Absence> absencesMonthAndYear = absenceService.findAbsenceServiceMonthYear(id, month, year);
