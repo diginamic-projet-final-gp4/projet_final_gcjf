@@ -11,8 +11,7 @@ export default function TraitementDemande() {
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
-  useEffect(() => {
-  }, [loadedData]);
+  useEffect(() => {}, [loadedData]);
 
   return (
     <>
@@ -43,12 +42,15 @@ export default function TraitementDemande() {
                     <td>{formatDate(absence.dt_fin)}</td>
                     <td>{absence.type}</td>
                     <td className="classActionButtons">
-                      {/* TODO : Redirect */}
                       <button className="valider">
-                        <Link to={`/`}>Valider</Link>
+                        <Link to={`/manager/${absence.id}/validee`}>
+                          Valider
+                        </Link>
                       </button>
                       <button className="refuser">
-                        <Link to={`/`}>Refuser</Link>
+                        <Link to={`/manager/${absence.id}/rejetee`}>
+                          Refuser
+                        </Link>
                       </button>
                     </td>
                   </tr>
