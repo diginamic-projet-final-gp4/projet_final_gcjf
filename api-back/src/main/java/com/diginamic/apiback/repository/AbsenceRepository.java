@@ -14,13 +14,14 @@ public interface AbsenceRepository extends JpaRepository<Absence, Long> {
     List<Absence> findByUser(User user);
     
 
-    @Query(value ="select absence.* from user  " +
-    "inner join service on user.service_id = service.id " +
-    "inner join absence on user.id = absence.user_id " +
-    "where service.id= :id " +
-    "AND EXTRACT(MONTH FROM absence.dt_debut) = :month " +
-    "AND EXTRACT(YEAR FROM absence.dt_debut) = :year", nativeQuery = true )
-    List<Absence> findAbsencesByServiceIdAndMonthAndYear(Long id, String month, String year);
+    @Query(value ="""
+        select a from Absence a 
+        INNER JOIN User u ON a.user_id = u.id
+        WHERE a.user_id = :id
+        AND MONTH(a.dt_debut) = :month
+        AND YEAR(a.dt_debut) = :year
+        """)
+    List<Absence> findAbsencesAndMonthAndYear(Long id , String month, String year);
     
     
 }
