@@ -6,6 +6,8 @@ import {
   useNavigate,
 } from "react-router-dom";
 import "./Body.css";
+import { UserContext } from "../../model/utils/context/UserContext";
+import { useContext } from "react";
 
 import Login from "../../pages/Login/Login";
 import NotFound from "../../pages/NotFound/NotFound";
@@ -21,8 +23,8 @@ import ListCollabActuel from "../../pages/Rapport/ListCollabActuel";
 import AdminPage from "../../pages/Administration/AdminPage";
 import TraitementAbs from "../../pages/Administration/TraitementAbs";
 import TraitementDemande from "../../pages/Manager/TraitementDemande";
-import { useContext } from "react";
-import { UserContext } from "../../model/utils/context/UserContext";
+import ValideeAbs from "../../pages/Manager/ValideeAbs";
+import RejeteeAbs from "../../pages/Manager/RejeteeAbs";
 
 function Nav() {
   const isLogged = localStorage.getItem("isLogged");
@@ -114,6 +116,9 @@ export default function Body() {
                 path="/manager/traitement"
                 element={<TraitementDemande />}
               />
+              <Route path="/manager/:id/validee" element={<ValideeAbs />} />
+              <Route path="/manager/:id/rejetee" element={<RejeteeAbs />} />
+
               <Route path="/admin" element={<AdminPage />} />
               <Route path="/admin/traitement-abs" element={<TraitementAbs />} />
             </>

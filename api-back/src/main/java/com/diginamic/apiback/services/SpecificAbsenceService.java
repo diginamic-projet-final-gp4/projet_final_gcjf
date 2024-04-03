@@ -31,6 +31,7 @@ public class SpecificAbsenceService {
         return specificAbsenceRepository.findById(id);
     }
 
+    @SuppressWarnings("null")
     public SpecificAbsence updateSpecificAbsence(@Valid @NonNull SpecificAbsence specificAbsence, @NonNull Long id) {
         boolean idAbsence = specificAbsenceRepository.existsById(id);
         if (idAbsence != true) {
@@ -41,6 +42,7 @@ public class SpecificAbsenceService {
         return specificAbsenceRepository.save(specificAbsence);
     }
 
+    @SuppressWarnings("null")
     public SpecificAbsence createSpecificAbsence(@Valid SpecificAbsence specificAbsence) {
         Optional<Organization> organizationOptional = organizationService
                 .findById(specificAbsence.getOrganization_id());
