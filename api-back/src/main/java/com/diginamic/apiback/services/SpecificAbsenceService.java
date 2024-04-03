@@ -1,18 +1,18 @@
 package com.diginamic.apiback.services;
 
+import java.util.List;
 import java.util.Optional;
 
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import com.diginamic.apiback.models.SpecificAbsence;
 import com.diginamic.apiback.models.Organization;
+import com.diginamic.apiback.models.SpecificAbsence;
 import com.diginamic.apiback.repository.SpecificAbsenceRepository;
 
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class SpecificAbsenceService {
@@ -50,9 +50,9 @@ public class SpecificAbsenceService {
             Organization organizationObject = organizationOptional.get();
             specificAbsence.setOrganization(organizationObject);
             return specificAbsenceRepository.save(specificAbsence);
-        } else {
-            throw new EntityNotFoundException("Organization not found");
-        }
+        } 
+
+        throw new EntityNotFoundException("Organization not found");
     }
 
     public SpecificAbsence deleteSpecificAbsence(@NonNull Long id) {

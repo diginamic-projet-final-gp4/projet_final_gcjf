@@ -30,9 +30,9 @@ public class SessionController {
         User user = userService.authenticateUser(userLoginDTO.getEmail(), userLoginDTO.getPassword());
         if (user != null) {
             return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookieConfig.buildJWTCookie(user)).build();
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Échec de l'authentification");
-        }
+        } 
+        
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Échec de l'authentification");
     }
 
 

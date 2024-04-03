@@ -3,7 +3,9 @@ package com.diginamic.apiback.services;
 import java.util.Optional;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
@@ -94,8 +96,12 @@ public class AbsenceService {
         return absenceToDelete;
     }
 
-    public List<Absence> findAbsenceServiceMonthYear(String id_service, String month, String year){
-        return absenceRepository.findAbsencesByServiceIdAndMonthAndYear(id_service, month, year);
+    public List<Absence> findAbsenceMonthYear(Long user_id, String month, String year){
+        return absenceRepository.findAbsencesAndMonthAndYear(user_id, month, year);
+    }
+
+    public ResponseEntity<?> getAbsenceForYearAndMonth(User user, int year, int month){
+        return ResponseEntity.ok("Succès");
     }
 
     public void validateAbsence(Long id) {
