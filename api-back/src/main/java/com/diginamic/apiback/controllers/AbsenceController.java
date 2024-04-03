@@ -110,4 +110,26 @@ public class AbsenceController {
         return ResponseEntity.ok(userDTOs);
     }
 
+    @GetMapping("/{id}/validate")
+    public ResponseEntity<?> validateAbsence(@PathVariable Long id) {
+        try {
+            absenceService.validateAbsence(id);
+            return ResponseEntity.ok().body(Map.of("message", "Absence validated successfully"));
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("message", "The absence you are trying to validate does not exists"));
+        }
+    }
+
+    @GetMapping("/{id}/rejete")
+    public ResponseEntity<?> rejeteAbsence(@PathVariable Long id) {
+        try {
+            absenceService.rejeteAbsence(id);
+            return ResponseEntity.ok().body(Map.of("message", "Absence rejete successfully"));
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("message", "The absence you are trying to rejete does not exists"));
+        }
+    }
+
 }
