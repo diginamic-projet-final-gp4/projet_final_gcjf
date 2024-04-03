@@ -8,6 +8,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import com.diginamic.apiback.dto.AbsenceDTO;
+import com.diginamic.apiback.enums.Status;
 import com.diginamic.apiback.models.Absence;
 import com.diginamic.apiback.models.User;
 import com.diginamic.apiback.repository.AbsenceRepository;
@@ -93,8 +94,24 @@ public class AbsenceService {
         return absenceToDelete;
     }
 
-    public List<Absence> findAbsenceServiceMonthYear(Long id_service, String month, String year){
+    public List<Absence> findAbsenceServiceMonthYear(Long id_service, String month, String year) {
         return absenceRepository.findAbsencesByServiceIdAndMonthAndYear(id_service, month, year);
+    }
+
+    public void validateAbsence(Long id) {
+        @SuppressWarnings("null")
+        Absence absence = absenceRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("ID : " + id + " introuvable"));
+        absence.setStatus(Status.VALIDEE);
+        absenceRepository.save(absence);
+    }
+
+    public void rejeteAbsence(Long id) {
+        @SuppressWarnings("null")
+        Absence absence = absenceRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("ID : " + id + " introuvable"));
+        absence.setStatus(Status.REJETEE);
+        absenceRepository.save(absence);
     }
 
 }
