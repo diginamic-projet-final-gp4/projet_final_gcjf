@@ -12,15 +12,16 @@ import com.diginamic.apiback.models.User;
 @Repository
 public interface AbsenceRepository extends JpaRepository<Absence, Long> {
     List<Absence> findByUser(User user);
-    
 
-    @Query(value ="select absence.* from user  " +
-    "inner join service on user.service_id = service.id " +
-    "inner join absence on user.id = absence.user_id " +
-    "where service.id= :id " +
-    "AND EXTRACT(MONTH FROM absence.dt_debut) = :month " +
-    "AND EXTRACT(YEAR FROM absence.dt_debut) = :year", nativeQuery = true )
+    @Query(value = "SELECT * FROM absence WHERE status = :status", nativeQuery = true)
+    List<Absence> findByStatus(String status);
+
+    @Query(value = "select absence.* from user  " +
+            "inner join service on user.service_id = service.id " +
+            "inner join absence on user.id = absence.user_id " +
+            "where service.id= :id " +
+            "AND EXTRACT(MONTH FROM absence.dt_debut) = :month " +
+            "AND EXTRACT(YEAR FROM absence.dt_debut) = :year", nativeQuery = true)
     List<Absence> findAbsencesByServiceIdAndMonthAndYear(Long id, String month, String year);
-    
-    
+
 }
