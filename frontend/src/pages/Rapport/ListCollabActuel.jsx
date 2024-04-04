@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import loadData from "../../model/utils/hooks.jsx"
 import ListCollabActuelTable from "./ListCollabActuelTable.jsx";
+import "./ListCollabActuel.css"
 
 const months = [
   { value: 1, label: "January" },

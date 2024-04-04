@@ -25,12 +25,20 @@ export default function ListCollabActuelTable({ service, month, year }) {
 
   data.forEach((user) => {
     let obj = {};
-
     for (let i = 0; i < daysOfMonth.length; i++) {
       let dayOfMonth = new Date(year, month, i);
       for (let abs of user.absences) {
         let dayOfUser = new Date(abs.dt_debut);
         if (dayOfUser.getDate() == dayOfMonth.getDate()) {
+          if (abs.type == "PAID_LEAVE"|| abs.type == "UNPAID_LEAVE") {
+            abs.type = "C"
+          }
+          if (abs.type == "RTT_EMPLOYER"|| abs.type == "RTT_EMPLOYEE") {
+            abs.type = "R"
+          }
+          if (abs.type == "FERIEE") {
+            abs.type = "F"
+          }
           obj[dayOfMonth] = abs.type;
         } else continue;
       }
@@ -45,13 +53,10 @@ export default function ListCollabActuelTable({ service, month, year }) {
     <>
       <h2>liste des congés</h2>
       <div id="table">
-        <div className="user">
-          <h4>User</h4>
-
           <table>
             <thead>
               <tr>
-                <th>User</th>
+                <th className="user">User</th>
                 {daysOfMonth &&
                   daysOfMonth.map((val) => <th key={val}>{val}</th>)}
               </tr>
@@ -62,7 +67,6 @@ export default function ListCollabActuelTable({ service, month, year }) {
                   return (
                     <tr key={index}>
                       <td>{user.firstName + " " + user.lastName}</td>
-                      
                       {Array.from(Object.keys(user?.obj)).map((item, i) => {
                         if(user.obj[item]) return <td key={i}>{user.obj[item].split("")[0]}</td>
                         else return <td key={i}></td>
@@ -72,7 +76,6 @@ export default function ListCollabActuelTable({ service, month, year }) {
                 })}
             </tbody>
           </table>
-        </div>
       </div>
     </>
   );
