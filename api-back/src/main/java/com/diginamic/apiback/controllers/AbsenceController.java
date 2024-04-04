@@ -3,6 +3,7 @@ package com.diginamic.apiback.controllers;
 import java.util.Optional;
 
 import org.springframework.lang.NonNull;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -71,10 +72,10 @@ public class AbsenceController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateUser(@NonNull @RequestBody @Valid Absence absence,
+    public ResponseEntity<?> updateUser(Authentication authentication, @NonNull @RequestBody @Valid Absence absence,
             @NonNull @PathVariable("id") Long id) {
         try {
-            absenceService.updateAbsence(absence, id);
+            absenceService.updateAbsence(authentication, absence, id);
             return ResponseEntity.ok().body(Map.of("message", "Your absence was updated successfuly"));
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -94,6 +95,7 @@ public class AbsenceController {
                 .body(Map.of("message", "No absence entity with corresponding id found in db"));
     }
 
+    // TODO: Retrieve only absence that have a status of validated ?
     @GetMapping("/service")
     public ResponseEntity<?> findAbsenceWithServiceMonthAndYear(@RequestParam Long id,
             @RequestParam String month,

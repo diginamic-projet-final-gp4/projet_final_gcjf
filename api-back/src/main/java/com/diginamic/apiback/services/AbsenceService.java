@@ -7,9 +7,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import com.diginamic.apiback.dto.AbsenceDTO;
+import com.diginamic.apiback.enums.AbsenceType;
 import com.diginamic.apiback.enums.Status;
 import com.diginamic.apiback.models.Absence;
 import com.diginamic.apiback.models.User;
@@ -65,13 +67,14 @@ public class AbsenceService {
     }
 
     @SuppressWarnings("null")
-    public Absence updateAbsence(@Valid @NonNull Absence absence, @NonNull Long id) {
+    public Absence updateAbsence(Authentication authentication, @Valid @NonNull Absence absence, @NonNull Long id) {
         boolean idAbsence = absenceRepository.existsById(id);
         if (idAbsence != true) {
             throw new EntityNotFoundException("cette absence n'existe pas");
         }
         absence.setId(id);
-        absence.setUser(userService.findById(absence.getUser_id()).get());
+        absence.setStatus(Status.INITIALE);
+        absence.setUser(userService.findByEmail(authentication.getName()).get());
         return absenceRepository.save(absence);
     }
 
