@@ -153,7 +153,6 @@ public class AbsenceController {
             for(SpecificAbsence specificAbsence : specificAbsenceService.findAbsencesAndMonthAndYear(organizationId, month, year)){
                 absencesUserList.add(specificAbsence.toAbsence());
             }
-            System.out.println("list" + absencesUserList);
             user.setAbsences(absencesUserList);
             userDTOs.add(user.toDto());
         }
