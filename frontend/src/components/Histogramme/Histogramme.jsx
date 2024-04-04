@@ -1,7 +1,6 @@
 import "./Histogramme.css";
 import useFetchData from "../../model/utils/hooks";
 import { Bar } from "react-chartjs-2";
-import { useEffect, useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -20,71 +19,64 @@ ChartJS.register(
   Legend
 );
 
-class Dataset {
-  constructor(label, data){
-    this.label = label
-    this.data = data
-    this.backgroundColor = "#ff00f0"
-    this.borderColor = "#00ff0f"
-    this.borderWidth = 1
-    this.data = Math.random() * 10
-  }
-
-  toObject(){
-    return {
-      label : this.label,
-      data : this.data,
-      backgroundColor : this.backgroundColor,
-      borderColor : this.borderColor,
-      borderWidth : this.borderWidth,
-    }
-  }
-}
-
 export default function Histogramme({
   selectedService,
   selectedMonth,
   selectedYear,
 }) {
+  class Dataset {
+    constructor(label, data){
+      this.label = label
+      this.data = absToList(data)
+      this.backgroundColor = "#ff00f0"
+      this.borderColor = "#00ff0f"
+      this.borderWidth = 1
+    }
+  
+    toObject(){
+      return {
+        label : this.label,
+        data : this.data,
+        backgroundColor : this.backgroundColor,
+        borderColor : this.borderColor,
+        borderWidth : this.borderWidth,
+      }
+    }
+  }
   const { loadedData } = useFetchData(
     `http://localhost:8082/api/absence/service?id=${selectedService}&month=${selectedMonth}&year=${selectedYear}`
   );
-  const [data, setData] = useState(loadedData);
-  const [labels, setLabels] = useState(createLabel(selectedYear, selectedMonth));
+  let data = loadedData
+  const daysOfMonth = createLabel(selectedYear, selectedMonth)
 
-  data.forEach((user) => {
+  function absToList(absences) {
     let obj = {};
 
-    for (let i = 0; i < daysOfMonth.length; i++) {
-      let dayOfMonth = new Date(year, month, i);
-      for (let abs of user.absences) {
+    for (let i = 1; i <= daysOfMonth.length; i++) {
+      let dayOfMonth = new Date(selectedYear, selectedMonth, i);
+      for (let abs of absences) {
         let dayOfUser = new Date(abs.dt_debut);
         if (dayOfUser.getDate() == dayOfMonth.getDate()) {
-          obj[dayOfMonth] = abs.type;
+          obj[dayOfMonth] = 1;
         } else continue;
       }
       if (obj[dayOfMonth] == undefined) {
-        obj[dayOfMonth] = null;
+        obj[dayOfMonth] = 0;
       }
     }
-    user["obj"] = obj;
-  });
 
-  useEffect(() => {
-    setLabels(createLabel(selectedYear, selectedMonth))
-    if(loadedData){
-      setData({
-        labels,
-        datasets: loadedData?.map((user) => {
-          return new Dataset(user.firstName, user.absences).toObject()
-        }),
-        
-      });
+    return Array.from(Object.values(obj));
+  }
+
+  if(loadedData){
+    data = {
+      labels: daysOfMonth,
+      datasets: loadedData?.map((user) => {
+        return new Dataset(user.firstName, user.absences).toObject()
+      }),
     }
-    
-    console.log("tchoin", data);
-  }, [loadedData]);
-
+  }
+  
   function createLabel(year, month) {
     const daysInMonth = new Date(year, month, 0).getDate();
     let tempArr = [];
@@ -109,7 +101,6 @@ export default function Histogramme({
 
   return (
     <>
-      {JSON.stringify(loadedData)}
       {!!data?.datasets?.length > 0 && <Bar data={data} options={options} />}
     </>
   );
