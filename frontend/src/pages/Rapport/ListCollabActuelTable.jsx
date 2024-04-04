@@ -22,35 +22,24 @@ export default function ListCollabActuelTable({ service, month, year }) {
 
   const daysOfMonth = getDaysInMonth(year, month);
   let data = loadedData;
-  const fullNameSet = new Set();
-  const absenceDaysSet = new Set();
 
-  data.forEach((datas) => {
-    fullNameSet.add(datas.firstName + " " + datas.lastName);
-    absenceDaysSet.add;
+  data.forEach((user) => {
+    let obj = {};
+
+    for (let i = 0; i < daysOfMonth.length; i++) {
+      let dayOfMonth = new Date(year, month, i);
+      for (let abs of user.absences) {
+        let dayOfUser = new Date(abs.dt_debut);
+        if (dayOfUser.getDate() == dayOfMonth.getDate()) {
+          obj[dayOfMonth] = abs.type;
+        } else continue;
+      }
+      if (obj[dayOfMonth] == undefined) {
+        obj[dayOfMonth] = null;
+      }
+    }
+    user["obj"] = obj;
   });
-  console.log(data);
-  console.log(month);
-  const maListe = [
-    {
-      fullName: "Jean mi",
-      absences: [
-
-      ]
-    },
-    {
-      fullName: "qdfglkjhqsdg mi",
-      absences: [
-
-      ]
-    },
-    {
-      fullName: "poiupoiu",
-      absences: [
-        
-      ]
-    },
-  ];
 
   return (
     <>
@@ -59,60 +48,31 @@ export default function ListCollabActuelTable({ service, month, year }) {
         <div className="user">
           <h4>User</h4>
 
-
-
-
-
           <table>
             <thead>
               <tr>
                 <th>User</th>
-                {daysOfMonth && daysOfMonth.map((val) => <th key={val}>{val}</th>)}
+                {daysOfMonth &&
+                  daysOfMonth.map((val) => <th key={val}>{val}</th>)}
               </tr>
             </thead>
             <tbody>
-              {
-                maListe && maListe.map((user, index) => {
-                  return <tr key={index}>
-                    <td>{user.fullName}</td>
-                    {user?.absences.map((absence) => {
-                      <td>{}</td>
-                    })}
-                  </tr>
-                })
-              }
-
-
-              <tr>
-                <td>Jean mi</td>
-                <td></td>
-                <td>5</td>
-                <td>48</td>
-                <td></td>
-                <td>654</td>
-                <td>67</td>
-                <td>67</td>
-              </tr>
-
-
+              {data &&
+                data.map((user, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{user.firstName + " " + user.lastName}</td>
+                      
+                      {Array.from(Object.keys(user?.obj)).map((item, i) => {
+                        if(user.obj[item]) return <td key={i}>{user.obj[item].split("")[0]}</td>
+                        else return <td key={i}></td>
+                      })}
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
-          
-          
-          {/* <div className="conteneurUser">
-            {Array.from(fullNameSet).map((fullName) => (
-              <p key={fullName}>{fullName}</p>
-            ))}
-          </div> */}
         </div>
-        {/* <div className="days">
-          {daysOfMonth.map((day) => (
-            <p className="day" key={day}>
-              {day}
-            </p>
-          ))}
-          <div></div>
-        </div> */}
       </div>
     </>
   );

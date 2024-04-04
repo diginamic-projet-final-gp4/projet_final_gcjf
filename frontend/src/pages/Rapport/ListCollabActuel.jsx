@@ -30,7 +30,6 @@ export default function ListCollabActuel() {
   const handleChangeYear = e => setYear(e.target.value)
 
   useEffect(() => {
-    console.log(services)
     setService(services[0]?.id)
   },[services])
   return (
