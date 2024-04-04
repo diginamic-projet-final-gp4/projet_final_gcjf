@@ -41,13 +41,23 @@ public class UserController {
     @Autowired
     private ServiceService serviceService;
 
+    /**
+     * Route pour récupérer tous les utilisateurs (version Manager)
+     * 
+     * @return une liste d'utilisateurs
+     */
     // @Secured("MANAGER")
     @GetMapping("/all")
     public List<UserDTO> findAll() {
         return userService.findAll();
     }
 
-    @SuppressWarnings("null")
+    /**
+     * Route pour récupérer un utilisateur par son id
+     * 
+     * @param authentication l'authentification
+     * @return un utilisateur
+     */
     @GetMapping()
     public ResponseEntity<?> findById(Authentication authentication) {
         final User user = userService.loadUserByUsername(authentication.getName());
@@ -59,12 +69,24 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
+    /**
+     * Route pour mettre à jour un utilisateur
+     * 
+     * @param user l'utilisateur
+     * @param id   l'ID de l'utilisateur
+     * @return l'utilisateur mis à jour
+     */
     @PutMapping("/{id}")
     public User updateUser(@NonNull @RequestBody @Valid User user, @NonNull @PathVariable("id") Long id) {
         return userService.updateUser(user, id);
     }
 
-    @SuppressWarnings("null")
+    /**
+     * Route pour récupérer toutes les absences
+     * 
+     * @param authentication l'authentification
+     * @return une liste d'absences
+     */
     @GetMapping("/absence")
     public List<AbsenceDTO> getAbsencesForUser(Authentication authentication) {
         final User user = userService.loadUserByUsername(authentication.getName());
@@ -73,11 +95,23 @@ public class UserController {
         return absenceService.findAbscenceForUserId(id);
     }
 
+    /**
+     * Route pour créer une absence
+     * 
+     * @param id l'ID de l'utilisateur
+     * @return une absence
+     */
     @DeleteMapping("/delete/{id}")
     public User deleteUser(@NonNull @PathVariable Long id) {
         return userService.deleteUser(id);
     }
 
+    /**
+     * Route pour récupérer les utilisateurs d'un service
+     * 
+     * @param id l'ID du service
+     * @return une liste d'utilisateurs
+     */
     @GetMapping("/service/{id}")
     public ResponseEntity<?> findByServiceId(@NonNull @PathVariable Long id) {
         Optional<com.diginamic.apiback.models.Service> service = serviceService.findById(id);

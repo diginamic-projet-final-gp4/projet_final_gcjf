@@ -39,7 +39,7 @@ import jakarta.validation.Valid;
 public class AbsenceController {
     @Autowired
     AbsenceService absenceService;
-    
+
     @Autowired
     UserService userService;
 
@@ -49,6 +49,11 @@ public class AbsenceController {
     @Autowired
     private ServiceService serviceService;
 
+    /**
+     * Route pour récupérer toutes les absences
+     * 
+     * @return une liste d'absences
+     */
     @GetMapping("/all")
     public ResponseEntity<?> findAll() {
         List<AbsenceDTO> absenceDtoList = new ArrayList<>();
@@ -59,6 +64,12 @@ public class AbsenceController {
         return ResponseEntity.ok().body(absenceDtoList);
     }
 
+    /**
+     * Route pour récupérer une absence par son id
+     * 
+     * @param id l'ID de l'absence
+     * @return l'absence
+     */
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@NonNull @PathVariable("id") Long id) {
         Optional<Absence> absence = absenceService.findById(id);
@@ -70,12 +81,26 @@ public class AbsenceController {
                 .body(Map.of("message", "No absence entity with corresponding id found in db"));
     }
 
+    /**
+     * Route pour créer une absence
+     * 
+     * @param absence l'absence
+     * @return l'absence créée
+     */
     @PostMapping("/create")
     public ResponseEntity<?> createAbsence(@RequestBody @Valid Absence absence) {
         Absence abs = absenceService.createAbsence(absence);
         return ResponseEntity.ok().body(abs.toDto());
     }
 
+    /**
+     * Route pour mettre à jour une absence
+     * 
+     * @param authentication l'authentification
+     * @param absence        l'absence
+     * @param id             l'ID de l'absence
+     * @return un message de confirmation
+     */
     @PutMapping("/update/{id}")
     public ResponseEntity<?> updateUser(Authentication authentication, @NonNull @RequestBody @Valid Absence absence,
             @NonNull @PathVariable("id") Long id) {
@@ -88,6 +113,12 @@ public class AbsenceController {
         }
     }
 
+    /**
+     * Route pour supprimer une absence
+     * 
+     * @param id l'ID de l'absence
+     * @return un message de confirmation
+     */
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteAbsence(@NonNull @PathVariable("id") Long id) {
         Optional<Absence> abs = absenceService.findById(id);
@@ -100,6 +131,14 @@ public class AbsenceController {
                 .body(Map.of("message", "No absence entity with corresponding id found in db"));
     }
 
+    /**
+     * Route pour récupérer les absences d'un utilisateur
+     * 
+     * @param id    l'ID de l'utilisateur
+     * @param month le mois
+     * @param year  l'année
+     * @return une liste d'absences
+     */
     // TODO: Retrieve only absence that have a status of validated ?
     @GetMapping("/service")
     public ResponseEntity<?> findAbsenceWithServiceMonthAndYear(@RequestParam Long id,
@@ -108,7 +147,7 @@ public class AbsenceController {
 
         List<User> userList = userService.findByService(serviceService.findById(id).get());
         List<UserDTO> userDTOs = new ArrayList<>();
-        for(User user: userList){
+        for (User user : userList) {
             List<Absence> absencesUserList = absenceService.findAbsenceMonthYear(user.getId(), month, year);
             Long organizationId = user.getService().getOrganization().getId();
             for(SpecificAbsence specificAbsence : specificAbsenceService.findAbsencesAndMonthAndYear(organizationId, month, year)){
@@ -122,6 +161,13 @@ public class AbsenceController {
         return ResponseEntity.ok(userDTOs);
     }
 
+    // TODO : A voir si il faut le mettre dans le manager controller
+    /**
+     * Route pour valider une absence (manager only)
+     * 
+     * @param id l'ID de l'absence
+     * @return un message de confirmation
+     */
     @GetMapping("/{id}/validate")
     public ResponseEntity<?> validateAbsence(@PathVariable Long id) {
         try {
@@ -133,6 +179,12 @@ public class AbsenceController {
         }
     }
 
+    /**
+     * Route pour rejeter une absence (manager only)
+     * 
+     * @param id l'ID de l'absence
+     * @return un message de confirmation
+     */
     @GetMapping("/{id}/rejete")
     public ResponseEntity<?> rejeteAbsence(@PathVariable Long id) {
         try {
