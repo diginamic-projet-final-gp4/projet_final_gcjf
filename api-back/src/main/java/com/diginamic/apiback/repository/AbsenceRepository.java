@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.diginamic.apiback.enums.AbsenceType;
 import com.diginamic.apiback.models.Absence;
 import com.diginamic.apiback.models.User;
 
@@ -18,6 +19,9 @@ public interface AbsenceRepository extends JpaRepository<Absence, Long> {
      * @return la liste des absences
      */
     List<Absence> findByUser(User user);
+
+    @Query(value = "SELECT * FROM absence WHERE status = :status", nativeQuery = true)
+    List<Absence> findByStatus(String status);
 
     /**
      * Méthode permettant de rechercher les absences d'un utilisateur par mois et
@@ -37,5 +41,14 @@ public interface AbsenceRepository extends JpaRepository<Absence, Long> {
             ORDER BY a.dt_debut ASC
             """)
     List<Absence> findAbsencesAndMonthAndYear(Long id, String month, String year);
+
+    @Query("""
+                SELECT COALESCE(SUM(DATEDIFF(a.dt_fin,a.dt_debut)+1),0)
+                FROM Absence a
+                WHERE a.status = Status.VALIDEE
+                AND a.user = :user
+                AND a.type = :type
+            """)
+    long sumApprovedAbsences(User user, AbsenceType type);
 
 }

@@ -99,4 +99,12 @@ public class SpecificAbsenceService {
         return specificAbsenceRepository.findAbsencesAndMonthAndYear(organizationId, month, year);
     }
 
+    public List<SpecificAbsence> findInitialEmployerWtr() {
+        return specificAbsenceRepository.findInitialEmployerWtr();
+    }
+
+    public SpecificAbsence save(SpecificAbsence specificAbsence) {
+        return specificAbsenceRepository.save(specificAbsence);
+    }
+
 }
