@@ -28,8 +28,12 @@ export default function Histogramme({
     constructor(label, data){
       this.label = label
       this.data = absToList(data)
-      this.backgroundColor = "#ff00f0"
-      this.borderColor = "#00ff0f"
+      let color = label.toLowerCase().split("").slice(0, 3).map((letter) =>  {
+        let charcode = letter.charCodeAt(0) - 93   
+        return charcode * 9
+      }).join()
+      this.backgroundColor = "rgba(" + color + ", .7)";
+      this.borderColor = "rgb(" + color + ")";
       this.borderWidth = 1
     }
   
@@ -44,7 +48,7 @@ export default function Histogramme({
     }
   }
   const { loadedData } = useFetchData(
-    `http://localhost:8082/api/absence/service?id=${selectedService}&month=${selectedMonth}&year=${selectedYear}`
+    `http://localhost:8082/api/absence/service?id=${selectedService}&month=${selectedMonth + 1}&year=${selectedYear}`
   );
   let data = loadedData
   const daysOfMonth = createLabel(selectedYear, selectedMonth)
@@ -94,7 +98,16 @@ export default function Histogramme({
     plugins: {
       title: {
         display: true,
-        text: "Bar Chart",
+        text: 'Chart.js Bar Chart - Stacked',
+      },
+    },
+    responsive: true,
+    scales: {
+      x: {
+        stacked: true,
+      },
+      y: {
+        stacked: true,
       },
     },
   };
