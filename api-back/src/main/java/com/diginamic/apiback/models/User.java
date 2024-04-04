@@ -33,6 +33,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "manager")
     @Column(nullable = true)
     private List<User> users = new ArrayList<>();

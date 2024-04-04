@@ -52,7 +52,7 @@ export default function ModifAbs() {
 
     setTimeout(() => {
       navigate("/absence");
-    }, 100);
+    }, 100)
   };
   return (
     <>
