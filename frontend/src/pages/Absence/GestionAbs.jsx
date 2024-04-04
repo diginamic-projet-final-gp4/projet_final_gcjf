@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { format, parseISO } from "date-fns";
 import { Link } from "react-router-dom";
 
@@ -8,9 +7,6 @@ import "react-calendar/dist/Calendar.css";
 
 export default function SeeAbs() {
   const { loadedData } = loadData("http://localhost:8082/api/user/absence");
-
-  useEffect(() => {
-  }, [loadedData]);
 
   return (
     <>

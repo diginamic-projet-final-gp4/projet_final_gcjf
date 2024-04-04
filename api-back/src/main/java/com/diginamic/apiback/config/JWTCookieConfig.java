@@ -17,7 +17,13 @@ public class JWTCookieConfig {
         @Autowired
         private JwtConfig jwtConfig;
 
-        @SuppressWarnings({ "deprecation", "null" })
+        /**
+         * Crée un cookie JWT à partir d'un objet User
+         * 
+         * @param user l'utilisateur
+         * @return un cookie JWT
+         */
+        @SuppressWarnings({ "deprecation" })
         public String buildJWTCookie(User user) {
                 byte[] secretKeyBytes = jwtConfig.getSecretKey().getEncoded();
                 String jetonJWT = Jwts.builder()

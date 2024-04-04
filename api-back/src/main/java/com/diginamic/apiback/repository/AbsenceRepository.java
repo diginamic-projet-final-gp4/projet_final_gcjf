@@ -12,6 +12,12 @@ import com.diginamic.apiback.models.User;
 
 @Repository
 public interface AbsenceRepository extends JpaRepository<Absence, Long> {
+    /**
+     * Méthode permettant de rechercher les absences d'un utilisateur
+     * 
+     * @param user l'utilisateur
+     * @return la liste des absences
+     */
     List<Absence> findByUser(User user);
 
     @Query(value = "SELECT * FROM absence WHERE status = :status", nativeQuery = true)

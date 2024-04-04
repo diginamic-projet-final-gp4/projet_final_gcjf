@@ -3,6 +3,7 @@ package com.diginamic.apiback.controllers;
 import java.util.Optional;
 
 import org.springframework.lang.NonNull;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,8 +22,14 @@ import java.util.Map;
 import java.util.ArrayList;
 
 import com.diginamic.apiback.dto.AbsenceDTO;
+import com.diginamic.apiback.dto.UserDTO;
 import com.diginamic.apiback.models.Absence;
+import com.diginamic.apiback.models.SpecificAbsence;
+import com.diginamic.apiback.models.User;
 import com.diginamic.apiback.services.AbsenceService;
+import com.diginamic.apiback.services.ServiceService;
+import com.diginamic.apiback.services.SpecificAbsenceService;
+import com.diginamic.apiback.services.UserService;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
@@ -33,6 +40,20 @@ public class AbsenceController {
     @Autowired
     AbsenceService absenceService;
 
+    @Autowired
+    UserService userService;
+
+     @Autowired
+     SpecificAbsenceService specificAbsenceService;
+
+    @Autowired
+    private ServiceService serviceService;
+
+    /**
+     * Route pour récupérer toutes les absences
+     * 
+     * @return une liste d'absences
+     */
     @GetMapping("/all")
     public ResponseEntity<?> findAll() {
         List<AbsenceDTO> absenceDtoList = new ArrayList<>();
@@ -43,6 +64,12 @@ public class AbsenceController {
         return ResponseEntity.ok().body(absenceDtoList);
     }
 
+    /**
+     * Route pour récupérer une absence par son id
+     * 
+     * @param id l'ID de l'absence
+     * @return l'absence
+     */
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@NonNull @PathVariable("id") Long id) {
         Optional<Absence> absence = absenceService.findById(id);
@@ -54,17 +81,31 @@ public class AbsenceController {
                 .body(Map.of("message", "No absence entity with corresponding id found in db"));
     }
 
+    /**
+     * Route pour créer une absence
+     * 
+     * @param absence l'absence
+     * @return l'absence créée
+     */
     @PostMapping("/create")
     public ResponseEntity<?> createAbsence(@RequestBody @Valid Absence absence) {
         Absence abs = absenceService.createAbsence(absence);
         return ResponseEntity.ok().body(abs.toDto());
     }
 
+    /**
+     * Route pour mettre à jour une absence
+     * 
+     * @param authentication l'authentification
+     * @param absence        l'absence
+     * @param id             l'ID de l'absence
+     * @return un message de confirmation
+     */
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateUser(@NonNull @RequestBody @Valid Absence absence,
+    public ResponseEntity<?> updateUser(Authentication authentication, @NonNull @RequestBody @Valid Absence absence,
             @NonNull @PathVariable("id") Long id) {
         try {
-            absenceService.updateAbsence(absence, id);
+            absenceService.updateAbsence(authentication, absence, id);
             return ResponseEntity.ok().body(Map.of("message", "Your absence was updated successfuly"));
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -72,6 +113,12 @@ public class AbsenceController {
         }
     }
 
+    /**
+     * Route pour supprimer une absence
+     * 
+     * @param id l'ID de l'absence
+     * @return un message de confirmation
+     */
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteAbsence(@NonNull @PathVariable("id") Long id) {
         Optional<Absence> abs = absenceService.findById(id);
@@ -84,66 +131,33 @@ public class AbsenceController {
                 .body(Map.of("message", "No absence entity with corresponding id found in db"));
     }
 
+    /**
+     * Route pour récupérer les absences d'un utilisateur
+     * 
+     * @param id    l'ID de l'utilisateur
+     * @param month le mois
+     * @param year  l'année
+     * @return une liste d'absences
+     */
+    // TODO: Retrieve only absence that have a status of validated ?
     @GetMapping("/service")
     public ResponseEntity<?> findAbsenceWithServiceMonthAndYear(@RequestParam Long id,
             @RequestParam String month,
             @RequestParam String year) {
-        List<Absence> absencesMonthAndYear = absenceService.findAbsenceServiceMonthYear(id, month, year);
 
-        if (absencesMonthAndYear.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(Map.of("message", "Aucune absence trouvée pour le service, le mois et l'année spécifiés."));
-        } else {
-            return ResponseEntity.ok(absencesMonthAndYear);
+        List<User> userList = userService.findByService(serviceService.findById(id).get());
+        List<UserDTO> userDTOs = new ArrayList<>();
+        for (User user : userList) {
+            List<Absence> absencesUserList = absenceService.findAbsenceMonthYear(user.getId(), month, year);
+            Long organizationId = user.getService().getOrganization().getId();
+            for(SpecificAbsence specificAbsence : specificAbsenceService.findAbsencesAndMonthAndYear(organizationId, month, year)){
+                absencesUserList.add(specificAbsence.toAbsence());
+            }
+            user.setAbsences(absencesUserList);
+            userDTOs.add(user.toDto());
         }
+
+        return ResponseEntity.ok(userDTOs);
     }
-
-    @GetMapping("/{id}/validate")
-    public ResponseEntity<?> validateAbsence(@PathVariable Long id) {
-        try {
-            absenceService.validateAbsence(id);
-            return ResponseEntity.ok().body(Map.of("message", "Absence validated successfully"));
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(Map.of("message", "The absence you are trying to validate does not exists"));
-        }
-    }
-
-    @GetMapping("/{id}/rejete")
-    public ResponseEntity<?> rejeteAbsence(@PathVariable Long id) {
-        try {
-            absenceService.rejeteAbsence(id);
-            return ResponseEntity.ok().body(Map.of("message", "Absence rejete successfully"));
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(Map.of("message", "The absence you are trying to rejete does not exists"));
-        }
-    }
-
-    // @DeleteMapping("/{id}")
-    // public ResponseEntity<?> deleteAbsenceRequest(final Authentication
-    // authentication, @PathVariable final Long id) {
-    // final AbsenceRequest absenceRequest = absenceRequestService.find(id);
-
-    // // Verify that this absence request exists
-    // if (absenceRequest == null) {
-    // return ResponseEntity
-    // .status(HttpStatus.NOT_FOUND)
-    // .body(Map.of("message", "Cette d'absence n'existe pas ou plus."));
-    // }
-
-    // final User user = userService.loadUserByUsername(authentication.getName());
-
-    // // Verify that the absence request is owned by this user
-    // if (!absenceRequest.getUser().equals(user)) {
-    // return ResponseEntity
-    // .status(HttpStatus.UNAUTHORIZED)
-    // .body(Map.of("message", "Cette d'absence ne vous appartient pas."));
-    // }
-
-    // absenceRequestService.delete(absenceRequest);
-
-    // return ResponseEntity.ok(Map.of("message", "La d'absence a été supprimée."));
-    // }
 
 }

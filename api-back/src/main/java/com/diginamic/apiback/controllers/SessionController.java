@@ -14,27 +14,31 @@ import com.diginamic.apiback.dto.LoginRequestDTO;
 import com.diginamic.apiback.models.User;
 import com.diginamic.apiback.services.UserService;
 
-
 @RestController
 @RequestMapping("/api")
 public class SessionController {
     @Autowired
     private UserService userService;
-    
+
     @Autowired
     private JWTCookieConfig jwtCookieConfig;
 
+    /**
+     * Route pour l'authentification
+     * Retourne un cookie JWT si l'authentification est réussie
+     * 
+     * @param userLoginDTO les informations de connexion
+     * @return un cookie JWT
+     */
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequestDTO userLoginDTO) {
         // Authentification
         User user = userService.authenticateUser(userLoginDTO.getEmail(), userLoginDTO.getPassword());
         if (user != null) {
             return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookieConfig.buildJWTCookie(user)).build();
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Échec de l'authentification");
         }
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Échec de l'authentification");
     }
-
-
 
 }

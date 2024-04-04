@@ -62,4 +62,15 @@ public class SpecificAbsence {
         absenceDTO.setType(type);
         return absenceDTO;
     }
+
+    public Absence toAbsence() {
+        Absence absence = new Absence();
+        absence.setDt_debut(dt_debut);
+        absence.setDt_fin(dt_fin);
+        absence.setId(id);
+        absence.setMotif(motif);
+        absence.setStatus(status);
+        absence.setType(type);
+        return absence;
+    }
 }

@@ -64,5 +64,16 @@ public class Absence {
         absenceDTO.setFullName(user.getFirstName() + " " + user.getLastName());
         return absenceDTO;
     }
+    
+    public AbsenceDTO toDtoWOFullName() {
+        AbsenceDTO absenceDTO = new AbsenceDTO();
+        absenceDTO.setDt_debut(dt_debut);
+        absenceDTO.setDt_fin(dt_fin);
+        absenceDTO.setId(id);
+        absenceDTO.setMotif(motif);
+        absenceDTO.setStatus(status);
+        absenceDTO.setType(type);
+        return absenceDTO;
+    }
 
 }

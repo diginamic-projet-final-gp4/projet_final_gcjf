@@ -28,7 +28,7 @@ public class UserDTO {
     private Float rttEmployee;
     private Float unpaidLeave;
     private Float paidLeave;
-    
+
     public UserDTO() {
     }
 

@@ -32,6 +32,11 @@ public class SpecificAbsenceController {
     @Autowired
     SpecificAbsenceService specificAbsenceService;
 
+    /**
+     * Route pour récupérer toutes les absences spécifiques
+     * 
+     * @return une liste d'absences
+     */
     @GetMapping("/all")
     public List<SpecificAbsenceDTO> findAll() {
         List<SpecificAbsenceDTO> absenceDtoList = new ArrayList<>();
@@ -42,6 +47,12 @@ public class SpecificAbsenceController {
         return absenceDtoList;
     }
 
+    /**
+     * Route pour récupérer une absence spécifique par son id
+     * 
+     * @param id l'ID de l'absence
+     * @return l'absence
+     */
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@NonNull @PathVariable("id") Long id) {
         Optional<SpecificAbsence> specificAbsence = specificAbsenceService.findById(id);
@@ -52,13 +63,25 @@ public class SpecificAbsenceController {
                 .body(Map.of("message", "No specific absence entity with corresponding id found in db"));
     }
 
-    // @CrossOrigin(origins = "http://localhost:4200")
+    /**
+     * Route pour créer une absence spécifique
+     * 
+     * @param specificAbsence l'absence
+     * @return l'absence créée
+     */
     @PostMapping("/create")
     public ResponseEntity<?> createAbsence(@RequestBody @Valid SpecificAbsence specificAbsence) {
         SpecificAbsence abs = specificAbsenceService.createSpecificAbsence(specificAbsence);
         return ResponseEntity.ok().body(abs.toDto());
     }
 
+    /**
+     * Route pour mettre à jour une absence spécifique
+     * 
+     * @param specificAbsence l'absence
+     * @param id              l'ID de l'absence
+     * @return un message de confirmation
+     */
     @PutMapping("/update/{id}")
     public ResponseEntity<?> updateSpecificAbsence(@NonNull @RequestBody @Valid SpecificAbsence specificAbsence,
             @NonNull @PathVariable("id") Long id) {
@@ -71,6 +94,12 @@ public class SpecificAbsenceController {
         }
     }
 
+    /**
+     * Route pour supprimer une absence spécifique
+     * 
+     * @param id l'ID de l'absence
+     * @return un message de confirmation
+     */
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteUser(@NonNull @PathVariable("id") Long id) {
         Optional<SpecificAbsence> abs = specificAbsenceService.findById(id);
