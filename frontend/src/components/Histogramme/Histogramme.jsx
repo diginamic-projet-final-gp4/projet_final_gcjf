@@ -48,7 +48,7 @@ export default function Histogramme({
     }
   }
   const { loadedData } = useFetchData(
-    `http://localhost:8082/api/absence/service?id=${selectedService}&month=${selectedMonth}&year=${selectedYear}`
+    `http://localhost:8082/api/absence/service?id=${selectedService}&month=${selectedMonth + 1}&year=${selectedYear}`
   );
   let data = loadedData
   const daysOfMonth = createLabel(selectedYear, selectedMonth)
