@@ -8,6 +8,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import com.diginamic.apiback.dto.AbsenceDTO;
+import com.diginamic.apiback.enums.AbsenceType;
 import com.diginamic.apiback.enums.Status;
 import com.diginamic.apiback.models.Absence;
 import com.diginamic.apiback.models.User;
@@ -112,6 +113,14 @@ public class AbsenceService {
                 .orElseThrow(() -> new EntityNotFoundException("ID : " + id + " introuvable"));
         absence.setStatus(Status.REJETEE);
         absenceRepository.save(absence);
+    }
+
+    public long remainingPaidLeaves(User user) {
+        return 25 - absenceRepository.sumApprovedAbsences(user, AbsenceType.PAID_LEAVE);
+    }
+
+    public long remainingEmployeeWtr(User user) {
+        return 6 - absenceRepository.sumApprovedAbsences(user, AbsenceType.RTT_EMPLOYEE);
     }
 
 }
