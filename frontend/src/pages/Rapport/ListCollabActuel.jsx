@@ -63,6 +63,8 @@ export default function ListCollabActuel() {
         </div>
       </form>
       {service != null && (<ListCollabActuelTable service={service} month={month} year={year}/>)}
-    </>
+
+      <p>R = RTT   <span>C = Congé</span>   <span>F = Férié</span></p>
+    </> 
   );
 }
