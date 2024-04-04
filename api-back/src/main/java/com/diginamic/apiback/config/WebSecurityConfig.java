@@ -30,17 +30,34 @@ public class WebSecurityConfig {
     @Autowired
     private JwtConfig jwtConfig;
 
+    /**
+     * Crée un objet PasswordEncoder
+     * 
+     * @return un objet PasswordEncoder
+     */
     @Bean
     PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Crée un objet MvcRequestMatcher.Builder qui permet de définir des règles de
+     * sécurité basées sur des requêtes HTTP.
+     * 
+     * @param introspector un objet HandlerMappingIntrospector
+     * @return un objet MvcRequestMatcher.Builder
+     */
     @Scope("prototype")
     @Bean
     MvcRequestMatcher.Builder mvc(HandlerMappingIntrospector introspector) {
         return new MvcRequestMatcher.Builder(introspector);
     }
 
+    /**
+     * Configuration de CORS
+     * 
+     * @return un objet CorsConfigurationSource
+     */
     @Bean
     CorsConfigurationSource corsConfiguration() {
         CorsConfiguration configuration = new CorsConfiguration();
@@ -54,10 +71,20 @@ public class WebSecurityConfig {
         return source;
     }
 
+    /**
+     * Configuration de la sécurité
+     * 
+     * @param http   un objet HttpSecurity
+     * @param mvc    un objet MvcRequestMatcher.Builder
+     * @param source la configuration CORS
+     * @return un objet SecurityFilterChain
+     * @throws Exception si une erreur survient
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, MvcRequestMatcher.Builder mvc,
             @Qualifier("corsConfiguration") CorsConfigurationSource source) throws Exception {
 
+        // TODO : Changer la configuration de sécurité
         http.authorizeHttpRequests(
                 auth -> auth
                         // .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/user")).permitAll()

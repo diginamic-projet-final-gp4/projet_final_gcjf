@@ -23,15 +23,33 @@ public class SpecificAbsenceService {
     @Autowired
     OrganizationService organizationService;
 
+    /**
+     * Trouve toutes les absences spécifiques.
+     *
+     * @return une liste d'objets SpecificAbsence
+     */
     public List<SpecificAbsence> findAll() {
         return specificAbsenceRepository.findAll();
     }
 
+    /**
+     * Trouve une absence spécifique par son id.
+     *
+     * @param id l'id de l'absence spécifique
+     * @return un Optional de l'objet SpecificAbsence
+     */
     public Optional<SpecificAbsence> findById(@NonNull Long id) {
         return specificAbsenceRepository.findById(id);
     }
 
-    @SuppressWarnings("null")
+    /**
+     * Met à jour une absence spécifique.
+     *
+     * @param specificAbsence l'absence spécifique à mettre à jour
+     * @param id              l'ID de l'absence spécifique à mettre à jour
+     * @return l'absence spécifique mise à jour
+     * @throws EntityNotFoundException si l'absence spécifique n'est pas trouvée
+     */
     public SpecificAbsence updateSpecificAbsence(@Valid @NonNull SpecificAbsence specificAbsence, @NonNull Long id) {
         boolean idAbsence = specificAbsenceRepository.existsById(id);
         if (idAbsence != true) {
@@ -42,7 +60,13 @@ public class SpecificAbsenceService {
         return specificAbsenceRepository.save(specificAbsence);
     }
 
-    @SuppressWarnings("null")
+    /**
+     * Crée une absence spécifique.
+     *
+     * @param specificAbsence l'absence spécifique à créer
+     * @return l'absence spécifique créée
+     * @throws EntityNotFoundException si l'organisation n'est pas trouvée
+     */
     public SpecificAbsence createSpecificAbsence(@Valid SpecificAbsence specificAbsence) {
         Optional<Organization> organizationOptional = organizationService
                 .findById(specificAbsence.getOrganization_id());
@@ -50,11 +74,18 @@ public class SpecificAbsenceService {
             Organization organizationObject = organizationOptional.get();
             specificAbsence.setOrganization(organizationObject);
             return specificAbsenceRepository.save(specificAbsence);
-        } 
+        }
 
         throw new EntityNotFoundException("Organization not found");
     }
 
+    /**
+     * Supprime une absence spécifique.
+     *
+     * @param id l'ID de l'absence spécifique à supprimer
+     * @return l'absence spécifique supprimée
+     * @throws EntityNotFoundException si l'absence spécifique n'est pas trouvée
+     */
     public SpecificAbsence deleteSpecificAbsence(@NonNull Long id) {
         SpecificAbsence absenceToDelete = specificAbsenceRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("ID : " + id + " introuvable"));
@@ -62,6 +93,18 @@ public class SpecificAbsenceService {
             specificAbsenceRepository.deleteById(id);
         }
         return absenceToDelete;
+    }
+
+    public List<SpecificAbsence> findAbsencesAndMonthAndYear(Long organizationId, String month, String year){
+        return specificAbsenceRepository.findAbsencesAndMonthAndYear(organizationId, month, year);
+    }
+
+    public List<SpecificAbsence> findInitialEmployerWtr() {
+        return specificAbsenceRepository.findInitialEmployerWtr();
+    }
+
+    public SpecificAbsence save(SpecificAbsence specificAbsence) {
+        return specificAbsenceRepository.save(specificAbsence);
     }
 
 }

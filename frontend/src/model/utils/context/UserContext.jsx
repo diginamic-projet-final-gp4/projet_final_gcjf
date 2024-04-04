@@ -24,6 +24,24 @@ export default function UserContextProvider({ children }) {
     return response;
   }
 
+  async function updateData(url = "", donnees = {}) {
+    let options = {
+      method: "PUT",
+      cache: "no-cache",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify(donnees),
+    };
+
+    const response = await fetch(url, options);
+
+    return response;
+  }
+
   const signIn = async (email, password) => {
     const response = await postData("http://localhost:8082/api/login", {
       email: email,
@@ -65,7 +83,7 @@ export default function UserContextProvider({ children }) {
   }
 
   return (
-    <UserContext.Provider value={{ signIn, logOut, postData, deleteData, role }}>
+    <UserContext.Provider value={{ signIn, logOut, postData, deleteData, updateData, role }}>
       {children}
     </UserContext.Provider>
   );

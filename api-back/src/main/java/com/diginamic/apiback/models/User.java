@@ -33,6 +33,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "manager")
     @Column(nullable = true)
     private List<User> users = new ArrayList<>();
@@ -93,7 +94,7 @@ public class User implements UserDetails {
         userDTO.setService(service);
         List<AbsenceDTO> absenceDTOs = new ArrayList<>();
         for (Absence abs : absences) {
-            absenceDTOs.add(abs.toDto());
+            absenceDTOs.add(abs.toDtoWOFullName());
         }
         userDTO.setAbsences(absenceDTOs);
 
