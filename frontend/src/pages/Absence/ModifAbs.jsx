@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../model/utils/context/UserContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import loadData from "./../../model/utils/hooks.jsx";
 
 export default function ModifAbs() {
+  const {id} = useParams();
   const [dt_debut, setDtDebut] = useState(null);
   const dateAujourdhui = new Date();
   const navigate = useNavigate();
@@ -13,12 +14,11 @@ export default function ModifAbs() {
   const [isFormValid, setIsFormValid] = useState(false);
 
   const { loadedData } = loadData(
-    "http://localhost:8082/api/absence/" +
-      window.location.pathname.split("/").pop()
-  );
+    "http://localhost:8082/api/absence/" + id
+      );
 
-  useEffect(() => {
-  }, [loadedData]);
+  
+  useEffect(() => {}, [loadedData]);
 
   useEffect(() => {
     const form = document.querySelector(".abs-form");
@@ -48,7 +48,7 @@ export default function ModifAbs() {
     formData.forEach((value, key) => {
       data[key] = value;
     });
-    updateData("http://localhost:8082/api/absence/update/" + window.location.pathname.split("/").pop(), data);
+    updateData("http://localhost:8082/api/absence/update/" + id, data);
 
     navigate("/absence");
   };

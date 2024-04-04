@@ -18,6 +18,12 @@ public class OrganizationService {
     @Autowired
     UserService userService;
 
+    /**
+     * Trouve une organisation par son id.
+     *
+     * @param id l'id de l'organisation
+     * @return un Optional de l'objet Organization
+     */
     public Optional<Organization> findById(@NonNull Long id) {
         return organizationRepository.findById(id);
     }
