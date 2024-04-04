@@ -50,7 +50,9 @@ export default function ModifAbs() {
     });
     updateData("http://localhost:8082/api/absence/update/" + id, data);
 
-    navigate("/absence");
+    setTimeout(() => {
+      navigate("/absence");
+    }, 100)
   };
   return (
     <>
