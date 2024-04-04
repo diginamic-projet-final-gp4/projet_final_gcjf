@@ -38,11 +38,9 @@ export default function Login() {
     await signIn(inputs.current[0].value, inputs.current[1].value)
       .then(() => {
         navigate("/profile");
-        window.location.reload();
         setValidation("");
       })
       .catch((e) => {
-        console.log(e);
         setValidation("Error, email or password incorrect");
       });
 
