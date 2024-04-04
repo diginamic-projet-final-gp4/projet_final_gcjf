@@ -23,13 +23,24 @@ public interface AbsenceRepository extends JpaRepository<Absence, Long> {
     @Query(value = "SELECT * FROM absence WHERE status = :status", nativeQuery = true)
     List<Absence> findByStatus(String status);
 
-    @Query(value = "select absence.* from user  " +
-            "inner join service on user.service_id = service.id " +
-            "inner join absence on user.id = absence.user_id " +
-            "where service.id= :id " +
-            "AND EXTRACT(MONTH FROM absence.dt_debut) = :month " +
-            "AND EXTRACT(YEAR FROM absence.dt_debut) = :year", nativeQuery = true)
-    List<Absence> findAbsencesByServiceIdAndMonthAndYear(Long id, String month, String year);
+    /**
+     * Méthode permettant de rechercher les absences d'un utilisateur par mois et
+     * année
+     * 
+     * @param id    l'ID de l'utilisateur
+     * @param month le mois
+     * @param year  l'année
+     * @return la liste des absences
+     */
+    @Query(value = """
+            select a from Absence a
+            INNER JOIN User u ON a.user_id = u.id
+            WHERE a.user_id = :id
+            AND MONTH(a.dt_debut) = :month
+            AND YEAR(a.dt_debut) = :year
+            ORDER BY a.dt_debut ASC
+            """)
+    List<Absence> findAbsencesAndMonthAndYear(Long id, String month, String year);
 
     @Query("""
                 SELECT COALESCE(SUM(DATEDIFF(a.dt_fin,a.dt_debut)+1),0)

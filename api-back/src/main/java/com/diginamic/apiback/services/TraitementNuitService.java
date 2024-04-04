@@ -23,8 +23,10 @@ public class TraitementNuitService {
 
     private AbsenceRepository absenceRepository;
 
-    public TraitementNuitService(AbsenceRepository absenceRepository, SpecificAbsenceService specificAbsenceService) {
+    public TraitementNuitService(AbsenceRepository absenceRepository, SpecificAbsenceService specificAbsenceService,
+            AbsenceService absenceService) {
         this.specificAbsenceService = specificAbsenceService;
+        this.absenceService = absenceService;
         this.absenceRepository = absenceRepository;
     }
 
