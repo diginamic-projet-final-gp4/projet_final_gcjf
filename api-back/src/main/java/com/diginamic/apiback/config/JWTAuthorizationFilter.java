@@ -27,6 +27,11 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
     @Autowired
     private JwtConfig jwtConfig;
 
+    /**
+     * Filtre qui vérifie la présence d'un jeton JWT dans un cookie et qui
+     * authentifie l'utilisateur si le jeton est valide.
+     * 
+     */
     @Override
     @SuppressWarnings({ "deprecation", "null" })
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain)
