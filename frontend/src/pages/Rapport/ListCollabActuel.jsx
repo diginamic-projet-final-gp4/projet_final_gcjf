@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import loadData from "../../model/utils/hooks.jsx"
 import ListCollabActuelTable from "./ListCollabActuelTable.jsx";
+import "./ListCollabActuel.css"
 
 const months = [
   { value: 1, label: "January" },
@@ -29,7 +30,9 @@ export default function ListCollabActuel() {
   const handleChangeMonth = e => setMonth(e.target.value)
   const handleChangeYear = e => setYear(e.target.value)
 
-
+  useEffect(() => {
+    setService(services[0]?.id)
+  },[services])
   return (
     <>
       <h1>Vue par département et par jour</h1>
@@ -44,7 +47,7 @@ export default function ListCollabActuel() {
         </div>
         <div>
           <label htmlFor="month">Mois:</label>
-          <select id="month" name="month" value = {month} onChange={handleChangeMonth}>
+          <select id="month" name="month" value={month} onChange={handleChangeMonth}>
             {months.map((month) => (
               <option key={month.value} value={month.value}>{month.label}</option>
             ))}
