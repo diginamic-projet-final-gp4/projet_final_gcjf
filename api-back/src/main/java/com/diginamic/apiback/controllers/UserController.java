@@ -41,7 +41,7 @@ public class UserController {
     @Autowired
     private ServiceService serviceService;
 
-    @Secured("MANAGER")
+    // @Secured("MANAGER")
     @GetMapping("/all")
     public List<UserDTO> findAll() {
         return userService.findAll();

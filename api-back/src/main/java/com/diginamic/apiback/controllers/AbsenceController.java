@@ -24,9 +24,11 @@ import java.util.ArrayList;
 import com.diginamic.apiback.dto.AbsenceDTO;
 import com.diginamic.apiback.dto.UserDTO;
 import com.diginamic.apiback.models.Absence;
+import com.diginamic.apiback.models.SpecificAbsence;
 import com.diginamic.apiback.models.User;
 import com.diginamic.apiback.services.AbsenceService;
 import com.diginamic.apiback.services.ServiceService;
+import com.diginamic.apiback.services.SpecificAbsenceService;
 import com.diginamic.apiback.services.UserService;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -40,6 +42,9 @@ public class AbsenceController {
     
     @Autowired
     UserService userService;
+
+     @Autowired
+     SpecificAbsenceService specificAbsenceService;
 
     @Autowired
     private ServiceService serviceService;
@@ -105,6 +110,11 @@ public class AbsenceController {
         List<UserDTO> userDTOs = new ArrayList<>();
         for(User user: userList){
             List<Absence> absencesUserList = absenceService.findAbsenceMonthYear(user.getId(), month, year);
+            Long organizationId = user.getService().getOrganization().getId();
+            for(SpecificAbsence specificAbsence : specificAbsenceService.findAbsencesAndMonthAndYear(organizationId, month, year)){
+                absencesUserList.add(specificAbsence.toAbsence());
+            }
+            System.out.println("list" + absencesUserList);
             user.setAbsences(absencesUserList);
             userDTOs.add(user.toDto());
         }
