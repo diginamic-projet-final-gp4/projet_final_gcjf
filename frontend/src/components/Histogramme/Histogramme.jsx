@@ -28,8 +28,12 @@ export default function Histogramme({
     constructor(label, data){
       this.label = label
       this.data = absToList(data)
-      this.backgroundColor = "#ff00f0"
-      this.borderColor = "#00ff0f"
+      let color = label.toLowerCase().split("").slice(0, 3).map((letter) =>  {
+        let charcode = letter.charCodeAt(0) - 93   
+        return charcode * 9
+      }).join()
+      this.backgroundColor = "rgba(" + color + ", .7)";
+      this.borderColor = "rgb(" + color + ")";
       this.borderWidth = 1
     }
   
