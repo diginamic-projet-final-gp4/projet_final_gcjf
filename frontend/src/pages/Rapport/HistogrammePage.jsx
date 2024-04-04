@@ -17,7 +17,7 @@ export default function HistogrammePage() {
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
-    setMonth(new Date(date).getMonth() + 1);
+    setMonth(new Date(date).getMonth());
     setYear(new Date(date).getFullYear());
   };
 
