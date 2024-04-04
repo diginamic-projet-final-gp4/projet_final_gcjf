@@ -9,7 +9,7 @@ export default function RejeteeAbs() {
 
   // eslint-disable-next-line no-unused-vars
   const { loadedData } = loadData(
-    "http://localhost:8082/api/manager/absence/" + id + "/rejete"
+    "http://localhost:8082/api/absence/" + id + "/rejete"
   );
 
   function handleReturn() {

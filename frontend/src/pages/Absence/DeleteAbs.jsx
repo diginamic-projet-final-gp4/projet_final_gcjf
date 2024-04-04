@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Link, useNavigate, useParams,  } from "react-router-dom";
 import loadData from "./../../model/utils/hooks.jsx";
 import { UserContext } from "../../model/utils/context/UserContext.jsx";
@@ -16,8 +16,15 @@ export default function DeleteAbs() {
     deleteData("http://localhost:8082/api/absence/delete/" + id);
     setTimeout(() => {
       navigate("/absence");
-    }, 150);
+    }, 100);
   }
+
+  useEffect(() => {
+    if (loadedData) {
+      console.log(loadedData);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

@@ -9,7 +9,7 @@ export default function ValideeAbs() {
 
   // eslint-disable-next-line no-unused-vars
   const { loadedData } = loadData(
-    "http://localhost:8082/api/manager/absence/" + id + "/validate"
+    "http://localhost:8082/api/absence/" + id + "/validate"
   );
 
   function handleReturn() {
