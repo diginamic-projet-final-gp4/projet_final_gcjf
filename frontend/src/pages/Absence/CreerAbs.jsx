@@ -1,10 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../model/utils/context/UserContext";
+import { useNavigate } from "react-router-dom";
 import loadData from "./../../model/utils/hooks.jsx";
 
 import "./Absense.css";
 
 export default function CreateAbs() {
+  const navigate = useNavigate();
   const [dt_debut, setDtDebut] = useState(null);
   const dateAujourdhui = new Date();
 
@@ -47,8 +49,10 @@ export default function CreateAbs() {
     data.status = "INITIALE";
     data["user_id"] = loadedData.id;
     postData("http://localhost:8082/api/absence/create", data);
-
-    window.location.href = "/absence";
+    console.log(data);
+    setTimeout(() => {
+      navigate("/absence");
+    }, 100);
   };
 
   return (
