@@ -30,6 +30,24 @@ export default function Histogramme({
   );
   const [data, setData] = useState();
 
+  data.forEach((user) => {
+    let obj = {};
+
+    for (let i = 0; i < daysOfMonth.length; i++) {
+      let dayOfMonth = new Date(year, month, i);
+      for (let abs of user.absences) {
+        let dayOfUser = new Date(abs.dt_debut);
+        if (dayOfUser.getDate() == dayOfMonth.getDate()) {
+          obj[dayOfMonth] = abs.type;
+        } else continue;
+      }
+      if (obj[dayOfMonth] == undefined) {
+        obj[dayOfMonth] = null;
+      }
+    }
+    user["obj"] = obj;
+  });
+
   useEffect(() => {
     setData({
       labels: createLabel(selectedYear, selectedMonth),
