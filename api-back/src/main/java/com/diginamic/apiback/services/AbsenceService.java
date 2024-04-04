@@ -11,7 +11,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import com.diginamic.apiback.dto.AbsenceDTO;
-import com.diginamic.apiback.enums.AbsenceType;
 import com.diginamic.apiback.enums.Status;
 import com.diginamic.apiback.models.Absence;
 import com.diginamic.apiback.models.User;
@@ -32,10 +31,22 @@ public class AbsenceService {
     @Autowired
     ServiceService serviceService;
 
+    /**
+     * Trouve toutes les absences.
+     *
+     * @return une liste d'objets Absence
+     */
     public List<Absence> findAll() {
         return absenceRepository.findAll();
     }
 
+    /**
+     * Trouve les absences pour un utilisateur spécifique.
+     *
+     * @param id l'ID de l'utilisateur
+     * @return une liste d'objets AbsenceDTO
+     * @throws EntityNotFoundException si l'utilisateur n'est pas trouvé
+     */
     public List<AbsenceDTO> findAbscenceForUserId(@NonNull Long id) {
         Optional<User> user = userService.findById(id);
         if (user.isPresent()) {
@@ -49,6 +60,13 @@ public class AbsenceService {
         throw new EntityNotFoundException("L'utilisateur recherché n'a pas été trouvé");
     }
 
+    /**
+     * Trouve les utilisateurs pour un service spécifique.
+     *
+     * @param id l'ID du service
+     * @return une liste d'objets User
+     * @throws EntityNotFoundException si le service n'est pas trouvé
+     */
     public List<User> findUserForServiceId(@NonNull Long id) {
         Optional<com.diginamic.apiback.models.Service> service = serviceService.findById(id);
         if (service.isPresent()) {
@@ -62,11 +80,25 @@ public class AbsenceService {
         throw new EntityNotFoundException("L'utilisateur recherché n'a pas été trouvé");
     }
 
+    /**
+     * Trouve une absence par son id.
+     *
+     * @param id l'id de l'absence
+     * @return un Optional de l'objet Absence
+     */
     public Optional<Absence> findById(@NonNull Long id) {
         return absenceRepository.findById(id);
     }
 
-    @SuppressWarnings("null")
+    /**
+     * Met à jour une absence.
+     *
+     * @param authentication l'authentification de l'utilisateur
+     * @param absence        l'absence à mettre à jour
+     * @param id             l'ID de l'absence à mettre à jour
+     * @return l'absence mise à jour
+     * @throws EntityNotFoundException si l'absence n'est pas trouvée
+     */
     public Absence updateAbsence(Authentication authentication, @Valid @NonNull Absence absence, @NonNull Long id) {
         boolean idAbsence = absenceRepository.existsById(id);
         if (idAbsence != true) {
@@ -78,7 +110,13 @@ public class AbsenceService {
         return absenceRepository.save(absence);
     }
 
-    @SuppressWarnings("null")
+    /**
+     * Crée une absence.
+     *
+     * @param absence l'absence à créer
+     * @return l'absence créée
+     * @throws EntityNotFoundException si l'utilisateur n'est pas trouvé
+     */
     public Absence createAbsence(@Valid Absence absence) {
         Optional<User> userOptional = userService.findById(absence.getUser_id());
         if (userOptional.isPresent()) {
@@ -90,6 +128,13 @@ public class AbsenceService {
         throw new EntityNotFoundException("User not found");
     }
 
+    /**
+     * Supprime une absence.
+     *
+     * @param id l'ID de l'absence à supprimer
+     * @return l'absence supprimée
+     * @throws EntityNotFoundException si l'absence n'est pas trouvée
+     */
     public Absence deleteAbsence(@NonNull Long id) {
         Absence absenceToDelete = absenceRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("ID : " + id + " introuvable"));
@@ -99,24 +144,51 @@ public class AbsenceService {
         return absenceToDelete;
     }
 
-    public List<Absence> findAbsenceMonthYear(Long user_id, String month, String year){
+    /**
+     * Trouve les absences pour un utilisateur spécifique, un mois et une année
+     * spécifiques.
+     *
+     * @param user_id l'ID de l'utilisateur
+     * @param month   le mois
+     * @param year    l'année
+     * @return une liste d'objets Absence
+     */
+    public List<Absence> findAbsenceMonthYear(Long user_id, String month, String year) {
         return absenceRepository.findAbsencesAndMonthAndYear(user_id, month, year);
     }
 
-    public ResponseEntity<?> getAbsenceForYearAndMonth(User user, int year, int month){
+    /**
+     * Récupère les absences pour une année et un mois spécifiques.
+     *
+     * @param user  l'utilisateur
+     * @param year  l'année
+     * @param month le mois
+     * @return une réponse HTTP
+     */
+    public ResponseEntity<?> getAbsenceForYearAndMonth(User user, int year, int month) {
         return ResponseEntity.ok("Succès");
     }
 
+    /**
+     * Valide une absence.
+     *
+     * @param id l'ID de l'absence à valider
+     * @throws EntityNotFoundException si l'absence n'est pas trouvée
+     */
     public void validateAbsence(Long id) {
-        @SuppressWarnings("null")
         Absence absence = absenceRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("ID : " + id + " introuvable"));
         absence.setStatus(Status.VALIDEE);
         absenceRepository.save(absence);
     }
 
+    /**
+     * Rejette une absence.
+     *
+     * @param id l'ID de l'absence à rejeter
+     * @throws EntityNotFoundException si l'absence n'est pas trouvée
+     */
     public void rejeteAbsence(Long id) {
-        @SuppressWarnings("null")
         Absence absence = absenceRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("ID : " + id + " introuvable"));
         absence.setStatus(Status.REJETEE);

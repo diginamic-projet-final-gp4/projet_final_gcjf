@@ -25,16 +25,34 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
+    /**
+     * Route pour récupérer tous les utilisateurs (version Admin)
+     * 
+     * @return une liste d'utilisateurs
+     */
     @GetMapping()
     public List<UserDTO> findAll() {
         return userService.findAll();
     }
 
+    /**
+     * Route pour récupérer un utilisateur par son id
+     * 
+     * @param id l'ID de l'utilisateur
+     * @return l'utilisateur
+     */
     @GetMapping("/{id}")
     public Optional<User> findById(@NonNull @PathVariable("id") Long id) {
         return userService.findById(id);
     }
 
+    /**
+     * Route pour créer un utilisateur (non implémentée)
+     * 
+     * @param user l'utilisateur
+     * @param id   l'ID de l'utilisateur
+     * @return l'utilisateur créé
+     */
     // @PostMapping("/register")
     // public ResponseEntity<String> register(@RequestBody RegisterRequest
     // registerRequest) {
@@ -43,11 +61,25 @@ public class AdminController {
     // return new ResponseEntity<>("User Registered Successfully", HttpStatus.OK);
     // }
 
+    /**
+     * Route pour mettre à jour un utilisateur
+     * 
+     * @param user l'utilisateur
+     * @param id   l'ID de l'utilisateur
+     * @return l'utilisateur mis à jour
+     */
     @PutMapping("/{id}")
     public User updateUser(@NonNull @RequestBody @Valid User user, @NonNull @PathVariable("id") Long id) {
         return userService.updateUser(user, id);
     }
 
+    /**
+     * Route pour supprimer un utilisateur
+     * 
+     * @param id l'ID de l'utilisateur
+     * @return l'utilisateur supprimé
+     */
+    // TODO : à voir si on désactive la fonctionnalité
     @DeleteMapping("/delete/{id}")
     public User deleteUser(@NonNull @PathVariable("id") Long id) {
         return userService.deleteUser(id);

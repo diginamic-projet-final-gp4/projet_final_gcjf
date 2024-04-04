@@ -5,14 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.diginamic.apiback.models.Service;
 
-/**
- * UserRepository est une interface qui étend JpaRepository pour gérer les
- * opérations CRUD sur les utilisateurs.
- * 
- */
-
 @Repository
 public interface ServiceRepository extends JpaRepository<Service, Long> {
 
-    
 }
