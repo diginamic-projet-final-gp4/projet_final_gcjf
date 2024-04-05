@@ -17,9 +17,9 @@ public interface SpecificAbsenceRepository extends JpaRepository<SpecificAbsence
         select s from SpecificAbsence s
         INNER JOIN Organization o ON s.organization_id = o.id
         WHERE s.organization_id = :id
-        AND MONTH(s.dt_debut) = :month
-        AND YEAR(s.dt_debut) = :year
-        ORDER BY s.dt_debut ASC
+        AND MONTH(s.dtDebut) = :month
+        AND YEAR(s.dtDebut) = :year
+        ORDER BY s.dtDebut ASC
         """)
     List<SpecificAbsence> findAbsencesAndMonthAndYear(Long id , String month, String year);
     

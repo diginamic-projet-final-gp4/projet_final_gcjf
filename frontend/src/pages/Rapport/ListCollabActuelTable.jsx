@@ -35,7 +35,7 @@ export default function ListCollabActuelTable({ service, month, year }) {
     for (let i = 0; i < daysOfMonth.length; i++) {
       let dayOfMonth = new Date(year, month, i);
       for (let abs of user.absences) {
-        let dayOfUser = new Date(abs.dt_debut);
+        let dayOfUser = new Date(abs.dtDebut);
         if (dayOfUser.getDate() == dayOfMonth.getDate()) {
           if (abs.type == "PAID_LEAVE" || abs.type == "UNPAID_LEAVE") {
             abs.type = "C";

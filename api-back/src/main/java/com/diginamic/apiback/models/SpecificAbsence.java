@@ -27,7 +27,7 @@ public class SpecificAbsence {
     @JoinColumn(nullable = false)
     private Organization organization;
 
-    private Date dt_debut;
+    private Date dtDebut;
 
     private Date dt_fin;
 
@@ -48,13 +48,13 @@ public class SpecificAbsence {
 
     @Override
     public String toString() {
-        return "SpecificAbsence [id=" + id + ", organization=" + organization + ", dt_debut=" + dt_debut + ", dt_fin="
+        return "SpecificAbsence [id=" + id + ", organization=" + organization + ", dtDebut=" + dtDebut + ", dt_fin="
                 + dt_fin + ", type=" + type + ", status=" + status + ", motif=" + motif + "]";
     }
 
     public SpecificAbsenceDTO toDto() {
         SpecificAbsenceDTO absenceDTO = new SpecificAbsenceDTO();
-        absenceDTO.setDt_debut(dt_debut);
+        absenceDTO.setDtDebut(dtDebut);
         absenceDTO.setDt_fin(dt_fin);
         absenceDTO.setId(id);
         absenceDTO.setMotif(motif);
@@ -65,7 +65,7 @@ public class SpecificAbsence {
 
     public Absence toAbsence() {
         Absence absence = new Absence();
-        absence.setDt_debut(dt_debut);
+        absence.setDtDebut(dtDebut);
         absence.setDt_fin(dt_fin);
         absence.setId(id);
         absence.setMotif(motif);

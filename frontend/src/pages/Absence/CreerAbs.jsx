@@ -7,7 +7,7 @@ import "./Absense.css";
 
 export default function CreateAbs() {
   const navigate = useNavigate();
-  const [dt_debut, setDtDebut] = useState(null);
+  const [dtDebut, setDtDebut] = useState(null);
   const dateAujourdhui = new Date();
 
   const { postData } = useContext(UserContext);
@@ -18,7 +18,7 @@ export default function CreateAbs() {
 
   useEffect(() => {
     const form = document.querySelector(".abs-form");
-    const dtDebutInput = form.querySelector('[name="dt_debut"]');
+    const dtDebutInput = form.querySelector('[name="dtDebut"]');
     const dtFinInput = form.querySelector('[name="dt_fin"]');
 
     const handleFormChange = () => {
@@ -74,7 +74,7 @@ export default function CreateAbs() {
           <span>Date de début</span>
           <input
             type="date"
-            name="dt_debut"
+            name="dtDebut"
             min={dateAujourdhui.toISOString().split("T")[0]}
             required
             onChange={(e) => setDtDebut(e.target.value)}
@@ -82,7 +82,7 @@ export default function CreateAbs() {
         </label>
         <label>
           <span>Date de fin</span>
-          <input type="date" name="dt_fin" required min={dt_debut} />
+          <input type="date" name="dt_fin" required min={dtDebut} />
         </label>
         <label>
           <span>Motif</span>

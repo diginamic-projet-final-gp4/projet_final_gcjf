@@ -38,7 +38,7 @@ export default function DeleteAbs() {
               <tr>
                 <td>{loadedData.id}</td>
                 <td>{loadedData.motif}</td>
-                <td>{loadedData.dt_debut}</td>
+                <td>{loadedData.dtDebut}</td>
                 <td>{loadedData.dt_fin}</td>
                 <td>{loadedData.type}</td>
               </tr>

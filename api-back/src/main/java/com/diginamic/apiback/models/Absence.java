@@ -31,7 +31,7 @@ public class Absence {
     @Column(name = "user_id", insertable = false, updatable = false)
     private Long user_id;
 
-    private Date dt_debut;
+    private Date dtDebut;
 
     private Date dt_fin;
 
@@ -49,13 +49,13 @@ public class Absence {
 
     @Override
     public String toString() {
-        return "Absence [id=" + id + ", user_id=" + user_id + ", dt_debut=" + dt_debut + ", dt_fin="
+        return "Absence [id=" + id + ", user_id=" + user_id + ", dtDebut=" + dtDebut + ", dt_fin="
                 + dt_fin + ", type=" + type + ", status=" + status + ", motif=" + motif + "]";
     }
 
     public AbsenceDTO toDto() {
         AbsenceDTO absenceDTO = new AbsenceDTO();
-        absenceDTO.setDt_debut(dt_debut);
+        absenceDTO.setDtDebut(dtDebut);
         absenceDTO.setDt_fin(dt_fin);
         absenceDTO.setId(id);
         absenceDTO.setMotif(motif);
@@ -67,7 +67,7 @@ public class Absence {
     
     public AbsenceDTO toDtoWOFullName() {
         AbsenceDTO absenceDTO = new AbsenceDTO();
-        absenceDTO.setDt_debut(dt_debut);
+        absenceDTO.setDtDebut(dtDebut);
         absenceDTO.setDt_fin(dt_fin);
         absenceDTO.setId(id);
         absenceDTO.setMotif(motif);

@@ -38,7 +38,7 @@ export default function TraitementDemande() {
                     <td>{absence.id}</td>
                     <td>{absence.fullName}</td>
                     <td>{absence.motif}</td>
-                    <td>{formatDate(absence.dt_debut)}</td>
+                    <td>{formatDate(absence.dtDebut)}</td>
                     <td>{formatDate(absence.dt_fin)}</td>
                     <td>{absence.type}</td>
                     <td className="classActionButtons">
