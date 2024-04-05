@@ -10,6 +10,8 @@ import com.diginamic.apiback.enums.AbsenceType;
 import com.diginamic.apiback.models.Absence;
 import com.diginamic.apiback.models.User;
 
+import jakarta.persistence.OrderBy;
+
 @Repository
 public interface AbsenceRepository extends JpaRepository<Absence, Long> {
     /**
@@ -18,7 +20,8 @@ public interface AbsenceRepository extends JpaRepository<Absence, Long> {
      * @param user l'utilisateur
      * @return la liste des absences
      */
-    List<Absence> findByUser(User user);
+
+    List<Absence> findByUserOrderByDtDebutDesc(User user);
 
     @Query(value = "SELECT * FROM absence WHERE status = :status", nativeQuery = true)
     List<Absence> findByStatus(String status);
@@ -36,14 +39,14 @@ public interface AbsenceRepository extends JpaRepository<Absence, Long> {
             select a from Absence a
             INNER JOIN User u ON a.user_id = u.id
             WHERE a.user_id = :id
-            AND MONTH(a.dt_debut) = :month
-            AND YEAR(a.dt_debut) = :year
-            ORDER BY a.dt_debut ASC
+            AND MONTH(a.dtDebut) = :month
+            AND YEAR(a.dtDebut) = :year
+            ORDER BY a.dtDebut ASC
             """)
     List<Absence> findAbsencesAndMonthAndYear(Long id, String month, String year);
 
     @Query("""
-                SELECT COALESCE(SUM(DATEDIFF(a.dt_fin,a.dt_debut)+1),0)
+                SELECT COALESCE(SUM(DATEDIFF(a.dt_fin,a.dtDebut)+1),0)
                 FROM Absence a
                 WHERE a.status = Status.VALIDEE
                 AND a.user = :user

@@ -33,7 +33,7 @@ export default function AdminPage() {
                 loadedData.map((absence) => (
                   <tr key={absence.id}>
                     <td>{absence.id}</td>
-                    <td>{format(new Date(absence.dt_debut), "dd/MM/yyyy")}</td>
+                    <td>{format(new Date(absence.dtDebut), "dd/MM/yyyy")}</td>
                     <td>{format(new Date(absence.dt_fin), "dd/MM/yyyy")}</td>
                     <td>{absence.type}</td>
                     <td>{absence.motif}</td>

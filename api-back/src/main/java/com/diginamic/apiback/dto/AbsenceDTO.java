@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 public class AbsenceDTO {
     private Long id;
-    private Date dt_debut;
+    private Date dtDebut;
     private Date dt_fin;
     private String fullName;
     private AbsenceType type;

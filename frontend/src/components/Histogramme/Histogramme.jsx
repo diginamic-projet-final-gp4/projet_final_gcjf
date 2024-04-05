@@ -80,7 +80,7 @@ export default function Histogramme({
     for (let i = 1; i <= daysOfMonth.length; i++) {
       let dayOfMonth = new Date(selectedYear, selectedMonth, i);
       for (let abs of absences) {
-        let dayOfUser = new Date(abs.dt_debut);
+        let dayOfUser = new Date(abs.dtDebut);
         if (dayOfUser.getDate() == dayOfMonth.getDate()) {
           obj[dayOfMonth] = 1;
         } else continue;

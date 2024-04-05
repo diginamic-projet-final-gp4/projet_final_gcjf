@@ -51,7 +51,7 @@ export default function CreerAbsenseGroup() {
         </label>
         <label>
           <span>Date de début</span>
-          <input type="date" name="dt_debut" min={new Date().toISOString().split("T")[0]} onChange={handleChangeDate}/>
+          <input type="date" name="dtDebut" min={new Date().toISOString().split("T")[0]} onChange={handleChangeDate}/>
         </label>
         <label>
           <span>Date de fin</span>

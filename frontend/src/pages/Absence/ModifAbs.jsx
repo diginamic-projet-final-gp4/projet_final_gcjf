@@ -6,7 +6,7 @@ import loadData from "./../../model/utils/hooks.jsx";
 
 export default function ModifAbs() {
   const {id} = useParams();
-  const [dt_debut, setDtDebut] = useState(null);
+  const [dtDebut, setDtDebut] = useState(null);
   const dateAujourdhui = new Date();
   const navigate = useNavigate();
   const { updateData } = useContext(UserContext);
@@ -22,7 +22,7 @@ export default function ModifAbs() {
 
   useEffect(() => {
     const form = document.querySelector(".abs-form");
-    const dtDebutInput = form.querySelector('[name="dt_debut"]');
+    const dtDebutInput = form.querySelector('[name="dtDebut"]');
     const dtFinInput = form.querySelector('[name="dt_fin"]');
     const handleFormChange = () => {
       const isDtDebutValid = dtDebutInput.validity.valid;
@@ -73,7 +73,7 @@ export default function ModifAbs() {
               <tr>
                 <td>{loadedData.id}</td>
                 <td>{loadedData.motif}</td>
-                <td>{loadedData.dt_debut}</td>
+                <td>{loadedData.dtDebut}</td>
                 <td>{loadedData.dt_fin}</td>
                 <td>{loadedData.type}</td>
               </tr>
@@ -104,7 +104,7 @@ export default function ModifAbs() {
             <span>Date de début</span>
             <input
               type="date"
-              name="dt_debut"
+              name="dtDebut"
               min={dateAujourdhui.toISOString().split("T")[0]}
               required
               onChange={(e) => setDtDebut(e.target.value)}
@@ -112,7 +112,7 @@ export default function ModifAbs() {
           </label>
           <label>
             <span>Date de fin</span>
-            <input type="date" name="dt_fin" required min={dt_debut} />
+            <input type="date" name="dt_fin" required min={dtDebut} />
           </label>
           <label>
             <span>Motif</span>

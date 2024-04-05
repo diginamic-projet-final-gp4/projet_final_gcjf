@@ -52,7 +52,7 @@ public class AbsenceService {
         Optional<User> user = userService.findById(id);
         if (user.isPresent()) {
             List<AbsenceDTO> absenceDTOs = new ArrayList<>();
-            for (Absence abs : absenceRepository.findByUser(user.get())) {
+            for (Absence abs : absenceRepository.findByUserOrderByDtDebutDesc(user.get())) {
                 absenceDTOs.add(abs.toDto());
             }
             return absenceDTOs;
