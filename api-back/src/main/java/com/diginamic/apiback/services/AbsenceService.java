@@ -1,7 +1,13 @@
 package com.diginamic.apiback.services;
 
 import java.util.Optional;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +24,7 @@ import com.diginamic.apiback.models.User;
 import com.diginamic.apiback.repository.AbsenceRepository;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @Service
@@ -176,9 +183,39 @@ public class AbsenceService {
      * @param id l'ID de l'absence à valider
      * @throws EntityNotFoundException si l'absence n'est pas trouvée
      */
+    @Transactional
     public void validateAbsence(Long id) {
         Absence absence = absenceRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("ID : " + id + " introuvable"));
+        User user = userService.findById(absence.getUser().getId()).get();
+        Date startDate = absence.getDt_debut();
+        Date endDate = absence.getDt_fin();
+
+        Calendar cal1 = Calendar.getInstance();
+        Calendar cal2 = Calendar.getInstance();
+        cal1.setTime(startDate);
+        cal2.setTime(endDate);
+
+        int numberOfDays = 0;
+        while (cal1.before(cal2)) {
+            if ((Calendar.SATURDAY != cal1.get(Calendar.DAY_OF_WEEK))
+                    && (Calendar.SUNDAY != cal1.get(Calendar.DAY_OF_WEEK))) {
+                numberOfDays++;
+            }
+            cal1.add(Calendar.DATE, 1);
+        }
+        
+        System.out.println("absence type" + absence.getType());
+        System.out.println("user" + user.getRttEmployee());
+        System.out.println("number days" + numberOfDays);
+        System.out.println("substract" + (user.getRttEmployee() - numberOfDays));
+        if(absence.getType() == AbsenceType.PAID_LEAVE) user.setPaidLeave(user.getPaidLeave() - numberOfDays);
+        if(absence.getType() == AbsenceType.RTT_EMPLOYEE) user.setRttEmployee(user.getRttEmployee() - numberOfDays);
+        if(absence.getType() == AbsenceType.UNPAID_LEAVE) user.setUnpaidLeave(user.getUnpaidLeave() + numberOfDays);
+        
+        userService.save(user);
+        System.out.println("user" + user);
+
         absence.setStatus(Status.VALIDEE);
         absenceRepository.save(absence);
     }
