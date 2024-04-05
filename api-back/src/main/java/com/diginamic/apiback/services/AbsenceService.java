@@ -205,16 +205,10 @@ public class AbsenceService {
             cal1.add(Calendar.DATE, 1);
         }
         
-        System.out.println("absence type" + absence.getType());
-        System.out.println("user" + user.getRttEmployee());
-        System.out.println("number days" + numberOfDays);
-        System.out.println("substract" + (user.getRttEmployee() - numberOfDays));
         if(absence.getType() == AbsenceType.PAID_LEAVE) user.setPaidLeave(user.getPaidLeave() - numberOfDays);
         if(absence.getType() == AbsenceType.RTT_EMPLOYEE) user.setRttEmployee(user.getRttEmployee() - numberOfDays);
-        if(absence.getType() == AbsenceType.UNPAID_LEAVE) user.setUnpaidLeave(user.getUnpaidLeave() + numberOfDays);
-        
+        if(absence.getType() == AbsenceType.UNPAID_LEAVE) user.setUnpaidLeave(user.getUnpaidLeave() + numberOfDays);        
         userService.save(user);
-        System.out.println("user" + user);
 
         absence.setStatus(Status.VALIDEE);
         absenceRepository.save(absence);
