@@ -60,7 +60,7 @@ export default function CreateAbs() {
       <form className="abs-form" onSubmit={handleSubmit}>
         <label>
           <span>Votre identifiant utilisateur</span>
-          <input type="text" name="user_id" value={loadedData.email} readOnly />
+          <input type="text" name="user_id" value={loadedData.email || ''} readOnly />
         </label>
         <label>
           <span>Type d&apos;absence</span>
