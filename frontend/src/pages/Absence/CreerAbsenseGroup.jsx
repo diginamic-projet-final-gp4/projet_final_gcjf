@@ -2,8 +2,10 @@ import { useContext } from "react";
 import { UserContext } from "../../model/utils/context/UserContext";
 
 import "./Absense.css";
+import { useNavigate } from "react-router-dom";
 
 export default function CreerAbsenseGroup() {
+  const navigate = useNavigate();
   // Récupèrera le nom de l'utilisateur connecté une fois l'authentification implémentée
   const orgaId = "1";
 
@@ -22,7 +24,9 @@ export default function CreerAbsenseGroup() {
 
     postData("http://localhost:8082/api/specific-absence/create", data);
 
-    // window.location.href = "/absence";
+    setTimeout(() => {
+      navigate("/admin");
+    }, 150);
   };
 
   return (
