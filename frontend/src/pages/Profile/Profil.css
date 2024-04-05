@@ -1,9 +1,3 @@
-.profil {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-
 /* Block gauche */
 .informations-personnelles {
   display: flex;
@@ -11,6 +5,11 @@
 }
 
 .profil {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 2em;
+
   ul {
     flex-direction: column;
     /* Cadre */
