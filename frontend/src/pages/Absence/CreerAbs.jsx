@@ -51,7 +51,7 @@ export default function CreateAbs() {
     postData("http://localhost:8082/api/absence/create", data);
     setTimeout(() => {
       navigate("/absence");
-    }, 100);
+    }, 150);
   };
 
   return (
