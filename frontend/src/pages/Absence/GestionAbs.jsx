@@ -17,7 +17,7 @@ export default function SeeAbs() {
         </div>
 
         <div className="classForTable">
-          <h2>Absenses</h2>
+          <h2>Absences</h2>
           <table>
             <thead>
               <tr>
