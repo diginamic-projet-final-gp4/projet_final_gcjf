@@ -7,7 +7,7 @@ import "./Absense.css";
 
 export default function CreateAbs() {
   const navigate = useNavigate();
-  const [dt_debut, setDtDebut] = useState(null);
+  const [dtDebut, setDtDebut] = useState(null);
   const dateAujourdhui = new Date();
   const [motifRequired, setMotifRequired] = useState(false);
 
@@ -19,7 +19,7 @@ export default function CreateAbs() {
 
   useEffect(() => {
     const form = document.querySelector(".abs-form");
-    const dtDebutInput = form.querySelector('[name="dt_debut"]');
+    const dtDebutInput = form.querySelector('[name="dtDebut"]');
     const dtFinInput = form.querySelector('[name="dt_fin"]');
 
     const handleFormChange = () => {
@@ -57,7 +57,7 @@ export default function CreateAbs() {
     postData("http://localhost:8082/api/absence/create", data);
     setTimeout(() => {
       navigate("/absence");
-    }, 100);
+    }, 150);
   };
 
   return (
@@ -66,7 +66,7 @@ export default function CreateAbs() {
       <form className="abs-form" onSubmit={handleSubmit}>
         <label>
           <span>Votre identifiant utilisateur</span>
-          <input type="text" name="user_id" value={loadedData.email} readOnly />
+          <input type="text" name="user_id" value={loadedData.email || ''} readOnly />
         </label>
         <label>
           <span>Type d&apos;absence</span>
@@ -80,7 +80,7 @@ export default function CreateAbs() {
           <span>Date de début</span>
           <input
             type="date"
-            name="dt_debut"
+            name="dtDebut"
             min={dateAujourdhui.toISOString().split("T")[0]}
             required
             onChange={(e) => setDtDebut(e.target.value)}
@@ -88,7 +88,7 @@ export default function CreateAbs() {
         </label>
         <label>
           <span>Date de fin</span>
-          <input type="date" name="dt_fin" required min={dt_debut} />
+          <input type="date" name="dt_fin" required min={dtDebut} />
         </label>
         {motifRequired ? (
           <label>

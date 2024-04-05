@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
+import "./Administration.css"
 
 import loadData from "./../../model/utils/hooks.jsx";
 import { useContext } from "react";
@@ -13,7 +14,7 @@ export default function AdminPage() {
 
   return (
     <>
-      <div className="classForTable">
+      <div className="AdminPage Absencesdegroupe">
         {role && role == "ADMIN" ? (
           <div className="admin-links">
             <h1>Administration</h1>
@@ -39,7 +40,7 @@ export default function AdminPage() {
               loadedData.map((absence) => (
                 <tr key={absence.id}>
                   <td>{absence.id}</td>
-                  <td>{format(new Date(absence.dt_debut), "dd/MM/yyyy")}</td>
+                  <td>{format(new Date(absence.dtDebut), "dd/MM/yyyy")}</td>
                   <td>{format(new Date(absence.dt_fin), "dd/MM/yyyy")}</td>
                   <td>{absence.type}</td>
                   <td>{absence.motif}</td>

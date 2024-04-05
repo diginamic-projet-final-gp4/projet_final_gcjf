@@ -1,12 +1,19 @@
 import loadData from "../../model/utils/hooks.jsx";
-import "./ListCollabActuelTable.css";
+import PropTypes from "prop-types";
+import "./Rapport.css";
+
+ListCollabActuelTable.propTypes = {
+  service: PropTypes.number.isRequired,
+  month: PropTypes.number.isRequired,
+  year: PropTypes.number.isRequired,
+};
+
 /**
  * @param  {Object}  props
  * @param  {number}  props.service
- * @param  {number}   props.month
+ * @param  {number}  props.month
  * @param  {number} props.year
  */
-
 function getDaysInMonth(year, month) {
   const daysInMonth = new Date(year, month, 0).getDate();
   const days = [];
@@ -28,16 +35,16 @@ export default function ListCollabActuelTable({ service, month, year }) {
     for (let i = 0; i < daysOfMonth.length; i++) {
       let dayOfMonth = new Date(year, month, i);
       for (let abs of user.absences) {
-        let dayOfUser = new Date(abs.dt_debut);
+        let dayOfUser = new Date(abs.dtDebut);
         if (dayOfUser.getDate() == dayOfMonth.getDate()) {
-          if (abs.type == "PAID_LEAVE"|| abs.type == "UNPAID_LEAVE") {
-            abs.type = "C"
+          if (abs.type == "PAID_LEAVE" || abs.type == "UNPAID_LEAVE") {
+            abs.type = "C";
           }
-          if (abs.type == "RTT_EMPLOYER"|| abs.type == "RTT_EMPLOYEE") {
-            abs.type = "R"
+          if (abs.type == "RTT_EMPLOYER" || abs.type == "RTT_EMPLOYEE") {
+            abs.type = "R";
           }
           if (abs.type == "FERIEE") {
-            abs.type = "F"
+            abs.type = "F";
           }
           obj[dayOfMonth] = abs.type;
         } else continue;
@@ -53,29 +60,30 @@ export default function ListCollabActuelTable({ service, month, year }) {
     <>
       <h2>liste des congés</h2>
       <div id="table">
-          <table>
-            <thead>
-              <tr>
-                <th className="user">User</th>
-                {daysOfMonth &&
-                  daysOfMonth.map((val) => <th key={val}>{val}</th>)}
-              </tr>
-            </thead>
-            <tbody>
-              {data &&
-                data.map((user, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>{user.firstName + " " + user.lastName}</td>
-                      {Array.from(Object.keys(user?.obj)).map((item, i) => {
-                        if(user.obj[item]) return <td key={i}>{user.obj[item].split("")[0]}</td>
-                        else return <td key={i}></td>
-                      })}
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
+        <table>
+          <thead>
+            <tr>
+              <th className="user">User</th>
+              {daysOfMonth &&
+                daysOfMonth.map((val) => <th key={val}>{val}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {data &&
+              data.map((user, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{user.firstName + " " + user.lastName}</td>
+                    {Array.from(Object.keys(user?.obj)).map((item, i) => {
+                      if (user.obj[item])
+                        return <td key={i}>{user.obj[item].split("")[0]}</td>;
+                      else return <td key={i}></td>;
+                    })}
+                  </tr>
+                );
+              })}
+          </tbody>
+        </table>
       </div>
     </>
   );

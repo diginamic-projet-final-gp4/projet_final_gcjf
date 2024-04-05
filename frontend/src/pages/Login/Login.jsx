@@ -41,6 +41,7 @@ export default function Login() {
         setValidation("");
       })
       .catch((e) => {
+        console.error(e);
         setValidation("Error, email or password incorrect");
       });
 

@@ -1,10 +1,17 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../model/utils/context/UserContext";
 
 import "./Absense.css";
+import { useNavigate } from "react-router-dom";
 
 export default function CreerAbsenseGroup() {
+  const navigate = useNavigate();
+  const [startDate, setStartDate] = useState(new Date());
   const { postData } = useContext(UserContext);
+
+  const handleChangeDate = (e) => {
+    setStartDate(e.target.value);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -18,28 +25,30 @@ export default function CreerAbsenseGroup() {
 
     postData("http://localhost:8082/api/specific-absence/create", data);
 
-    // window.location.href = "/absence";
+    setTimeout(() => {
+      navigate("/admin");
+    }, 150);
   };
 
   return (
-    <div className="create-abs">
+    <div className="abs">
       <h1>Créer une absence de groupe</h1>
 
-      <form className="create-abs-form" onSubmit={handleSubmit}>
+      <form className="abs-form" onSubmit={handleSubmit}>
         <label>
           <span>Type d&apos;absence</span>
-          <select name="type">
-            <option value="FERIEE">Fériée</option>
+          <select name="type" readOnly>
             <option value="RTT_EMPLOYER">RTT Employeur</option>
+            <option value="FERIEE">Feriée</option>
           </select>
         </label>
         <label>
           <span>Date de début</span>
-          <input type="date" name="dt_debut" />
+          <input type="date" name="dtDebut" min={new Date().toISOString().split("T")[0]} onChange={handleChangeDate}/>
         </label>
         <label>
           <span>Date de fin</span>
-          <input type="date" name="dt_fin" />
+          <input type="date" name="dt_fin" min={startDate} />
         </label>
         <label>
           <span>Motif</span>

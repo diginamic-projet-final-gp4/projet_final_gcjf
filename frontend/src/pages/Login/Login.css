@@ -44,7 +44,6 @@
     border-radius: 5px;
     background-color: #e9e9f7;
     padding: 5px;
-    width: 80%;
     color: #478d7e;
     border: 1px solid #dadaf7;
   }
@@ -62,6 +61,7 @@
     font-size: 14px;
     display: block;
     padding-bottom: 4px;
+    font-weight: 700;
   }
 
   button {

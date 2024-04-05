@@ -35,7 +35,7 @@ export default function SeeAbs() {
                 <tr key={absence.id}>
                   <td>{absence.id}</td>
                   <td>{absence.motif}</td>
-                  <td>{format(parseISO(absence.dt_debut), "dd/MM/yyyy")}</td>
+                  <td>{format(parseISO(absence.dtDebut), "dd/MM/yyyy")}</td>
                   <td>{format(parseISO(absence.dt_fin), "dd/MM/yyyy")}</td>
                   <td>{absence.status}</td>
                   <td>{absence.type}</td>

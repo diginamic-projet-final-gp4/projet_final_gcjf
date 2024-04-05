@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 public class SpecificAbsenceDTO {
     private Long id;
-    private Date dt_debut;
+    private Date dtDebut;
     private Date dt_fin;
     @Enumerated(EnumType.STRING)
     private AbsenceType type;

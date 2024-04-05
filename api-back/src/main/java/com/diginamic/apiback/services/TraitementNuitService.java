@@ -69,7 +69,7 @@ public class TraitementNuitService {
         if (absence.getType() == AbsenceType.UNPAID_LEAVE) {
             return true;
         }
-        LocalDate datededebut = absence.getDt_debut().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate datededebut = absence.getDtDebut().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate datedefin = absence.getDt_fin().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
         final long requestedDays = Period.between(datededebut, datedefin)

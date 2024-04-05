@@ -59,7 +59,7 @@ public class AbsenceService {
         Optional<User> user = userService.findById(id);
         if (user.isPresent()) {
             List<AbsenceDTO> absenceDTOs = new ArrayList<>();
-            for (Absence abs : absenceRepository.findByUser(user.get())) {
+            for (Absence abs : absenceRepository.findByUserOrderByDtDebutDesc(user.get())) {
                 absenceDTOs.add(abs.toDto());
             }
             return absenceDTOs;
@@ -188,7 +188,7 @@ public class AbsenceService {
         Absence absence = absenceRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("ID : " + id + " introuvable"));
         User user = userService.findById(absence.getUser().getId()).get();
-        Date startDate = absence.getDt_debut();
+        Date startDate = absence.getDtDebut();
         Date endDate = absence.getDt_fin();
 
         Calendar cal1 = Calendar.getInstance();
