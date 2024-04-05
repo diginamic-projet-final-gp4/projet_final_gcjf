@@ -5,6 +5,8 @@ import "./Profil.css";
 export default function Profil() {
   const { loadedData } = loadData("http://localhost:8082/api/user");
 
+  console.log(loadedData);
+
   return (
     <>
       <h1>Bonjour {loadedData.firstName}</h1>
@@ -25,14 +27,24 @@ export default function Profil() {
             </li>
             <li>
               <span>Role:</span>
-              {loadedData.role === "ROLE_ADMIN" ? (
+              {loadedData.role === "ADMIN" ? (
                 <span>Admin</span>
-              ) : loadedData.role === "ROLE_MANAGER" ? (
+              ) : loadedData.role === "MANAGER" ? (
                 <span>Manager</span>
               ) : (
                 <span>Employé</span>
               )}
             </li>
+            {loadedData.manager && (
+              <li>
+                <span>Manager:</span>
+                <span>
+                  {loadedData.manager?.firstName} {loadedData.manager?.lastName}{" "}
+                  | {loadedData.manager?.email}
+                </span>
+              </li>
+            )}
+
             <li>
               <span>Service: </span>
               <span> {loadedData.service?.lastName}</span>
