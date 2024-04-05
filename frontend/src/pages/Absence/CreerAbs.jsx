@@ -9,6 +9,7 @@ export default function CreateAbs() {
   const navigate = useNavigate();
   const [dt_debut, setDtDebut] = useState(null);
   const dateAujourdhui = new Date();
+  const [motifRequired, setMotifRequired] = useState(false);
 
   const { postData } = useContext(UserContext);
 
@@ -37,6 +38,11 @@ export default function CreateAbs() {
     };
   }, []);
 
+  function handleAbsenceType(e) {
+    if (e.target.value == "UNPAID_LEAVE") setMotifRequired(true);
+    else setMotifRequired(false);
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -64,7 +70,7 @@ export default function CreateAbs() {
         </label>
         <label>
           <span>Type d&apos;absence</span>
-          <select name="type">
+          <select name="type" onChange={handleAbsenceType}>
             <option value="PAID_LEAVE">Congé</option>
             <option value="UNPAID_LEAVE">Congé sans solde</option>
             <option value="RTT_EMPLOYEE">RTT</option>
@@ -84,10 +90,17 @@ export default function CreateAbs() {
           <span>Date de fin</span>
           <input type="date" name="dt_fin" required min={dt_debut} />
         </label>
-        <label>
-          <span>Motif</span>
-          <input type="text" name="motif" />
-        </label>
+        {motifRequired ? (
+          <label>
+            <span>Motif</span>
+            <input type="text" required name="motif" />
+          </label>
+        ) : (
+          <label>
+            <span>Motif</span>
+            <input type="text" name="motif" />
+          </label>
+        )}
         <button type="submit" disabled={!isFormValid}>
           Créer
         </button>
