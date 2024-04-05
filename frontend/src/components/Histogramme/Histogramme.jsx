@@ -119,7 +119,9 @@ export default function Histogramme({
     plugins: {
       title: {
         display: true,
-        text: 'Chart.js Bar Chart - Stacked',
+      },
+      legend: {
+        position: "bottom"
       },
     },
     responsive: true,
