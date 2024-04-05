@@ -12,11 +12,10 @@ export default function SeeAbs() {
     <>
       <h1>Gérer les demandes d&apos;absences</h1>
       <div>
-        <ul>
-          <li>
-            <Link to="/absence/create">Créer une absence</Link>
-          </li>
-        </ul>
+        <div>
+          <Link to="/absence/create">Créer une absence</Link>
+        </div>
+
         <div className="classForTable">
           <h2>Absenses</h2>
           <table>
