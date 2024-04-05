@@ -41,3 +41,8 @@
 .abs-form button:hover {
   background-color: #2f5059b2;
 }
+
+.refused{
+  color: red !important;
+  margin-left: 12px;
+}
