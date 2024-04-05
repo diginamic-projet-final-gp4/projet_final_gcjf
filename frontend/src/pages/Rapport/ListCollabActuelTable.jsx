@@ -1,10 +1,17 @@
 import loadData from "../../model/utils/hooks.jsx";
+import PropTypes from "prop-types";
 import "./Rapport.css";
+
+ListCollabActuelTable.propTypes = {
+  service: PropTypes.number.isRequired,
+  month: PropTypes.number.isRequired,
+  year: PropTypes.number.isRequired,
+};
 
 /**
  * @param  {Object}  props
  * @param  {number}  props.service
- * @param  {number}   props.month
+ * @param  {number}  props.month
  * @param  {number} props.year
  */
 function getDaysInMonth(year, month) {
