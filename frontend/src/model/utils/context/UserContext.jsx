@@ -4,7 +4,7 @@ export const UserContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 export default function UserContextProvider({ children }) {
-  const [role, setRole] = useState()
+  const [role, setRole] = useState();
 
   async function postData(url = "", donnees = {}) {
     let options = {
@@ -51,14 +51,16 @@ export default function UserContextProvider({ children }) {
       throw new Error("Login or password incorrect");
     }
 
-    const res = await fetch("http://localhost:8082/api/user", {credentials: "include"}).then(response=>response.json())
-    setRole(res.role)
+    const res = await fetch("http://localhost:8082/api/user", {
+      credentials: "include",
+    }).then((response) => response.json());
+    setRole(res.role);
   };
 
   const logOut = async () => {
     const response = await postData("http://localhost:8082/logout");
     if (response.ok) {
-      setRole()
+      setRole();
       return;
     }
 
@@ -83,7 +85,9 @@ export default function UserContextProvider({ children }) {
   }
 
   return (
-    <UserContext.Provider value={{ signIn, logOut, postData, deleteData, updateData, role }}>
+    <UserContext.Provider
+      value={{ signIn, logOut, postData, deleteData, updateData, role }}
+    >
       {children}
     </UserContext.Provider>
   );

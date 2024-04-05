@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import loadData from "../../model/utils/hooks.jsx"
+import loadData from "../../model/utils/hooks.jsx";
 import ListCollabActuelTable from "./ListCollabActuelTable.jsx";
-import "./ListCollabActuel.css"
+import "./Rapport.css";
 
 const months = [
   { value: 1, label: "January" },
@@ -18,53 +18,77 @@ const months = [
   { value: 12, label: "December" },
 ];
 
-const years =[2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030];
+const years = [2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030];
 export default function ListCollabActuel() {
   //setServices(loadData(`http://localhost:8082/api/absence/service?id=${selectedService}&month=${selectedMonth}&year=${selectedYear}`))
-  const { loadedData : services} = loadData("http://localhost:8082/api/service/all")
-  const [month, setMonth] = useState(months[0].value)
-  const [year, setYear] = useState(years[0])
-  const [service, setService ] = useState(null)
+  const { loadedData: services } = loadData(
+    "http://localhost:8082/api/service/all"
+  );
+  const [month, setMonth] = useState(months[0].value);
+  const [year, setYear] = useState(years[0]);
+  const [service, setService] = useState(null);
 
-  const handleChangeService = e => setService(e.target.value)
-  const handleChangeMonth = e => setMonth(e.target.value)
-  const handleChangeYear = e => setYear(e.target.value)
+  const handleChangeService = (e) => setService(e.target.value);
+  const handleChangeMonth = (e) => setMonth(e.target.value);
+  const handleChangeYear = (e) => setYear(e.target.value);
 
   useEffect(() => {
-    setService(services[0]?.id)
-  },[services])
+    setService(services[0]?.id);
+  }, [services]);
   return (
     <>
-      <h1>Vue par département et par jour</h1>
-      <form>
-        <div>
-          <label htmlFor="service">Service:</label>
-          <select id="service" name="service" required onChange={handleChangeService} >
-            {services.map((service) => (
-              <option key={service.id} value={service.id}>{service.lastName}</option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label htmlFor="month">Mois:</label>
-          <select id="month" name="month" value={month} onChange={handleChangeMonth}>
-            {months.map((month) => (
-              <option key={month.value} value={month.value}>{month.label}</option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label htmlFor="year">Année:</label>
-          <select id="year" name="year" onChange={handleChangeYear}>
-            {years.map((year) => (
-              <option key={year} value={year}>{year}</option>
-            ))}
-          </select>
-        </div>
-      </form>
-      {service != null && (<ListCollabActuelTable service={service} month={month} year={year}/>)}
+      <div className="ListCollabActuel">
+        <h1>Vue par département et par jour</h1>
+        <form>
+          <div>
+            <label htmlFor="service">Service:</label>
+            <select
+              id="service"
+              name="service"
+              required
+              onChange={handleChangeService}
+            >
+              {services.map((service) => (
+                <option key={service.id} value={service.id}>
+                  {service.lastName}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label htmlFor="month">Mois:</label>
+            <select
+              id="month"
+              name="month"
+              value={month}
+              onChange={handleChangeMonth}
+            >
+              {months.map((month) => (
+                <option key={month.value} value={month.value}>
+                  {month.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label htmlFor="year">Année:</label>
+            <select id="year" name="year" onChange={handleChangeYear}>
+              {years.map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+            </select>
+          </div>
+        </form>
+        {service != null && (
+          <ListCollabActuelTable service={service} month={month} year={year} />
+        )}
 
-      <p>R = RTT   <span>C = Congé</span>   <span>F = Férié</span></p>
-    </> 
+        <p>
+          R = RTT <span>C = Congé</span> <span>F = Férié</span>
+        </p>
+      </div>
+    </>
   );
 }
