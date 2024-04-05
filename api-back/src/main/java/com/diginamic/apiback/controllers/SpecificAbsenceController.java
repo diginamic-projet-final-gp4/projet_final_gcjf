@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ import java.util.Map;
 import com.diginamic.apiback.dto.SpecificAbsenceDTO;
 import com.diginamic.apiback.models.SpecificAbsence;
 import com.diginamic.apiback.services.SpecificAbsenceService;
+import com.diginamic.apiback.services.UserService;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
@@ -31,6 +33,9 @@ import jakarta.validation.Valid;
 public class SpecificAbsenceController {
     @Autowired
     SpecificAbsenceService specificAbsenceService;
+    
+    @Autowired
+    UserService userService;
 
     /**
      * Route pour récupérer toutes les absences spécifiques
@@ -59,6 +64,7 @@ public class SpecificAbsenceController {
         if (specificAbsence.isPresent()) {
             return ResponseEntity.ok().body(specificAbsence.get().toDto());
         }
+        
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(Map.of("message", "No specific absence entity with corresponding id found in db"));
     }
@@ -70,8 +76,9 @@ public class SpecificAbsenceController {
      * @return l'absence créée
      */
     @PostMapping("/create")
-    public ResponseEntity<?> createAbsence(@RequestBody @Valid SpecificAbsence specificAbsence) {
-        SpecificAbsence abs = specificAbsenceService.createSpecificAbsence(specificAbsence);
+    public ResponseEntity<?> createAbsence(Authentication authentication, @RequestBody @Valid SpecificAbsence specificAbsence) {
+        Long id = userService.loadUserByUsername(authentication.getName()).getService().getOrganization().getId();
+        SpecificAbsence abs = specificAbsenceService.createSpecificAbsence(id, specificAbsence);
         return ResponseEntity.ok().body(abs.toDto());
     }
 

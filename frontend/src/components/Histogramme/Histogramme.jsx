@@ -19,26 +19,6 @@ ChartJS.register(
   Legend
 );
 
-class Dataset {
-  constructor(label, data){
-    this.label = label
-    this.data = data
-    this.backgroundColor = "#ff00f0"
-    this.borderColor = "#00ff0f"
-    this.borderWidth = 1
-    this.data = Math.random() * 10
-  }
-
-  toObject(){
-    return {
-      label : this.label,
-      data : this.data,
-      backgroundColor : this.backgroundColor,
-      borderColor : this.borderColor,
-      borderWidth : this.borderWidth,
-    }
-  }
-}
 
 export default function Histogramme({
   selectedService,
@@ -119,7 +99,9 @@ export default function Histogramme({
     plugins: {
       title: {
         display: true,
-        text: 'Chart.js Bar Chart - Stacked',
+      },
+      legend: {
+        position: "bottom"
       },
     },
     responsive: true,

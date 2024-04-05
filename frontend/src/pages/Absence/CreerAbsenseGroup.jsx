@@ -7,9 +7,6 @@ import { useNavigate } from "react-router-dom";
 export default function CreerAbsenseGroup() {
   const navigate = useNavigate();
   const [startDate, setStartDate] = useState(new Date());
-  // Récupèrera le nom de l'utilisateur connecté une fois l'authentification implémentée
-  const orgaId = "1";
-
   const { postData } = useContext(UserContext);
 
   const handleChangeDate = (e) => {
@@ -38,10 +35,6 @@ export default function CreerAbsenseGroup() {
       <h1>Créer une absence de groupe</h1>
 
       <form className="abs-form" onSubmit={handleSubmit}>
-        <label>
-          <span>Votre identifiant d&apos;organisation</span>
-          <input type="text" name="organization_id" value={orgaId} readOnly />
-        </label>
         <label>
           <span>Type d&apos;absence</span>
           <select name="type" readOnly>

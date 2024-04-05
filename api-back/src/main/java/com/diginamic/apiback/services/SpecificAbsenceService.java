@@ -65,18 +65,12 @@ public class SpecificAbsenceService {
      *
      * @param specificAbsence l'absence spécifique à créer
      * @return l'absence spécifique créée
-     * @throws EntityNotFoundException si l'organisation n'est pas trouvée
+     * @throws specificAbsence
      */
-    public SpecificAbsence createSpecificAbsence(@Valid SpecificAbsence specificAbsence) {
-        Optional<Organization> organizationOptional = organizationService
-                .findById(specificAbsence.getOrganization_id());
-        if (organizationOptional.isPresent()) {
-            Organization organizationObject = organizationOptional.get();
-            specificAbsence.setOrganization(organizationObject);
-            return specificAbsenceRepository.save(specificAbsence);
-        }
-
-        throw new EntityNotFoundException("Organization not found");
+    public SpecificAbsence createSpecificAbsence(Long organiation_id, @Valid SpecificAbsence specificAbsence) {
+        Organization organization = organizationService.findById(organiation_id).get();
+        specificAbsence.setOrganization(organization);
+        return specificAbsenceRepository.save(specificAbsence);
     }
 
     /**
@@ -95,7 +89,7 @@ public class SpecificAbsenceService {
         return absenceToDelete;
     }
 
-    public List<SpecificAbsence> findAbsencesAndMonthAndYear(Long organizationId, String month, String year){
+    public List<SpecificAbsence> findAbsencesAndMonthAndYear(Long organizationId, String month, String year) {
         return specificAbsenceRepository.findAbsencesAndMonthAndYear(organizationId, month, year);
     }
 

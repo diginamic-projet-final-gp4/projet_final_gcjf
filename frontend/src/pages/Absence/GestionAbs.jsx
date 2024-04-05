@@ -61,7 +61,14 @@ export default function SeeAbs() {
                       <span>Demande validée</span>
                     )}
                     {absence.status === "REJETEE" && (
-                      <span>Demande refusée</span>
+                      <>
+                        <button className="modifier">
+                          <Link to={`/absence/update/${absence.id}`}>
+                            Modifier
+                          </Link>
+                        </button>
+                        <span className="refused">Demande refusée</span>
+                      </>
                     )}
                   </td>
                 </tr>

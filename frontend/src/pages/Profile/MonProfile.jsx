@@ -5,8 +5,6 @@ import "./Profil.css";
 export default function Profil() {
   const { loadedData } = loadData("http://localhost:8082/api/user");
 
-  console.log(loadedData);
-
   return (
     <>
       <h1>Bonjour {loadedData.firstName}</h1>

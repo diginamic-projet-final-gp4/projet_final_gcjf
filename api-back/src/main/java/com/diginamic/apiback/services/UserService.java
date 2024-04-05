@@ -44,6 +44,10 @@ public class UserService implements UserDetailsService {
         throw new UsernameNotFoundException("Invalid credentials.");
     }
 
+    public User save(final User user){
+        return userRepository.save(user);
+    }
+
     /**
      * Trouve tous les utilisateurs.
      *
