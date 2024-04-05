@@ -1,0 +1,12 @@
+.AdminPage {
+  display: flex;
+  flex-direction: column;
+
+  .Absencesdegroupe {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 2em;
+  }
+}

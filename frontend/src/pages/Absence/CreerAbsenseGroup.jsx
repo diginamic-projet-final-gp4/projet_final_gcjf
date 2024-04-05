@@ -6,15 +6,15 @@ import { useNavigate } from "react-router-dom";
 
 export default function CreerAbsenseGroup() {
   const navigate = useNavigate();
-  const [startDate, setStartDate] = useState(new Date())
+  const [startDate, setStartDate] = useState(new Date());
   // Récupèrera le nom de l'utilisateur connecté une fois l'authentification implémentée
   const orgaId = "1";
 
   const { postData } = useContext(UserContext);
 
   const handleChangeDate = (e) => {
-    setStartDate(e.target.value)
-  }
+    setStartDate(e.target.value);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -34,18 +34,17 @@ export default function CreerAbsenseGroup() {
   };
 
   return (
-    <div className="create-abs">
+    <div className="abs">
       <h1>Créer une absence de groupe</h1>
 
-      <form className="create-abs-form" onSubmit={handleSubmit}>
+      <form className="abs-form" onSubmit={handleSubmit}>
         <label>
           <span>Votre identifiant d&apos;organisation</span>
           <input type="text" name="organization_id" value={orgaId} readOnly />
         </label>
         <label>
           <span>Type d&apos;absence</span>
-          <select name="type">
-            <option value="FERIEE">Fériée</option>
+          <select name="type" readOnly>
             <option value="RTT_EMPLOYER">RTT Employeur</option>
           </select>
         </label>
@@ -55,7 +54,7 @@ export default function CreerAbsenseGroup() {
         </label>
         <label>
           <span>Date de fin</span>
-          <input type="date" name="dt_fin" min={startDate}/>
+          <input type="date" name="dt_fin" min={startDate} />
         </label>
         <label>
           <span>Motif</span>

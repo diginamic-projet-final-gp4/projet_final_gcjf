@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Histogramme from "../../components/Histogramme/Histogramme";
 
-import "./HistogrammePage.css";
+import "./Rapport.css";
 import useFetchData from "../../model/utils/hooks";
 
 export default function HistogrammePage() {
