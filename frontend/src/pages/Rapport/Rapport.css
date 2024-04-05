@@ -1,0 +1,76 @@
+.Rapportglobal {
+  display: flex;
+  flex-direction: row;
+
+  .Collaborateurs,
+  .Histogramme {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* ListCollabActuelTable */
+#table {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+#table table {
+  width: 90%;
+}
+
+.user {
+  margin-right: 20px;
+}
+
+.user h4 {
+  margin-bottom: 10px;
+}
+
+.days {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.day {
+  list-style: none;
+  margin-bottom: 5px;
+}
+
+/* ListCollabActuel */
+
+.ListCollabActuel {
+  form {
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+  }
+
+  form div {
+    display: flex;
+    align-items: center;
+    gap: 2%;
+  }
+
+  form div select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #e1f1ed;
+  }
+}
+
+/* HistogrammePage */
+
+.histogramme {
+  display: flex;
+  width: 80%;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
