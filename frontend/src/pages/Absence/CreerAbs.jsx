@@ -49,7 +49,6 @@ export default function CreateAbs() {
     data.status = "INITIALE";
     data["user_id"] = loadedData.id;
     postData("http://localhost:8082/api/absence/create", data);
-    console.log(data);
     setTimeout(() => {
       navigate("/absence");
     }, 100);
