@@ -4,11 +4,7 @@ import { UserContext } from "../../model/utils/context/UserContext";
 import "./Absense.css";
 
 export default function CreerAbsenseGroup() {
-  // Récupèrera le nom de l'utilisateur connecté une fois l'authentification implémentée
-  const orgaId = "1";
-
   const { postData } = useContext(UserContext);
-
 
   const handleSubmit = async (event) => {
     event.preventDefault();

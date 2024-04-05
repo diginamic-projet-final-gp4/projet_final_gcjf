@@ -53,6 +53,9 @@ function Nav({ logOut, role }) {
               <li>
                 <Link to="/absence">Absence</Link>
               </li>
+              <li>
+                <Link to="/planing-ferie">Planing Ferié</Link>
+              </li>
               {role && role === "MANAGER" ? (
                 <>
                   <li>
@@ -60,12 +63,6 @@ function Nav({ logOut, role }) {
                   </li>
                   <li>
                     <Link to="/manager/traitement">Traitement demande</Link>
-                  </li>
-                </>
-              ) : role === "ADMIN" ? (
-                <>
-                  <li>
-                    <Link to="/admin">Administration</Link>
                   </li>
                 </>
               ) : (
@@ -105,6 +102,7 @@ export default function Body() {
               <Route path="/absence/update/:id" element={<ModifAbs />} />
               <Route path="/absence/delete/:id" element={<DeleteAbs />} />
               <Route path="/absence/create" element={<CreateAbs />} />
+              <Route path="/planing-ferie" element={<AdminPage />} />
 
               {role && role === "MANAGER" ? (
                 <>
@@ -126,7 +124,6 @@ export default function Body() {
                 </>
               ) : role == "ADMIN" ? (
                 <>
-                  <Route path="/admin" element={<AdminPage />} />
                   <Route
                     path="/absence/group/create"
                     element={<CreerAbsenseGroup />}
