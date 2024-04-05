@@ -31,10 +31,6 @@ export default function CreerAbsenseGroup() {
 
       <form className="create-abs-form" onSubmit={handleSubmit}>
         <label>
-          <span>Votre identifiant d&apos;organisation</span>
-          <input type="text" name="organization_id" value={orgaId} readOnly />
-        </label>
-        <label>
           <span>Type d&apos;absence</span>
           <select name="type">
             <option value="FERIEE">Fériée</option>
