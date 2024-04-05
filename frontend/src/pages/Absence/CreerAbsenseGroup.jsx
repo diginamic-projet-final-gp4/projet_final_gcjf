@@ -1,14 +1,20 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../model/utils/context/UserContext";
 
 import "./Absense.css";
+import { useNavigate } from "react-router-dom";
 
 export default function CreerAbsenseGroup() {
+  const navigate = useNavigate();
+  const [startDate, setStartDate] = useState(new Date())
   // Récupèrera le nom de l'utilisateur connecté une fois l'authentification implémentée
   const orgaId = "1";
 
   const { postData } = useContext(UserContext);
 
+  const handleChangeDate = (e) => {
+    setStartDate(e.target.value)
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -22,7 +28,9 @@ export default function CreerAbsenseGroup() {
 
     postData("http://localhost:8082/api/specific-absence/create", data);
 
-    // window.location.href = "/absence";
+    setTimeout(() => {
+      navigate("/admin");
+    }, 150);
   };
 
   return (
@@ -43,11 +51,11 @@ export default function CreerAbsenseGroup() {
         </label>
         <label>
           <span>Date de début</span>
-          <input type="date" name="dt_debut" />
+          <input type="date" name="dt_debut" min={new Date().toISOString().split("T")[0]} onChange={handleChangeDate}/>
         </label>
         <label>
           <span>Date de fin</span>
-          <input type="date" name="dt_fin" />
+          <input type="date" name="dt_fin" min={startDate}/>
         </label>
         <label>
           <span>Motif</span>
