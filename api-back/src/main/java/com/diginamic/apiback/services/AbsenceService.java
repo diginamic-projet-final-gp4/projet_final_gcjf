@@ -1,10 +1,6 @@
 package com.diginamic.apiback.services;
 
 import java.util.Optional;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -204,10 +200,13 @@ public class AbsenceService {
             }
             cal1.add(Calendar.DATE, 1);
         }
-        
-        if(absence.getType() == AbsenceType.PAID_LEAVE) user.setPaidLeave(user.getPaidLeave() - numberOfDays);
-        if(absence.getType() == AbsenceType.RTT_EMPLOYEE) user.setRttEmployee(user.getRttEmployee() - numberOfDays);
-        if(absence.getType() == AbsenceType.UNPAID_LEAVE) user.setUnpaidLeave(user.getUnpaidLeave() + numberOfDays);        
+
+        if (absence.getType() == AbsenceType.PAID_LEAVE)
+            user.setPaidLeave(user.getPaidLeave() - numberOfDays);
+        if (absence.getType() == AbsenceType.RTT_EMPLOYEE)
+            user.setRttEmployee(user.getRttEmployee() - numberOfDays);
+        if (absence.getType() == AbsenceType.UNPAID_LEAVE)
+            user.setUnpaidLeave(user.getUnpaidLeave() + numberOfDays);
         userService.save(user);
 
         absence.setStatus(Status.VALIDEE);
