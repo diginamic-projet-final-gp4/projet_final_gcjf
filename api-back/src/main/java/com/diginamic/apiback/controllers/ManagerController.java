@@ -78,7 +78,6 @@ public class ManagerController {
         return userService.deleteUser(id);
     }
 
-    // TODO : A voir si il faut le mettre dans le manager controller
     /**
      * Route pour valider une absence (manager only)
      * 

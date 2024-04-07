@@ -55,12 +55,14 @@ public class AbsenceController {
      * @return une liste d'absences
      */
     @GetMapping("/all")
-    public ResponseEntity<?> findAll() {
+    public ResponseEntity<?> findAll(Authentication authentication) {
+        User user = userService.loadUserByUsername(authentication.getName());
         List<AbsenceDTO> absenceDtoList = new ArrayList<>();
-        List<Absence> absenceList = absenceService.findAll();
+        List<Absence> absenceList = absenceService.findAllForCurrentManager(user);
         for (Absence absence : absenceList) {
             absenceDtoList.add(absence.toDto());
         }
+
         return ResponseEntity.ok().body(absenceDtoList);
     }
 

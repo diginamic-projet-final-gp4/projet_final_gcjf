@@ -10,8 +10,6 @@ import com.diginamic.apiback.enums.AbsenceType;
 import com.diginamic.apiback.models.Absence;
 import com.diginamic.apiback.models.User;
 
-import jakarta.persistence.OrderBy;
-
 @Repository
 public interface AbsenceRepository extends JpaRepository<Absence, Long> {
     /**
@@ -20,8 +18,15 @@ public interface AbsenceRepository extends JpaRepository<Absence, Long> {
      * @param user l'utilisateur
      * @return la liste des absences
      */
-
     List<Absence> findByUserOrderByDtDebutDesc(User user);
+
+    @Query(value = """
+            select a from Absence a
+            INNER JOIN User u ON a.user_id = u.id
+            WHERE u.manager = :user
+            ORDER BY a.dtDebut DESC
+            """)
+    List<Absence> findByManagerId(User user);
 
     @Query(value = "SELECT * FROM absence WHERE status = :status", nativeQuery = true)
     List<Absence> findByStatus(String status);
