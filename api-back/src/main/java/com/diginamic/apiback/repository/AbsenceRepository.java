@@ -46,6 +46,7 @@ public interface AbsenceRepository extends JpaRepository<Absence, Long> {
             WHERE a.user_id = :id
             AND MONTH(a.dtDebut) = :month
             AND YEAR(a.dtDebut) = :year
+            AND a.status = VALIDEE
             ORDER BY a.dtDebut ASC
             """)
     List<Absence> findAbsencesAndMonthAndYear(Long id, String month, String year);

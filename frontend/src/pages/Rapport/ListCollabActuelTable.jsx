@@ -17,7 +17,7 @@ ListCollabActuelTable.propTypes = {
 function getDaysInMonth(year, month) {
   const daysInMonth = new Date(year, month, 0).getDate();
   const days = [];
-  for (let day = 1; day <= daysInMonth; day++) {
+  for (let day = 0; day < daysInMonth; day++) {
     days.push(day);
   }
   return days;
