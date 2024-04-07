@@ -143,7 +143,7 @@ public class AbsenceController {
      * @param year  l'année
      * @return une liste d'absences
      */
-    // TODO: Retrieve only absence that have a status of validated ?
+    @Secured("MANAGER")
     @GetMapping("/service")
     public ResponseEntity<?> findAbsenceWithServiceMonthAndYear(@RequestParam Long id,
             @RequestParam String month,

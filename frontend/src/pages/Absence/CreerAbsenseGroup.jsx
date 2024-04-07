@@ -23,7 +23,7 @@ export default function CreerAbsenseGroup() {
       data[key] = value;
     });
 
-    postData("http://localhost:8082/api/specific-absence/create", data);
+    postData("http://localhost:8082/api/admin/specific-absence/create", data);
 
     setTimeout(() => {
       navigate("/admin");
