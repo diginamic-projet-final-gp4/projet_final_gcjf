@@ -1,10 +1,14 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const UserContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 export default function UserContextProvider({ children }) {
   const [role, setRole] = useState();
+
+  useEffect(() => {
+    if(localStorage.getItem("role")){ setRole(localStorage.getItem("role"))}
+  }, [])
 
   async function postData(url = "", donnees = {}) {
     let options = {
@@ -55,6 +59,7 @@ export default function UserContextProvider({ children }) {
       credentials: "include",
     }).then((response) => response.json());
     setRole(res.role);
+    localStorage.setItem("role", res.role)
   };
 
   const logOut = async () => {

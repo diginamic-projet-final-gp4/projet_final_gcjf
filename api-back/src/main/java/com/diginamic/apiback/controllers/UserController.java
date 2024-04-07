@@ -45,7 +45,6 @@ public class UserController {
      * 
      * @return une liste d'utilisateurs
      */
-    // @Secured("MANAGER")
     @GetMapping("/all")
     public List<UserDTO> findAll() {
         return userService.findAll();

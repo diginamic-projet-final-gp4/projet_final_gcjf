@@ -9,7 +9,7 @@ import "./Administration.css";
 export default function AdminPage() {
   const { role } = useContext(UserContext);
   const { loadedData } = loadData(
-    "http://localhost:8082/api/specific-absence/all"
+    "http://localhost:8082/api/admin/specific-absence/all"
   );
 
   return (

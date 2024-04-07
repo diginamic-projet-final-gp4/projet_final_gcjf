@@ -45,6 +45,15 @@ public class AbsenceService {
     }
 
     /**
+     * Trouve toutes les absences pour le current manager.
+     *
+     * @return une liste d'objets Absence
+     */
+    public List<Absence> findAllForCurrentManager(User user) {
+        return absenceRepository.findByManagerId(user);
+    }
+
+    /**
      * Trouve les absences pour un utilisateur spécifique.
      *
      * @param id l'ID de l'utilisateur

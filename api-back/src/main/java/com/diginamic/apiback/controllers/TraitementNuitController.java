@@ -22,12 +22,8 @@ public class TraitementNuitController {
     public ResponseEntity<?> launchTraitementNuit() {
         List<Absence> absences = absenceRepository.findByStatus("INITIALE");
 
-        // TODO : Vérifier si l'utilisateur a assez de jours de congés
-        // TODO : Vérification des superpositions de dates
-
         for (Absence absence : absences) {
             absence.setStatus(Status.EN_ATTENTE_VALIDATION);
-            System.out.println("Traitement de l'absence : " + absence.getId());
             absenceRepository.save(absence);
         }
 

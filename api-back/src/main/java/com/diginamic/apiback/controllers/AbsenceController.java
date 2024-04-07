@@ -3,6 +3,7 @@ package com.diginamic.apiback.controllers;
 import java.util.Optional;
 
 import org.springframework.lang.NonNull;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,8 +44,8 @@ public class AbsenceController {
     @Autowired
     UserService userService;
 
-     @Autowired
-     SpecificAbsenceService specificAbsenceService;
+    @Autowired
+    SpecificAbsenceService specificAbsenceService;
 
     @Autowired
     private ServiceService serviceService;
@@ -54,13 +55,16 @@ public class AbsenceController {
      * 
      * @return une liste d'absences
      */
+    @Secured("MANAGER")
     @GetMapping("/all")
-    public ResponseEntity<?> findAll() {
+    public ResponseEntity<?> findAll(Authentication authentication) {
+        User user = userService.loadUserByUsername(authentication.getName());
         List<AbsenceDTO> absenceDtoList = new ArrayList<>();
-        List<Absence> absenceList = absenceService.findAll();
+        List<Absence> absenceList = absenceService.findAllForCurrentManager(user);
         for (Absence absence : absenceList) {
             absenceDtoList.add(absence.toDto());
         }
+
         return ResponseEntity.ok().body(absenceDtoList);
     }
 
@@ -139,7 +143,7 @@ public class AbsenceController {
      * @param year  l'année
      * @return une liste d'absences
      */
-    // TODO: Retrieve only absence that have a status of validated ?
+    @Secured("MANAGER")
     @GetMapping("/service")
     public ResponseEntity<?> findAbsenceWithServiceMonthAndYear(@RequestParam Long id,
             @RequestParam String month,
@@ -150,7 +154,8 @@ public class AbsenceController {
         for (User user : userList) {
             List<Absence> absencesUserList = absenceService.findAbsenceMonthYear(user.getId(), month, year);
             Long organizationId = user.getService().getOrganization().getId();
-            for(SpecificAbsence specificAbsence : specificAbsenceService.findAbsencesAndMonthAndYear(organizationId, month, year)){
+            for (SpecificAbsence specificAbsence : specificAbsenceService.findAbsencesAndMonthAndYear(organizationId,
+                    month, year)) {
                 absencesUserList.add(specificAbsence.toAbsence());
             }
             user.setAbsences(absencesUserList);

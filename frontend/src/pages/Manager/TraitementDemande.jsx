@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import loadData from "./../../model/utils/hooks.jsx";
@@ -10,8 +9,6 @@ export default function TraitementDemande() {
     const options = { year: "numeric", month: "2-digit", day: "2-digit" };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
-
-  useEffect(() => {}, [loadedData]);
 
   return (
     <>

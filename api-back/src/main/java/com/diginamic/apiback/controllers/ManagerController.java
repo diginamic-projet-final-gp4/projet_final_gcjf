@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +31,7 @@ import jakarta.validation.Valid;
 public class ManagerController {
     @Autowired
     private UserService userService;
-    
+
     @Autowired
     private AbsenceService absenceService;
 
@@ -39,6 +40,7 @@ public class ManagerController {
      * 
      * @return une liste d'utilisateurs
      */
+    @Secured("MANAGER")
     @GetMapping()
     public List<UserDTO> findAll() {
         return userService.findAll();
@@ -50,6 +52,7 @@ public class ManagerController {
      * @param id l'ID de l'utilisateur
      * @return l'utilisateur
      */
+    @Secured("MANAGER")
     @GetMapping("/{id}")
     public Optional<User> findById(@NonNull @PathVariable("id") Long id) {
         return userService.findById(id);
@@ -78,13 +81,13 @@ public class ManagerController {
         return userService.deleteUser(id);
     }
 
-    // TODO : A voir si il faut le mettre dans le manager controller
     /**
      * Route pour valider une absence (manager only)
      * 
      * @param id l'ID de l'absence
      * @return un message de confirmation
      */
+    @Secured("MANAGER")
     @GetMapping("/absence/{id}/validate")
     public ResponseEntity<?> validateAbsence(@PathVariable Long id) {
         try {
@@ -102,6 +105,7 @@ public class ManagerController {
      * @param id l'ID de l'absence
      * @return un message de confirmation
      */
+    @Secured("MANAGER")
     @GetMapping("/absence/{id}/rejete")
     public ResponseEntity<?> rejeteAbsence(@PathVariable Long id) {
         try {

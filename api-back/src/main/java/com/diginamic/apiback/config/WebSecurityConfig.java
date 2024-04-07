@@ -84,15 +84,13 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http, MvcRequestMatcher.Builder mvc,
             @Qualifier("corsConfiguration") CorsConfigurationSource source) throws Exception {
 
-        // TODO : Changer la configuration de sécurité
         http.authorizeHttpRequests(
                 auth -> auth
-                        // .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/user")).permitAll()
-                        // .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/user/**")).permitAll()
                         .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/login/**")).permitAll()
-                        .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/**")).permitAll()
+                        .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/**")).authenticated()
                         .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/**")).authenticated()
-                        // .requestMatchers(mvc.pattern("/admin/**")).hasAuthority("ROLE_ADMIN")
+                        .requestMatchers(mvc.pattern(HttpMethod.PUT, "/api/**")).authenticated()
+                        .requestMatchers(mvc.pattern(HttpMethod.DELETE, "/api/**")).authenticated()
                         .anyRequest().authenticated())
 
                 // Spring Security va valoriser un jeton stocké dans un cookie XSRF-TOKEN
