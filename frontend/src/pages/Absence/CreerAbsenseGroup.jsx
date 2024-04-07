@@ -26,7 +26,7 @@ export default function CreerAbsenseGroup() {
     postData("http://localhost:8082/api/admin/specific-absence/create", data);
 
     setTimeout(() => {
-      navigate("/admin");
+      navigate("/planing-ferie");
     }, 150);
   };
 
