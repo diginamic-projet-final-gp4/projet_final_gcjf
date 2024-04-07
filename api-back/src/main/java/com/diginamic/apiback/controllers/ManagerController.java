@@ -31,7 +31,7 @@ import jakarta.validation.Valid;
 public class ManagerController {
     @Autowired
     private UserService userService;
-    
+
     @Autowired
     private AbsenceService absenceService;
 

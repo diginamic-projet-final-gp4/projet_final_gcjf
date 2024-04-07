@@ -33,7 +33,7 @@ import jakarta.validation.Valid;
 public class AdminController {
     @Autowired
     SpecificAbsenceService specificAbsenceService;
-    
+
     @Autowired
     UserService userService;
 
@@ -65,7 +65,7 @@ public class AdminController {
         if (specificAbsence.isPresent()) {
             return ResponseEntity.ok().body(specificAbsence.get().toDto());
         }
-        
+
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(Map.of("message", "No specific absence entity with corresponding id found in db"));
     }
@@ -78,7 +78,8 @@ public class AdminController {
      */
     @Secured("ADMIN")
     @PostMapping("/specific-absence/create")
-    public ResponseEntity<?> createAbsence(Authentication authentication, @RequestBody @Valid SpecificAbsence specificAbsence) {
+    public ResponseEntity<?> createAbsence(Authentication authentication,
+            @RequestBody @Valid SpecificAbsence specificAbsence) {
         Long id = userService.loadUserByUsername(authentication.getName()).getService().getOrganization().getId();
         SpecificAbsence abs = specificAbsenceService.createSpecificAbsence(id, specificAbsence);
         return ResponseEntity.ok().body(abs.toDto());
