@@ -89,14 +89,34 @@ public class SpecificAbsenceService {
         return absenceToDelete;
     }
 
+    /**
+     * Trouve les absences spécifiques par rapport à l'organisation, le mois et
+     * l'année
+     * 
+     * @param organizationId l'ID de l'organisation
+     * @param month          le mois
+     * @param year           l'année
+     * @return la liste des absences
+     */
     public List<SpecificAbsence> findAbsencesAndMonthAndYear(Long organizationId, String month, String year) {
         return specificAbsenceRepository.findAbsencesAndMonthAndYear(organizationId, month, year);
     }
 
+    /**
+     * Trouve les RTT employeur en statut initiale
+     * 
+     * @return la liste des absences
+     */
     public List<SpecificAbsence> findInitialEmployerWtr() {
         return specificAbsenceRepository.findInitialEmployerWtr();
     }
 
+    /**
+     * Sauvegarde une absence spécifique
+     * 
+     * @param specificAbsence l'absence spécifique à sauvegarder
+     * @return l'absence spécifique sauvegardée
+     */
     public SpecificAbsence save(SpecificAbsence specificAbsence) {
         return specificAbsenceRepository.save(specificAbsence);
     }

@@ -1,10 +1,10 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
-import "./Administration.css"
-
-import loadData from "./../../model/utils/hooks.jsx";
-import { useContext } from "react";
 import { UserContext } from "../../model/utils/context/UserContext.jsx";
+import loadData from "./../../model/utils/hooks.jsx";
+
+import "./Administration.css";
 
 export default function AdminPage() {
   const { role } = useContext(UserContext);
@@ -28,10 +28,10 @@ export default function AdminPage() {
         <table>
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Date de début</th>
-              <th>Date de fin</th>
-              <th>Type</th>
+              <th className="classNum">ID</th>
+              <th className="classDate">Date de début</th>
+              <th className="classDate">Date de fin</th>
+              <th className="classType">Type</th>
               <th>Motif</th>
             </tr>
           </thead>

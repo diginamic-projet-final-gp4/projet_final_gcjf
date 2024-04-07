@@ -23,6 +23,13 @@ public class TraitementNuitService {
 
     private AbsenceRepository absenceRepository;
 
+    /**
+     * Constructeur
+     * 
+     * @param absenceRepository
+     * @param specificAbsenceService
+     * @param absenceService
+     */
     public TraitementNuitService(AbsenceRepository absenceRepository, SpecificAbsenceService specificAbsenceService,
             AbsenceService absenceService) {
         this.specificAbsenceService = specificAbsenceService;
@@ -30,33 +37,45 @@ public class TraitementNuitService {
         this.absenceRepository = absenceRepository;
     }
 
+    /**
+     * Méthode permettant de lancer le traitement de nuit
+     */
     @Scheduled(cron = "0 0 0 * * *")
     public void launchTraitementNuit() {
 
+        // Chercher les absences en statut INITIALE
         List<Absence> absences = absenceRepository.findByStatus("INITIALE");
         System.out.println("Traitement de " + absences.size() + " absences");
 
+        // Pour chaque absence
         for (Absence absence : absences) {
             System.out.println("Traitement de l'absence : " + absence.getId());
 
+            // Si l'utilisateur a assez de jours
             if (aAssezDeJours(absence)) {
+                // On met l'absence en attente de validation
                 absence.setStatus(Status.EN_ATTENTE_VALIDATION);
                 System.out.println("Absence " + absence.getId() + " : EN ATTENTE");
             } else {
+                // Sinon on rejette l'absence
                 absence.setStatus(Status.REJETEE);
                 System.out.println("Absence " + absence.getId() + " : REJETEE");
             }
+            // On sauvegarde l'absence
             absenceRepository.save(absence);
 
         }
         System.out.println("Les absences ont été traitées");
 
+        // Chercher les RTT employeurs en statut INITIALE
         List<SpecificAbsence> specificAbsences = specificAbsenceService.findInitialEmployerWtr();
         System.out.println("Traitement de " + specificAbsences.size() + " RTT employeurs");
 
+        // Pour chaque RTT employeur
         for (SpecificAbsence specificAbsence : specificAbsences) {
             System.out.println("Traitement de la RTT employeur : " + specificAbsence.getId());
 
+            // On met la RTT employeur en validée
             specificAbsence.setStatus(Status.VALIDEE);
             System.out.println("RTT employeur " + specificAbsence.getId() + " : VALIDE");
 
@@ -65,6 +84,12 @@ public class TraitementNuitService {
         System.out.println("Les RTT employeur ont été traitées");
     }
 
+    /**
+     * Méthode permettant de vérifier si l'utilisateur a assez de jours
+     * 
+     * @param absence l'absence
+     * @return true si l'utilisateur a assez de jours, false sinon
+     */
     private boolean aAssezDeJours(Absence absence) {
         if (absence.getType() == AbsenceType.UNPAID_LEAVE) {
             return true;

@@ -51,13 +51,20 @@ public interface AbsenceRepository extends JpaRepository<Absence, Long> {
                         """)
         List<Absence> findAbsencesAndMonthAndYear(Long id, String month, String year);
 
-        @Query("""
-                            SELECT COALESCE(SUM(DATEDIFF(a.dt_fin,a.dtDebut)+1),0)
-                            FROM Absence a
-                            WHERE a.status = Status.VALIDEE
-                            AND a.user = :user
-                            AND a.type = :type
-                        """)
-        long sumApprovedAbsences(User user, AbsenceType type);
+    /**
+     * Méthode permettant de donner la somme des absences validées d'un utilisateur
+     * 
+     * @param user l'utilisateur
+     * @param type le type d'absence
+     * @return la liste des absences
+     */
+    @Query("""
+                SELECT COALESCE(SUM(DATEDIFF(a.dt_fin,a.dtDebut)+1),0)
+                FROM Absence a
+                WHERE a.status = Status.VALIDEE
+                AND a.user = :user
+                AND a.type = :type
+            """)
+    long sumApprovedAbsences(User user, AbsenceType type);
 
 }
