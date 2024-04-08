@@ -65,6 +65,7 @@ export default function UserContextProvider({ children }) {
   const logOut = async () => {
     const response = await postData("http://localhost:8082/logout");
     if (response.ok) {
+      localStorage.removeItem("role")
       setRole();
       return;
     }

@@ -24,16 +24,15 @@ export default function Login() {
   const handleForm = async (e) => {
     e.preventDefault();
 
-    // if (
-    //   (inputs.current[1].value.length || inputs.current[2].value.length) < 6
-    // ) {
-    //   //pseudo validation côté front
-    //   setValidation("Le mot de passe doit contenir au moins 6 caractères");
-    //   setTimeout(() => {
-    //     setValidation("");
-    //   }, 7000);
-    //   return;
-    // }
+    if (
+      (inputs.current[1].value.length || inputs.current[2].value.length) < 3
+    ) {
+      setValidation("Le mot de passe doit contenir au moins 3 caractères");
+      setTimeout(() => {
+        setValidation("");
+      }, 4000);
+      return;
+    }
 
     await signIn(inputs.current[0].value, inputs.current[1].value)
       .then(() => {
