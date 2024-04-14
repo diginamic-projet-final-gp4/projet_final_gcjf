@@ -1,10 +1,32 @@
+.login-page {
+  position: relative;
+  height: 100%;
+  padding-top: 25vh;
+  padding-bottom: 25vh;
+  overflow: hidden;
+}
+
+.login-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/2150763636.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: blur(10px);
+  z-index: -1;
+}
+
 #login-form {
   display: flex;
   align-items: stretch;
   width: 30%;
   min-height: 30%;
   margin: 0 auto;
-  margin-top: 25vh;
   border-radius: 1em;
   background: #e1f1ed;
   border: 1px solid #2f505941;
