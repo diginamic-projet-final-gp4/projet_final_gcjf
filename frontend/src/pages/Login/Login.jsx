@@ -49,8 +49,6 @@ export default function Login() {
 
   return (
     <>
-      <h1>Login</h1>
-
       <form
         className="form card"
         ref={formRef}

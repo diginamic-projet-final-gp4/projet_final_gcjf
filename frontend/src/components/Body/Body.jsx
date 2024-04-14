@@ -31,7 +31,16 @@ function Nav({ logOut, role }) {
 
   async function handleLogout() {
     await logOut();
+    localStorage.removeItem("isLogged");
     navigate("/");
+  }
+
+  // Vérifier si l'utilisateur est connecté
+  const isLogged = localStorage.getItem("isLogged");
+
+  // Si l'utilisateur n'est pas connecté, ne rien retourner
+  if (!isLogged) {
+    return null;
   }
 
   return (

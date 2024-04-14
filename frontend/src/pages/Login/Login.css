@@ -1,10 +1,8 @@
 #login-form {
   display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
   align-items: stretch;
   width: 30%;
-  height: 30%;
+  min-height: 30%;
   margin: 0 auto;
   border-radius: 1em;
   background: #e1f1ed;
@@ -12,6 +10,7 @@
   box-shadow: 10px 10px 64px 0px rgba(180, 180, 207, 0.75);
   -webkit-box-shadow: 10px 10px 64px 0px rgba(186, 186, 202, 0.75);
   -moz-box-shadow: 10px 10px 64px 0px rgba(208, 208, 231, 0.75);
+  flex-direction: column;
 
   .field {
     display: flex;

@@ -5,6 +5,12 @@ import "./Profil.css";
 export default function Profil() {
   const { loadedData } = loadData("http://localhost:8082/api/user");
 
+  if (loadedData && !localStorage.getItem("isLogged")) {
+    localStorage.setItem("isLogged", true);
+    // Déso pas déso, mais le menu c'est cool
+    window.location.reload();
+  }
+
   return (
     <>
       <h1>Bonjour {loadedData.firstName}</h1>
