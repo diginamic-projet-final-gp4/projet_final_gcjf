@@ -1,9 +1,22 @@
+import { useEffect } from "react";
 import loadData from "./../../model/utils/hooks.jsx";
 
 import "./Profil.css";
 
 export default function Profil() {
   const { loadedData } = loadData("http://localhost:8082/api/user");
+
+  useEffect(() => {
+    let theme = localStorage.getItem("theme");
+    if (theme === null) {
+      localStorage.setItem("theme", "light");
+      theme = "light";
+    }
+  }, []);
+
+  const handleTheme = (event) => {
+    localStorage.setItem("theme", event.target.value);
+  };
 
   return (
     <>
@@ -65,6 +78,35 @@ export default function Profil() {
               <span>{loadedData.unpaidLeave} jours</span>
             </li>
           </ul>
+        </div>
+      </div>
+      <div className="settings">
+        <div className="apparence">
+          <h2>Apparence</h2>
+
+          <div className="theme">
+            <h3>Thème</h3>
+            <div className="checklist" onChange={handleTheme}>
+              <label>
+                <input
+                  type="radio"
+                  name="theme"
+                  value="light"
+                  defaultChecked={localStorage.getItem("theme") === "light"}
+                />
+                <span>Clair</span>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="theme"
+                  value="dark"
+                  defaultChecked={localStorage.getItem("theme") === "dark"}
+                />
+                <span>Sombre</span>
+              </label>
+            </div>
+          </div>
         </div>
       </div>
     </>

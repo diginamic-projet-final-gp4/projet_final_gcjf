@@ -1,7 +1,10 @@
+.main {
+  padding-top: 2rem;
+}
+
 .site-navigation {
   display: flex;
   margin: 0 auto;
-  margin-top: 1em;
   border-radius: 100em;
   justify-content: space-between;
   padding-top: 1.2rem;
