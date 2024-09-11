@@ -68,9 +68,7 @@ public class User implements UserDetails {
 
     private Float paidLeave;
 
-    public User() {
-
-    }
+    public User() { }
 
     @Override
     public String toString() {
