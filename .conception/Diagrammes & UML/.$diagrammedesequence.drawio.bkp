@@ -1,0 +1,132 @@
+<mxfile host="Electron" modified="2024-04-08T09:19:43.525Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.0.2 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="_LdPOXG5gLOt36wcI5ju" version="23.0.2" type="device">
+  <diagram name="Page-1" id="13e1069c-82ec-6db2-03f1-153e76fe0fe0">
+    <mxGraphModel dx="1500" dy="887" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="7baba1c4bc27f4b0-2" value="En attente" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;" parent="1" vertex="1">
+          <mxGeometry x="380" y="100" width="100" height="680" as="geometry" />
+        </mxCell>
+        <mxCell id="8ppj3Jb1FmL6WpB68mss-16" value="Pas assez de jour : REFUS" style="verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;labelBackgroundColor=#FFFFFF;fontFamily=Verdana;fontSize=13;fontColor=default;labelBorderColor=none;html=1;fontStyle=0;shadow=0;editable=1;movable=1;resizable=1;rotatable=1;deletable=1;locked=0;connectable=1;" edge="1" parent="7baba1c4bc27f4b0-2" source="7baba1c4bc27f4b0-3">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-85" y="270" as="targetPoint" />
+            <mxPoint x="55" y="270" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8ppj3Jb1FmL6WpB68mss-19" value="Termine un jour férié / weekend / etc : REFUS" style="verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;labelBackgroundColor=#FFFFFF;fontFamily=Verdana;fontSize=13;fontColor=default;labelBorderColor=none;html=1;fontStyle=0;shadow=0;editable=1;movable=1;resizable=1;rotatable=1;deletable=1;locked=0;connectable=1;" edge="1" parent="7baba1c4bc27f4b0-2" source="7baba1c4bc27f4b0-4">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-85" y="320" as="targetPoint" />
+            <mxPoint x="55" y="320" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8ppj3Jb1FmL6WpB68mss-1" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;comic=0;labelBackgroundColor=#FFFFFF;strokeWidth=1;fontFamily=Verdana;fontSize=13;align=center;fontColor=default;labelBorderColor=none;html=1;fontStyle=0;editable=1;movable=1;resizable=1;rotatable=1;deletable=1;locked=0;connectable=1;" vertex="1" parent="7baba1c4bc27f4b0-2">
+          <mxGeometry x="45" y="370" width="10" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="8ppj3Jb1FmL6WpB68mss-4" value="Mise en attente pour le manager" style="verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;labelBackgroundColor=#FFFFFF;fontFamily=Verdana;fontSize=13;fontColor=default;labelBorderColor=none;html=1;fontStyle=0;shadow=0;editable=1;movable=1;resizable=1;rotatable=1;deletable=1;locked=0;connectable=1;" edge="1" parent="7baba1c4bc27f4b0-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="55" y="400" as="targetPoint" />
+            <mxPoint x="320" y="400" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8ppj3Jb1FmL6WpB68mss-32" value="Refus manuel" style="verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;labelBackgroundColor=default;fontFamily=Verdana;fontSize=13;fontColor=default;labelBorderColor=none;html=1;fontStyle=0;shadow=0;editable=1;movable=1;resizable=1;rotatable=1;deletable=1;locked=0;connectable=1;" edge="1" parent="7baba1c4bc27f4b0-2" source="8ppj3Jb1FmL6WpB68mss-22">
+          <mxGeometry x="0.0099" relative="1" as="geometry">
+            <mxPoint x="-226" y="530" as="targetPoint" />
+            <mxPoint x="45" y="530" as="sourcePoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7baba1c4bc27f4b0-3" value="CRON" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;" parent="1" vertex="1">
+          <mxGeometry x="520" y="100" width="100" height="680" as="geometry" />
+        </mxCell>
+        <mxCell id="8ppj3Jb1FmL6WpB68mss-10" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;comic=0;labelBackgroundColor=#FFFFFF;strokeWidth=1;fontFamily=Verdana;fontSize=13;align=center;fontColor=default;labelBorderColor=none;html=1;fontStyle=0;editable=1;movable=1;resizable=1;rotatable=1;deletable=1;locked=0;connectable=1;" vertex="1" parent="7baba1c4bc27f4b0-3">
+          <mxGeometry x="45" y="120" width="10" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="8ppj3Jb1FmL6WpB68mss-2" value="Validation ou refus manuel par le manager" style="verticalAlign=bottom;endArrow=block;labelBackgroundColor=#FFFFFF;fontFamily=Verdana;fontSize=13;edgeStyle=elbowEdgeStyle;elbow=vertical;fontColor=default;labelBorderColor=none;html=1;fontStyle=0;shadow=0;editable=1;movable=1;resizable=1;rotatable=1;deletable=1;locked=0;connectable=1;" edge="1" parent="7baba1c4bc27f4b0-3" target="8ppj3Jb1FmL6WpB68mss-22">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-85" y="460" as="sourcePoint" />
+            <mxPoint x="45" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7baba1c4bc27f4b0-4" value="Backend" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;" parent="1" vertex="1">
+          <mxGeometry x="660" y="100" width="100" height="680" as="geometry" />
+        </mxCell>
+        <mxCell id="8ppj3Jb1FmL6WpB68mss-18" value="Assez : passe" style="verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;labelBackgroundColor=#FFFFFF;fontFamily=Verdana;fontSize=13;edgeStyle=elbowEdgeStyle;elbow=vertical;fontColor=default;labelBorderColor=none;html=1;fontStyle=0;shadow=0;editable=1;movable=1;resizable=1;rotatable=1;deletable=1;locked=0;connectable=1;" edge="1" parent="7baba1c4bc27f4b0-4">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-85" y="270" as="sourcePoint" />
+            <mxPoint x="45" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8ppj3Jb1FmL6WpB68mss-14" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;comic=0;labelBackgroundColor=#FFFFFF;strokeWidth=1;fontFamily=Verdana;fontSize=13;align=center;fontColor=default;labelBorderColor=none;html=1;fontStyle=0;editable=1;movable=1;resizable=1;rotatable=1;deletable=1;locked=0;connectable=1;" vertex="1" parent="7baba1c4bc27f4b0-4">
+          <mxGeometry x="45" y="250" width="10" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="8ppj3Jb1FmL6WpB68mss-35" value="Validation manuel" style="verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;labelBackgroundColor=#FFFFFF;fontFamily=Verdana;fontSize=13;fontColor=default;labelBorderColor=none;html=1;fontStyle=0;shadow=0;editable=1;movable=1;resizable=1;rotatable=1;deletable=1;locked=0;connectable=1;" edge="1" parent="7baba1c4bc27f4b0-4">
+          <mxGeometry x="0.0099" relative="1" as="geometry">
+            <mxPoint x="-504.6923076923077" y="620" as="targetPoint" />
+            <mxPoint x="190" y="620" as="sourcePoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7baba1c4bc27f4b0-8" value="Frontend" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;" parent="1" vertex="1">
+          <mxGeometry x="100" y="100" width="100" height="690" as="geometry" />
+        </mxCell>
+        <mxCell id="8ppj3Jb1FmL6WpB68mss-5" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;comic=0;labelBackgroundColor=#FFFFFF;strokeWidth=1;fontFamily=Verdana;fontSize=13;align=center;fontColor=default;labelBorderColor=none;html=1;fontStyle=0;editable=1;movable=1;resizable=1;rotatable=1;deletable=1;locked=0;connectable=1;" vertex="1" parent="7baba1c4bc27f4b0-8">
+          <mxGeometry x="45" y="80" width="10" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="8ppj3Jb1FmL6WpB68mss-15" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;comic=0;labelBackgroundColor=#FFFFFF;strokeWidth=1;fontFamily=Verdana;fontSize=13;align=center;fontColor=default;labelBorderColor=none;html=1;fontStyle=0;editable=1;movable=1;resizable=1;rotatable=1;deletable=1;locked=0;connectable=1;" vertex="1" parent="7baba1c4bc27f4b0-8">
+          <mxGeometry x="45" y="500" width="10" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8ppj3Jb1FmL6WpB68mss-33" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;comic=0;labelBackgroundColor=#FFFFFF;strokeWidth=1;fontFamily=Verdana;fontSize=13;align=center;fontColor=default;labelBorderColor=none;html=1;fontStyle=0;editable=1;movable=1;resizable=1;rotatable=1;deletable=1;locked=0;connectable=1;" vertex="1" parent="7baba1c4bc27f4b0-8">
+          <mxGeometry x="45" y="590" width="10" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8ppj3Jb1FmL6WpB68mss-40" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;comic=0;labelBackgroundColor=#FFFFFF;strokeWidth=1;fontFamily=Verdana;fontSize=13;align=center;fontColor=default;labelBorderColor=none;html=1;fontStyle=0;editable=1;movable=1;resizable=1;rotatable=1;deletable=1;locked=0;connectable=1;" vertex="1" parent="7baba1c4bc27f4b0-8">
+          <mxGeometry x="45" y="250" width="10" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="8ppj3Jb1FmL6WpB68mss-22" value="Manager" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;" vertex="1" parent="1">
+          <mxGeometry x="800" y="100" width="100" height="680" as="geometry" />
+        </mxCell>
+        <mxCell id="8ppj3Jb1FmL6WpB68mss-29" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;comic=0;labelBackgroundColor=#FFFFFF;strokeWidth=1;fontFamily=Verdana;fontSize=13;align=center;fontColor=default;labelBorderColor=none;html=1;fontStyle=0;editable=1;movable=1;resizable=1;rotatable=1;deletable=1;locked=0;connectable=1;" vertex="1" parent="8ppj3Jb1FmL6WpB68mss-22">
+          <mxGeometry x="45" y="450" width="10" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="8ppj3Jb1FmL6WpB68mss-9" value="Traitement de nuit" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="40" width="660" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="8ppj3Jb1FmL6WpB68mss-20" value="Manager" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="800" y="40" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="8ppj3Jb1FmL6WpB68mss-7" value="Nouvelle demande" style="verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;labelBackgroundColor=#FFFFFF;fontFamily=Verdana;fontSize=13;edgeStyle=elbowEdgeStyle;elbow=vertical;fontColor=default;labelBorderColor=none;html=1;fontStyle=0;shadow=0;editable=1;movable=1;resizable=1;rotatable=1;deletable=1;locked=0;connectable=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="156" y="200" as="sourcePoint" />
+            <mxPoint x="286" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8ppj3Jb1FmL6WpB68mss-36" value="Initial" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;" vertex="1" parent="1">
+          <mxGeometry x="240" y="100" width="100" height="690" as="geometry" />
+        </mxCell>
+        <mxCell id="8ppj3Jb1FmL6WpB68mss-37" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;comic=0;labelBackgroundColor=#FFFFFF;strokeWidth=1;fontFamily=Verdana;fontSize=13;align=center;fontColor=default;labelBorderColor=none;html=1;fontStyle=0;editable=1;movable=1;resizable=1;rotatable=1;deletable=1;locked=0;connectable=1;" vertex="1" parent="8ppj3Jb1FmL6WpB68mss-36">
+          <mxGeometry x="45" y="80" width="10" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="8ppj3Jb1FmL6WpB68mss-38" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;comic=0;labelBackgroundColor=#FFFFFF;strokeWidth=1;fontFamily=Verdana;fontSize=13;align=center;fontColor=default;labelBorderColor=none;html=1;fontStyle=0;editable=1;movable=1;resizable=1;rotatable=1;deletable=1;locked=0;connectable=1;" vertex="1" parent="8ppj3Jb1FmL6WpB68mss-36">
+          <mxGeometry x="45" y="250" width="10" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="8ppj3Jb1FmL6WpB68mss-8" value="Peut modifier" style="verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;labelBackgroundColor=#FFFFFF;fontFamily=Verdana;fontSize=13;fontColor=default;labelBorderColor=none;html=1;fontStyle=0;shadow=0;editable=1;movable=1;resizable=1;rotatable=1;deletable=1;locked=0;connectable=1;" edge="1" parent="8ppj3Jb1FmL6WpB68mss-36">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-85" y="160" as="targetPoint" />
+            <mxPoint x="45" y="160" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8ppj3Jb1FmL6WpB68mss-11" value="Vérification" style="verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;labelBackgroundColor=#FFFFFF;fontFamily=Verdana;fontSize=13;edgeStyle=elbowEdgeStyle;elbow=horizontal;fontColor=default;labelBorderColor=none;html=1;fontStyle=0;shadow=0;editable=1;movable=1;resizable=1;rotatable=1;deletable=1;locked=0;connectable=1;" edge="1" parent="8ppj3Jb1FmL6WpB68mss-36">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="55" y="134.5" as="sourcePoint" />
+            <mxPoint x="324" y="134.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8ppj3Jb1FmL6WpB68mss-41" value="Affichage refus" style="verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;labelBackgroundColor=#FFFFFF;fontFamily=Verdana;fontSize=13;fontColor=default;labelBorderColor=none;html=1;fontStyle=0;shadow=0;editable=1;movable=1;resizable=1;rotatable=1;deletable=1;locked=0;connectable=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="154" y="400" as="targetPoint" />
+            <mxPoint x="284" y="400" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
